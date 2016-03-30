@@ -36,16 +36,17 @@
 			<from-outcome>exito</from-outcome>
 			<to-view-id>/listado.xhtml</to-view-id>
 		</navigation-case>
-		
+
 		<navigation-case>
-			<from-outcome>login</from-outcome>
-			<to-view-id>/login.xhtml</to-view-id>
+			<from-action>#{login.verify}</from-action>
+			<from-outcome>fallo</from-outcome>
+			<to-view-id>/index.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
 			<from-outcome>registrarse</from-outcome>
 			<to-view-id>/registrarse.xhtml</to-view-id>
 		</navigation-case>
-		
+
 	</navigation-rule>
 	<navigation-rule>
 		<from-view-id>/listado.xhtml</from-view-id>

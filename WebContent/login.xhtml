@@ -7,16 +7,20 @@
 
 	<ui:define name="cuerpo">
 		<h1>#{msgs.iniciarSesion}</h1>
-		<p:panel>
-			<h:panelGrid rows="2" cellpadding="5">
+		<p:panel >
+			<h:form>
+			<h:panelGrid cellpadding="5" >
 				<h:outputLabel for="username" value="#{msgs.usuario}" />
-				<p:inputText id="username" required="true" label="username" />
+				<p:inputText id="username" value="#{login.name}" required="true" label="username"
+				requiredMessage="#{msgs.login_username_required}" />
 
 				<h:outputLabel for="password" value="#{msgs.password}" />
-				<p:password id="password" required="true" label="password" />
+				<p:password id="password" value="#{login.password}" required="true" label="password"
+				requiredMessage="#{msgs.login_password_required}" />
 
-				<p:button id="login" value="#{msgs.iniciarSesion}" />
+				<p:commandButton id="login" action="#{login.verify}" value="#{msgs.iniciarSesion}" />
 			</h:panelGrid>
+			</h:form>
 		</p:panel>
 
 		<p:panel>

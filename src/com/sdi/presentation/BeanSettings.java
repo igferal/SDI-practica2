@@ -1,16 +1,24 @@
 package com.sdi.presentation;
+import java.io.File;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Locale;
+import java.util.Set;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.faces.bean.*;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+
+import org.hibernate.validator.internal.util.privilegedactions.GetConstructor;
 @ManagedBean(name="settings")
 @SessionScoped
 public class BeanSettings implements Serializable{
-  private static final long serialVersionUID = 2L;           
+  private static final long serialVersionUID = 2L;
+  
+  private static Set<Locale> locales = new HashSet<>();
+  
   private static final Locale ENGLISH = new Locale("en");
   private static final Locale SPANISH = new Locale("es");       
   private Locale locale = new Locale("es"); 
@@ -28,6 +36,7 @@ public void setAlumno(BeanAlumno alumno) {this.alumno = alumno;}
 //el MBean ya estaba construido y en @PostConstruct SI.
 @PostConstruct
 public void init() {
+loadLanguages();
 System.out.println("BeanSettings - PostConstruct");
 //Buscamos el alumno en la sesión. Esto es un patrón factoría claramente.
 alumno = 
@@ -75,4 +84,12 @@ System.out.println("BeanSettings - PreDestroy");
 	  }
 	}
 
+  private void loadLanguages() {
+	  File folder = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("/WEB-INF/classes"));
+	  
+	  for (File file:folder.listFiles())
+		  if (file.isFile() && file.getName().contains("_") && file.getName().endsWith(".properties"))
+			  locales.add(new Locale(file.getName().split("_")[1].split("\\.")[0]));
+  }
+  
 }
