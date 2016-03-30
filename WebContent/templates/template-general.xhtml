@@ -22,7 +22,7 @@
 				<f:facet name="options">
 					<p:button id="login" value="#{msgs.iniciarSesion}" outcome="login"/>
 				</f:facet>
-				
+			
 				<p:submenu style="float:right" label="#{msgs.textoIdioma}"
 					icon="ui-icon-document">
 					<p:menuitem id="linkespa" value="#{msgs.enlaceIdiomaES}"
@@ -30,6 +30,7 @@
 					<p:menuitem id="linkingles" value="#{msgs.enlaceIdiomaEN}"
 						actionListener="#{settings.setEnglish}" update="@all" />
 				</p:submenu>
+				
 			</p:menubar>
 		</h:form>
 
