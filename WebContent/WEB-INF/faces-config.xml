@@ -39,8 +39,13 @@
 
 		<navigation-case>
 			<from-action>#{login.verify}</from-action>
-			<from-outcome>fallo</from-outcome>
+			<from-outcome>exito</from-outcome>
 			<to-view-id>/index.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-action>#{login.verify}</from-action>
+			<from-outcome>fallo</from-outcome>
+			<to-view-id>/login.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
 			<from-outcome>registrarse</from-outcome>

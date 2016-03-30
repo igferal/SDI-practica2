@@ -7,18 +7,22 @@
 
 	<ui:define name="cuerpo">
 		<h1>#{msgs.iniciarSesion}</h1>
-		<p:panel >
+		<p:messages showDetail="true" autoUpdate="true" globalOnly="true" closable="true"/>
+		
+		<p:panel>
 			<h:form>
-			<h:panelGrid cellpadding="5" >
+			<h:panelGrid id="grid" columns="3" cellpadding="5">
 				<h:outputLabel for="username" value="#{msgs.usuario}" />
-				<p:inputText id="username" value="#{login.name}" required="true" label="username"
+				<p:inputText id="username" value="#{login.name}" required="true"
 				requiredMessage="#{msgs.login_username_required}" />
+				<p:message for="username" styleClass="error" />
 
 				<h:outputLabel for="password" value="#{msgs.password}" />
-				<p:password id="password" value="#{login.password}" required="true" label="password"
+				<p:password id="password" value="#{login.password}" required="true"
 				requiredMessage="#{msgs.login_password_required}" />
+				<p:message for="password" styleClass="error" />
 
-				<p:commandButton id="login" action="#{login.verify}" value="#{msgs.iniciarSesion}" />
+				<p:commandButton id="login" action="#{login.verify}" value="#{msgs.iniciarSesion}" update="grid" />
 			</h:panelGrid>
 			</h:form>
 		</p:panel>

@@ -1,9 +1,12 @@
 package com.sdi.presentation;
 
 import alb.util.log.Log;
+
 import java.io.Serializable;
 import java.util.Map;
+import java.util.ResourceBundle;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -16,9 +19,8 @@ import com.sdi.model.User;
 @SessionScoped
 public class BeanLogin implements Serializable {
 	private static final long serialVersionUID = 6L;
-	private String name = "";
-	private String password = "";
-	private String result = "login_form_result_valid";
+	private String name;
+	private String password;
 
 	public BeanLogin() {
 
@@ -32,8 +34,10 @@ public class BeanLogin implements Serializable {
 			Log.info("El usuario [%s] ha iniciado sesion", name);
 			return "exito";
 		}
-		setResult("login_form_result_error");
 		Log.info("El usuario [%s] no esta registrado", name);
+		FacesContext context = FacesContext.getCurrentInstance();
+		ResourceBundle bundle = context.getApplication().getResourceBundle(context, "msgs");
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "", bundle.getString("login_form_result_error")));
 		return "fallo";
 	}
 
@@ -58,12 +62,5 @@ public class BeanLogin implements Serializable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
-	public String getResult() {
-		return result;
-	}
-
-	public void setResult(String result) {
-		this.result = result;
-	}
+	
 }
