@@ -1,0 +1,105 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template-general.xhtml">
+
+	<ui:define name="titulo">
+      #{msgs.title_createTrip}
+    </ui:define>
+
+	<ui:define name="cuerpo">
+
+		<h1>#{msgs.createTrip_title}</h1>
+
+		<h:form>
+			<p:panelGrid columns="2" layout="grid" class="ui-noborder">
+				<p:panelGrid columns="1" layout="grid" class="ui-noborder">
+					<h2>#{msgs.createTrip_origen}</h2>
+					<h:outputText value="#{msgs.createTrip_calleOrigen}" />
+					<p:inputText id="calleOrigen" />
+
+					<h:outputText value="#{msgs.createTrip_ciudadOrigen}" />
+					<p:inputText id="ciudadOrigen" />
+
+					<h:outputText value="#{msgs.createTrip_provinciaOrigen}" />
+					<p:inputText id="provinciaOrigen" />
+
+					<h:outputText value="#{msgs.createTrip_paisOrigen}" />
+					<p:inputText id="paisOrigen" />
+
+					<h:outputText value="#{msgs.createTrip_codigoPostalOrigen}" />
+					<p:inputText id="codigoPostalOrigen" />
+
+					<h:outputText value="#{msgs.createTrip_coordenadasOrigen}" />
+					<p:inputText id="coordenadasOrigen" />
+				</p:panelGrid>
+
+				<p:panelGrid columns="1" layout="grid" class="ui-noborder">
+					<h2>#{msgs.createTrip_destino}</h2>
+					<h:outputText value="#{msgs.createTrip_calleDestino}" />
+					<p:inputText id="calleDestino" />
+
+					<h:outputText value="#{msgs.createTrip_ciudadDestino}" />
+					<p:inputText id="ciudadDestino" />
+
+					<h:outputText value="#{msgs.createTrip_provinciaDestino}" />
+					<p:inputText id="provinciaDestino" />
+
+					<h:outputText value="#{msgs.createTrip_paisDestino}" />
+					<p:inputText id="paisDestino" />
+
+					<h:outputText value="#{msgs.createTrip_codigoPostalOrigen}" />
+					<p:inputText id="codigoPostalDestino" />
+
+					<h:outputText value="#{msgs.createTrip_coordenadasDestino}" />
+					<p:inputText id="coordenadasDestino" />
+
+				</p:panelGrid>
+			</p:panelGrid>
+
+			<p:panelGrid columns="1" layout="grid" class="ui-noborder">
+
+				<p:outputLabel for="fechaSalida"
+					value="#{msgs.createTrip_fechaSalida}" />
+				<p:calendar id="fechaSalida" value="#{calendarView.date10}"
+					pattern="MM/dd/yyyy HH:mm:ss" />
+
+				<p:outputLabel for="fechaLlegada"
+					value="#{msgs.createTrip_fechaLlegada}" />
+				<p:calendar id="fechaLlegada" value="#{calendarView.date10}"
+					pattern="MM/dd/yyyy HH:mm:ss" />
+
+				<p:outputLabel for="fechaInscripcion"
+					value="#{msgs.createTrip_fechaInscripcion}" />
+				<p:calendar id="fechaInscripcion" value="#{calendarView.date10}"
+					pattern="MM/dd/yyyy HH:mm:ss" />
+
+				<h:outputText value="#{msgs.createTrip_costeEstimado}" />
+				<p:inputText id="costeEstimado" />
+
+				<h:outputText value="#{msgs.createTrip_plazasDisponibles}" />
+				<p:inputText id="plazasDisponibles" />
+
+				<h:outputText value="#{msgs.createTrip_plazasMaximas}" />
+				<p:inputText id="plazasMaximas" />
+
+				<h:outputText value="#{msgs.createTrip_comentarios}" />
+				<p:inputTextarea id="comentarios" rows="5" cols="30"
+					counter="display" maxlength="240"
+					counterTemplate="{0} #{msgs.createTrip_caracteresRestantes}."
+					autoResize="false" />
+				<h:outputText id="display" />
+				<p:commandButton value="#{msgs.createTrip_enviar}" id="enviar"
+					styleClass="ui-priority-primary" />
+			</p:panelGrid>
+
+		</h:form>
+
+	</ui:define>
+
+	<ui:define name="pie">
+	</ui:define>
+
+</ui:composition>
