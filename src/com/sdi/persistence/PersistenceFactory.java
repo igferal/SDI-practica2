@@ -27,5 +27,7 @@ public interface PersistenceFactory {
 
 	ApplicationDao newApplicationDao();
 
+	
+
 	// ... otros m��todos factoria para Daos de otras entidades del modelo ...
 }
