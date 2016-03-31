@@ -55,8 +55,13 @@
 			<to-view-id>/login.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
-			<from-outcome>registrarse</from-outcome>
-			<to-view-id>/registrarse.xhtml</to-view-id>
+			<from-outcome>join</from-outcome>
+			<to-view-id>/join.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-action>#{join.createUser}</from-action>
+			<from-outcome>exito</from-outcome>
+			<to-view-id>/login.xhtml</to-view-id>
 		</navigation-case>
 
 	</navigation-rule>

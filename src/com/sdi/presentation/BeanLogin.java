@@ -2,6 +2,7 @@ package com.sdi.presentation;
 
 import alb.util.log.Log;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -37,8 +38,17 @@ public class BeanLogin implements Serializable {
 		Log.info("El usuario [%s] no esta registrado", name);
 		FacesContext context = FacesContext.getCurrentInstance();
 		ResourceBundle bundle = context.getApplication().getResourceBundle(context, "msgs");
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "", bundle.getString("login_form_result_error")));
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "", bundle.getString("login_result_error")));
 		return "fallo";
+	}
+	
+	public void logout() {
+		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+		try {
+			FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
+		} catch (IOException e) {
+		
+		}
 	}
 
 	private void putUserInSession(User user) {

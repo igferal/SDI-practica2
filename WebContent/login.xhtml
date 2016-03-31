@@ -11,7 +11,7 @@
 		
 		<p:panel>
 			<h:form>
-			<h:panelGrid id="grid" columns="3" cellpadding="5">
+			<h:panelGrid id="grid" columns="1" cellpadding="1">
 				<h:outputLabel for="username" value="#{msgs.usuario}" />
 				<p:inputText id="username" value="#{login.name}" required="true"
 				requiredMessage="#{msgs.login_username_required}" />
@@ -29,7 +29,7 @@
 
 		<p:panel>
 			<p> #{msgs.mensajeEresNuevo}
-			<p:link outcome="registrarse" value="#{msgs.registrate}"/>
+			<p:link outcome="join" value="#{msgs.registrate}"/>
 			</p>
 		</p:panel>
 	</ui:define>
