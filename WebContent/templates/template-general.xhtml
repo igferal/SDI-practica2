@@ -13,29 +13,19 @@
 	<h:body>
 		<h:form id="form-cabecera">
 			<p:menubar id="mimenu">
-<<<<<<< HEAD
-				<p:menuitem id="shareMyTrip" value="#{msgs.appName}" url="/"/>
-				<p:menuitem id="viajesActivos" value="#{msgs.viajesActivos}" url=""/>
-				<p:menuitem id="misViajesOfertados" value="#{msgs.misViajesOfertados}" url="" rendered="#{not empty LOGGEDIN_USER}"/>
-				<p:menuitem id="misViajesImplicados" value="#{msgs.misViajesImplicados}" url="" rendered="#{not empty LOGGEDIN_USER}"/>
-				<p:menuitem id="crearViaje"  value="#{msgs.crearViaje}" url="createTrip.xhtml" rendered="#{not empty LOGGEDIN_USER}"/>
-				
-				<f:facet name="options">
-					<p:button id="login" value="#{msgs.iniciarSesion}" outcome="login" rendered="#{empty LOGGEDIN_USER}"/>
-=======
 				<p:menuitem id="shareMyTrip" value="#{msgs.appName}" url="/" />
-				<p:menuitem id="viajesActivos" value="#{msgs.viajesActivos}"
-					action="#{activeTrips.list}"  />
+				<p:menuitem id="viajesActivos" value="#{msgs.viajesActivos}" url="" />
 				<p:menuitem id="misViajesOfertados"
-					value="#{msgs.misViajesOfertados}" url="" />
+					value="#{msgs.misViajesOfertados}" url=""
+					rendered="#{not empty LOGGEDIN_USER}" />
 				<p:menuitem id="misViajesImplicados"
-					value="#{msgs.misViajesImplicados}" url="" />
+					value="#{msgs.misViajesImplicados}" url=""
+					rendered="#{not empty LOGGEDIN_USER}" />
 				<p:menuitem id="crearViaje" value="#{msgs.crearViaje}"
-					url="createTrip.xhtml" />
+					url="createTrip.xhtml" rendered="#{not empty LOGGEDIN_USER}" />
 
 				<f:facet name="options">
-					<p:button id="login" value="#{msgs.iniciarSesion}" outcome="login" />
->>>>>>> bab3d9ab625ef57704a29f1f1729d36af351312e
+					<p:button id="login" value="#{msgs.iniciarSesion}" outcome="login" rendered="#{empty LOGGEDIN_USER}"/>
 				</f:facet>
 
 				<p:submenu style="float:right" label="#{msgs.textoIdioma}"
@@ -45,15 +35,12 @@
 					<p:menuitem id="linkingles" value="#{msgs.enlaceIdiomaEN}"
 						actionListener="#{settings.setEnglish}" update="@all" />
 				</p:submenu>
-<<<<<<< HEAD
-				
-				<p:submenu label="#{LOGGEDIN_USER.login}" style="float:right" rendered="#{not empty LOGGEDIN_USER}">
-					<p:menuitem id="logout" value="#{msgs.cerrarSesion}" action="#{login.logout}" />
-				</p:submenu>
-				
-=======
 
->>>>>>> bab3d9ab625ef57704a29f1f1729d36af351312e
+				<p:submenu label="#{LOGGEDIN_USER.login}" style="float:right"
+					rendered="#{not empty LOGGEDIN_USER}">
+					<p:menuitem id="logout" value="#{msgs.cerrarSesion}"
+						action="#{login.logout}" />
+				</p:submenu>
 			</p:menubar>
 		</h:form>
 
