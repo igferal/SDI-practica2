@@ -125,6 +125,7 @@ public class BeanTripController {
 	public void save() {
 
 		TripService tservice;
+		System.out.println("PASO POR AQUI");
 
 		try {
 
