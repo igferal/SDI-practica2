@@ -23,7 +23,7 @@
 	<managed-bean>
 		<managed-bean-name>activeTrips</managed-bean-name>
 		<managed-bean-class>com.sdi.presentation.BeanActiveTrips</managed-bean-class>
-		<managed-bean-scope>request</managed-bean-scope>
+		<managed-bean-scope>view</managed-bean-scope>
 	</managed-bean>
 	
 
