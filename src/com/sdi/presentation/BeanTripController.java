@@ -32,6 +32,24 @@ public class BeanTripController {
 	private String costeEstimado;
 	private String plazasDisponibles;
 	private String plazasMaximas;
+	private String coordenadasOrigen;
+	private String coordenadasDestino;
+
+	public String getCoordenadasOrigen() {
+		return coordenadasOrigen;
+	}
+
+	public void setCoordenadasOrigen(String coordenadasOrigen) {
+		this.coordenadasOrigen = coordenadasOrigen;
+	}
+
+	public String getCoordenadasDestino() {
+		return coordenadasDestino;
+	}
+
+	public void setCoordenadasDestino(String coordenadasDestino) {
+		this.coordenadasDestino = coordenadasDestino;
+	}
 
 	public String getCosteEstimado() {
 		return costeEstimado;
@@ -132,6 +150,8 @@ public class BeanTripController {
 				context, "msgs");
 		String respuesta = "exito";
 
+		completeWaypoints();
+
 		try {
 
 			Double estimatedCost = Double.parseDouble(costeEstimado);
@@ -188,6 +208,25 @@ public class BeanTripController {
 
 		return respuesta;
 
+	}
+
+	private void completeWaypoints() {
+
+		if (coordenadasOrigen != null && coordenadasOrigen != "") {
+			String[] coorOr = coordenadasOrigen.split("C");
+			Double latOr = Double.parseDouble(coorOr[0]);
+			Double lonOr = Double.parseDouble(coorOr[1]);
+			Waypoint cO = new Waypoint(latOr, lonOr);
+			departure.setWaypoint(cO);
+
+		}
+		if (coordenadasDestino != null && coordenadasDestino != "") {
+			String[] coorDes = coordenadasOrigen.split("C");
+			Double latDes = Double.parseDouble(coorDes[0]);
+			Double lonDes = Double.parseDouble(coorDes[1]);
+			Waypoint cD = new Waypoint(latDes, lonDes);
+			destination.setWaypoint(cD);
+		}
 	}
 
 	@PreDestroy
