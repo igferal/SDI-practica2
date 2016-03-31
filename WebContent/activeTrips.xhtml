@@ -18,35 +18,45 @@
 				paginator="true"
 				paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 				rowsPerPageTemplate="5,10,15">
-				<p:column headerText="Id">
+				<p:column headerText="Id" sortBy="#{trip.id}" filterBy="#{trip.id}">
 					<h:outputText value="#{trip.id}" />
 				</p:column>
-				
-				<p:column headerText="#{msgs.createTrip_ciudadOrigen}"> 
+
+				<p:column headerText="#{msgs.createTrip_ciudadOrigen}"
+					filterBy="#{trip.departure.city}" sortBy="#{trip.departure.city}">
 					<h:outputText value="#{trip.departure.city}" />
 				</p:column>
 
-				<p:column headerText="#{msgs.createTrip_fechaSalida}">
+				<p:column headerText="#{msgs.createTrip_fechaSalida}"
+					sortBy="#{trip.departureDate}" filterBy="#{trip.departureDate}">
 					<h:outputText value="#{trip.departureDate}" />
 				</p:column>
-				
-				<p:column headerText="#{msgs.createTrip_ciudadDestino}">
+
+				<p:column headerText="#{msgs.createTrip_ciudadDestino}"
+					sortBy="#{trip.destination.city}"
+					filterBy="#{trip.destination.city}">
 					<h:outputText value="#{trip.destination.city}" />
 				</p:column>
 
-				<p:column headerText="#{msgs.createTrip_fechaLlegada}">
+				<p:column headerText="#{msgs.createTrip_fechaLlegada}"
+					sortBy="#{trip.arrivalDate}" filterBy="#{trip.departure.city}">
 					<h:outputText value="#{trip.arrivalDate}" />
 				</p:column>
-				
-				<p:column headerText="#{msgs.createTrip_fechaInscripcion}">
+
+				<p:column headerText="#{msgs.createTrip_fechaInscripcion}"
+					sortBy="#{trip.closingDate}" filterBy="#{trip.closingDate}">
 					<h:outputText value="#{trip.closingDate}" />
 				</p:column>
-				
-				<p:column headerText="#{msgs.createTrip_costeEstimado}">
-					<h:outputText value="#{trip.estimatedCost} €" />
+
+				<p:column headerText="#{msgs.createTrip_costeEstimado}"
+					sortBy="#{trip.estimatedCost}" filterBy="#{trip.estimatedCost}">
+			
+					<h:outputText value="#{trip.estimatedCost}">
+						<f:convertNumber currencySymbol="€" type="currency" />
+					</h:outputText>
 				</p:column>
-				
-				
+
+
 			</p:dataTable>
 		</h:form>
 

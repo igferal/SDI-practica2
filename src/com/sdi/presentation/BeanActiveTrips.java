@@ -2,6 +2,8 @@ package com.sdi.presentation;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
+import java.util.Locale;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
@@ -16,12 +18,12 @@ import com.sdi.model.Trip;
 public class BeanActiveTrips implements Serializable {
 	private static final long serialVersionUID = -8662200441018725390L;
 
-	private Trip[] trips = null;
+	private List<Trip> trips = null;
+	private List<Trip> filteredTrips = null;
 
 	@PostConstruct
 	public void init() {
 
-		
 		System.out.println("Creando Bean active trips");
 		list();
 	}
@@ -30,7 +32,7 @@ public class BeanActiveTrips implements Serializable {
 
 		try {
 			TripService tservice = Factories.services.createTripService();
-			trips = (Trip[]) tservice.listActiveTrips(new Date()).toArray(new Trip[0]);
+			setTrips(tservice.listActiveTrips(new Date()));
 			return "exito";
 
 		} catch (Exception e) {
@@ -40,12 +42,30 @@ public class BeanActiveTrips implements Serializable {
 
 	}
 
-	public Trip[] getTrips() {
+	/*
+	 * public boolean filterByCost(Object value, Object filter, Locale locale) {
+	 * String filterText = (filter == null) ? null : filter.toString().trim();
+	 * if(filterText == null||filterText.equals("")) { return true; }
+	 * 
+	 * if(value == null) { return false; }
+	 * 
+	 * return ((Comparable) value).compareTo(Integer.valueOf(filterText)) > 0; }
+	 */
+
+	public List<Trip> getTrips() {
 		return trips;
 	}
 
-	public void setTrips(Trip[] trips) {
+	public void setTrips(List<Trip> trips) {
 		this.trips = trips;
+	}
+
+	public List<Trip> getFilteredTrips() {
+		return filteredTrips;
+	}
+
+	public void setFilteredTrips(List<Trip> filteredTrips) {
+		this.filteredTrips = filteredTrips;
 	}
 
 }
