@@ -3,7 +3,6 @@ package com.sdi.presentation;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
@@ -15,7 +14,7 @@ import com.sdi.infrastructure.Factories;
 import com.sdi.model.Trip;
 
 @ManagedBean(name = "activeTrips")
-@RequestScoped
+@ViewScoped
 public class BeanActiveTrips implements Serializable {
 	private static final long serialVersionUID = -8662200441018725390L;
 
@@ -26,7 +25,7 @@ public class BeanActiveTrips implements Serializable {
 	public void init() {
 
 		System.out.println("Creando Bean active trips");
-		//list();
+		list();
 	}
 
 	public String list() {

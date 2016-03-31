@@ -14,7 +14,7 @@
 		<h:form id="form-cabecera">
 			<p:menubar id="mimenu">
 				<p:menuitem id="shareMyTrip" value="#{msgs.appName}" url="/" />
-				<p:menuitem id="viajesActivos" value="#{msgs.viajesActivos}" url="" />
+				<p:menuitem id="viajesActivos" value="#{msgs.viajesActivos}" action="#{activeTrips.list}"/>
 				<p:menuitem id="misViajesOfertados"
 					value="#{msgs.misViajesOfertados}" url=""
 					rendered="#{not empty LOGGEDIN_USER}" />
