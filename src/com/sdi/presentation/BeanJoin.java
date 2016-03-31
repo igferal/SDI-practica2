@@ -15,7 +15,6 @@ import alb.util.log.Log;
 import com.sdi.infrastructure.Factories;
 import com.sdi.model.User;
 import com.sdi.model.UserStatus;
-import com.sdi.persistence.UserDao;
 
 @ManagedBean(name = "join")
 public class BeanJoin implements Serializable {
@@ -44,17 +43,15 @@ public class BeanJoin implements Serializable {
 			return "fallo";
 		}
 
-		UserDao dao = Factories.persistence.newUserDao();
-		if (dao.findByLogin(username) == null) {
-			User user = new User();
-			user.setLogin(username);
-			user.setName(nombre);
-			user.setSurname(apellidos);
-			user.setEmail(email);
-			user.setPassword(password);
-			user.setStatus(UserStatus.ACTIVE);
+		User user = new User();
+		user.setLogin(username);
+		user.setName(nombre);
+		user.setSurname(apellidos);
+		user.setEmail(email);
+		user.setPassword(password);
+		user.setStatus(UserStatus.ACTIVE);
 
-			dao.save(user);
+		if (Factories.services.createLoginService().saveUser(user)) {
 			Log.debug("Se ha registrado con éxito al usuario [%s]", username);
 
 			FacesContext context = FacesContext.getCurrentInstance();
