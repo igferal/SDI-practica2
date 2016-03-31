@@ -18,21 +18,20 @@
 				<p:panelGrid columns="1" layout="grid" class="ui-noborder">
 					<h2>#{msgs.createTrip_origen}</h2>
 					<h:outputText value="#{msgs.createTrip_calleOrigen}" />
-					<p:inputText id="calleOrigen" />
-					<p:message for="default" />
- 
+					<p:inputText id="calleOrigen" value="#{tripController.departure.address}" />
+
 
 					<h:outputText value="#{msgs.createTrip_ciudadOrigen}" />
-					<p:inputText id="ciudadOrigen" />
+					<p:inputText id="ciudadOrigen" value="#{tripController.departure.city}"/>
 
 					<h:outputText value="#{msgs.createTrip_provinciaOrigen}" />
-					<p:inputText id="provinciaOrigen" />
+					<p:inputText id="provinciaOrigen" value="#{tripController.departure.state}"/>
 
 					<h:outputText value="#{msgs.createTrip_paisOrigen}" />
-					<p:inputText id="paisOrigen" />
+					<p:inputText id="paisOrigen" value="#{tripController.departure.country}"/>
 
 					<h:outputText value="#{msgs.createTrip_codigoPostalOrigen}" />
-					<p:inputText id="codigoPostalOrigen" />
+					<p:inputText id="codigoPostalOrigen" value="#{tripController.departure.zipCode}"/>
 
 					<h:outputText value="#{msgs.createTrip_coordenadasOrigen}" />
 					<p:inputText id="coordenadasOrigen" />
@@ -41,19 +40,19 @@
 				<p:panelGrid columns="1" layout="grid" class="ui-noborder">
 					<h2>#{msgs.createTrip_destino}</h2>
 					<h:outputText value="#{msgs.createTrip_calleDestino}" />
-					<p:inputText id="calleDestino" />
+					<p:inputText id="calleDestino" value="#{tripController.arrival.address}"/>
 
 					<h:outputText value="#{msgs.createTrip_ciudadDestino}" />
-					<p:inputText id="ciudadDestino" />
+					<p:inputText id="ciudadDestino" value="#{tripController.arrival.city}"/>
 
 					<h:outputText value="#{msgs.createTrip_provinciaDestino}" />
-					<p:inputText id="provinciaDestino" />
+					<p:inputText id="provinciaDestino" value="#{tripController.arrival.state}"/>
 
 					<h:outputText value="#{msgs.createTrip_paisDestino}" />
-					<p:inputText id="paisDestino" />
+					<p:inputText id="paisDestino" value="#{tripController.arrival.country}"/>
 
 					<h:outputText value="#{msgs.createTrip_codigoPostalOrigen}" />
-					<p:inputText id="codigoPostalDestino" />
+					<p:inputText id="codigoPostalDestino" value="#{tripController.arrival.zipCode}"/>
 
 					<h:outputText value="#{msgs.createTrip_coordenadasDestino}" />
 					<p:inputText id="coordenadasDestino" />
@@ -65,18 +64,18 @@
 
 				<p:outputLabel for="fechaSalida"
 					value="#{msgs.createTrip_fechaSalida}" />
-				<p:calendar id="fechaSalida" value="#{calendarView.date10}"
-					pattern="MM/dd/yyyy HH:mm:ss" />
+				<p:calendar id="fechaSalida" 
+					pattern="MM/dd/yyyy HH:mm:ss" value="#{tripController.dateSalida}"/>
 
 				<p:outputLabel for="fechaLlegada"
 					value="#{msgs.createTrip_fechaLlegada}" />
-				<p:calendar id="fechaLlegada" value="#{calendarView.date10}"
-					pattern="MM/dd/yyyy HH:mm:ss" />
+				<p:calendar id="fechaLlegada"
+					pattern="MM/dd/yyyy HH:mm:ss"   value="#{tripController.dateLlegada}/>
 
 				<p:outputLabel for="fechaInscripcion"
 					value="#{msgs.createTrip_fechaInscripcion}" />
-				<p:calendar id="fechaInscripcion" value="#{calendarView.date10}"
-					pattern="MM/dd/yyyy HH:mm:ss" />
+				<p:calendar id="fechaInscripcion"
+					pattern="MM/dd/yyyy HH:mm:ss"  value="#{tripController.dateInscripcion}/>
 
 				<h:outputText value="#{msgs.createTrip_costeEstimado}" />
 				<p:inputText id="costeEstimado" />
@@ -91,10 +90,11 @@
 				<p:inputTextarea id="comentarios" rows="5" cols="30"
 					counter="display" maxlength="240"
 					counterTemplate="{0} #{msgs.createTrip_caracteresRestantes}."
-					autoResize="false" />
+					autoResize="false" value="#{trip.comments}" />
 				<h:outputText id="display" />
 				<p:commandButton value="#{msgs.createTrip_enviar}" id="enviar"
-					styleClass="ui-priority-primary" />
+					styleClass="ui-priority-primary" action="#{tripController.save}"
+					process="@form" />
 			</p:panelGrid>
 
 		</h:form>

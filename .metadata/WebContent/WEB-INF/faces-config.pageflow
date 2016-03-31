@@ -5,8 +5,8 @@
   <nodes xsi:type="pageflow:PFPage" name="listado.xhtml" x="554" y="946" id="pf14568361469826" referenceLink="//@navigationRule.3/@navigationCase.0/@toViewId|" outlinks="pf14568361469827 pf14568361469828" inlinks="pf14568361469827 pf14568361469829 pf145683614698210 pf14569226252671" path="/listado.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="altaForm.xhtml" x="338" y="946" id="pf145683614698211" referenceLink="//@navigationRule.2/@fromViewId|" outlinks="pf14568361469829" inlinks="pf14569226252672" path="/altaForm.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="editForm.xhtml" x="338" y="562" id="pf145683614698212" referenceLink="//@navigationRule.3/@fromViewId|" outlinks="pf145683614698210" inlinks="pf14568361469828" path="/editForm.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="registrarse.xhtml" id="pf14593377386243" referenceLink="//@navigationRule.0/@navigationCase.4/@toViewId|" inlinks="pf14593377386242" path="/registrarse.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="index.xhtml" id="pf14593738054973" referenceLink="//@navigationRule.0/@navigationCase.4/@toViewId|" inlinks="pf14593738054972" path="/index.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="registrarse.xhtml" id="pf14593377386243" referenceLink="//@navigationRule.0/@navigationCase.5/@toViewId|" inlinks="pf14593377386242" path="/registrarse.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="index.xhtml" id="pf14593738054973" referenceLink="//@navigationRule.0/@navigationCase.3/@toViewId|" inlinks="pf14593738054972" path="/index.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="login.xhtml" id="pf14593747119305" referenceLink="//@navigationRule.0/@navigationCase.4/@toViewId|" inlinks="pf14593747119304" path="/login.xhtml"/>
   <links id="pf14568361469811" target="pf14568361469812" source="pf14568361469810" outcome="error"/>
   <links id="pf14568361469828" target="pf145683614698212" source="pf14568361469826" outcome="editar"/>

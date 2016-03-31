@@ -10,8 +10,6 @@ import javax.annotation.PreDestroy;
 import javax.faces.bean.*;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
-
-import org.hibernate.validator.internal.util.privilegedactions.GetConstructor;
 @ManagedBean(name="settings")
 @SessionScoped
 public class BeanSettings implements Serializable{
