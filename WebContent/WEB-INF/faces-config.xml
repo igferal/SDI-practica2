@@ -68,7 +68,6 @@
 			<to-view-id>/login.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
-<<<<<<< HEAD
 			<from-outcome>join</from-outcome>
 			<to-view-id>/join.xhtml</to-view-id>
 		</navigation-case>
@@ -76,7 +75,8 @@
 			<from-action>#{join.createUser}</from-action>
 			<from-outcome>exito</from-outcome>
 			<to-view-id>/login.xhtml</to-view-id>
-=======
+		</navigation-case>
+		<navigation-case>
 			<from-action>#{tripController.save}</from-action>
 			<from-outcome>fallo</from-outcome>
 			<to-view-id>/createTrip.xhtml</to-view-id>
@@ -89,7 +89,6 @@
 		<navigation-case>
 			<from-outcome>registrarse</from-outcome>
 			<to-view-id>/registrarse.xhtml</to-view-id>
->>>>>>> bab3d9ab625ef57704a29f1f1729d36af351312e
 		</navigation-case>
 
 	</navigation-rule>
