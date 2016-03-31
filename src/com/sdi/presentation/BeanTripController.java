@@ -129,11 +129,9 @@ public class BeanTripController {
 		departure = new AddressPoint("", "", "", "", "", new Waypoint(0D, 0D));
 		setArrival(new AddressPoint("", "", "", "", "", new Waypoint(0D, 0D)));
 		System.out.println("BeanAlumnos - PostConstruct");
-		// Buscamos el alumno en la sesión. Esto es un patrón factoría
-		// claramente.
+		
 		trip = (BeanTrip) FacesContext.getCurrentInstance()
 				.getExternalContext().getSessionMap().get(new String("trip"));
-		// si no existe lo creamos e inicializamos
 		if (trip == null) {
 			System.out.println("BeanTrip - No existia");
 			trip = new BeanTrip();
@@ -191,7 +189,7 @@ public class BeanTripController {
 
 			tservice = Factories.services.createTripService();
 
-			tservice.SaveTrip(trip);
+			tservice.saveTrip(trip);
 
 		} catch (NumberFormatException e) {
 			FacesContext.getCurrentInstance().addMessage(

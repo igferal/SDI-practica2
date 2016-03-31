@@ -12,7 +12,7 @@ public interface TripDao extends GenericDao<Trip, Long> {
 
 	Trip findByPromoterIdAndArrivalDate(Long id, Date arrivalDate);
 
-	List<Trip> findTravelsBefore(Date date);
+	List<Trip> findTravelsAfter(Date date);
 
 	List<Trip> dateAscending(Date date);
 
