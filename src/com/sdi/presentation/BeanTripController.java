@@ -1,9 +1,11 @@
 package com.sdi.presentation;
 
 import java.util.Date;
+import java.util.ResourceBundle;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
@@ -122,10 +124,13 @@ public class BeanTripController {
 		}
 	}
 
-	public void save() {
+	public String save() {
 
 		TripService tservice;
-		System.out.println("PASO POR AQUI");
+		FacesContext context = FacesContext.getCurrentInstance();
+		ResourceBundle bundle = context.getApplication().getResourceBundle(
+				context, "msgs");
+		String respuesta = "exito";
 
 		try {
 
@@ -135,12 +140,22 @@ public class BeanTripController {
 
 			if (maxPax < availablePax) {
 
-				return;
+				FacesContext.getCurrentInstance().addMessage(null,
+						new FacesMessage(FacesMessage.SEVERITY_ERROR, "",
+
+						bundle.getString("createTrip_wrongSeats")));
+				return "fallo";
+
 			}
 
 			if (DateUtil.isAfter(dateInscripcion, dateSalida)
 					|| DateUtil.isAfter(dateSalida, dateLlegada)) {
-				return;
+
+				FacesContext.getCurrentInstance().addMessage(
+						null,
+						new FacesMessage(FacesMessage.SEVERITY_ERROR, "",
+								bundle.getString("createTrip_wrongDates")));
+				return "fallo";
 			}
 
 			trip.setArrivalDate(dateLlegada);
@@ -153,17 +168,25 @@ public class BeanTripController {
 			trip.setMaxPax(maxPax);
 			trip.setStatus(TripStatus.OPEN);
 			trip.setPromoterId(314L);
-			
+
 			tservice = Factories.services.createTripService();
 
 			tservice.SaveTrip(trip);
 
 		} catch (NumberFormatException e) {
+			FacesContext.getCurrentInstance().addMessage(
+					null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "", bundle
+							.getString("createTrip_wrongNumberInputs")));
 			e.printStackTrace();
+			return "fallo";
 
 		} catch (Exception e) {
 			e.printStackTrace();
+			return "fallo";
 		}
+
+		return respuesta;
 
 	}
 
