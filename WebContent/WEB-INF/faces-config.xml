@@ -20,6 +20,12 @@
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
 	
+	<managed-bean>
+		<managed-bean-name>activeTrips</managed-bean-name>
+		<managed-bean-class>com.sdi.presentation.BeanActiveTrips</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	
 
 	<application>
 		<resource-bundle>
@@ -38,10 +44,17 @@
 			<from-outcome>alta</from-outcome>
 			<to-view-id>/altaForm.xhtml</to-view-id>
 		</navigation-case>
+		
 		<navigation-case>
 			<from-action>#{controller.listado}</from-action>
 			<from-outcome>exito</from-outcome>
 			<to-view-id>/listado.xhtml</to-view-id>
+		</navigation-case>
+		
+		<navigation-case>
+			<from-action>#{activeTrips.list}</from-action>
+			<from-outcome>exito</from-outcome>
+			<to-view-id>/activeTrips.xhtml</to-view-id>
 		</navigation-case>
 
 		<navigation-case>
@@ -55,6 +68,7 @@
 			<to-view-id>/login.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
+<<<<<<< HEAD
 			<from-outcome>join</from-outcome>
 			<to-view-id>/join.xhtml</to-view-id>
 		</navigation-case>
@@ -62,6 +76,20 @@
 			<from-action>#{join.createUser}</from-action>
 			<from-outcome>exito</from-outcome>
 			<to-view-id>/login.xhtml</to-view-id>
+=======
+			<from-action>#{tripController.save}</from-action>
+			<from-outcome>fallo</from-outcome>
+			<to-view-id>/createTrip.xhtml</to-view-id>
+		</navigation-case>
+			<navigation-case>
+			<from-action>#{tripController.save}</from-action>
+			<from-outcome>exito</from-outcome>
+			<to-view-id>/index.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>registrarse</from-outcome>
+			<to-view-id>/registrarse.xhtml</to-view-id>
+>>>>>>> bab3d9ab625ef57704a29f1f1729d36af351312e
 		</navigation-case>
 
 	</navigation-rule>

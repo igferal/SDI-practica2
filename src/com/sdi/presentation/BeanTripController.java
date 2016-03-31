@@ -1,9 +1,11 @@
 package com.sdi.presentation;
 
 import java.util.Date;
+import java.util.ResourceBundle;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
@@ -30,6 +32,24 @@ public class BeanTripController {
 	private String costeEstimado;
 	private String plazasDisponibles;
 	private String plazasMaximas;
+	private String coordenadasOrigen;
+	private String coordenadasDestino;
+
+	public String getCoordenadasOrigen() {
+		return coordenadasOrigen;
+	}
+
+	public void setCoordenadasOrigen(String coordenadasOrigen) {
+		this.coordenadasOrigen = coordenadasOrigen;
+	}
+
+	public String getCoordenadasDestino() {
+		return coordenadasDestino;
+	}
+
+	public void setCoordenadasDestino(String coordenadasDestino) {
+		this.coordenadasDestino = coordenadasDestino;
+	}
 
 	public String getCosteEstimado() {
 		return costeEstimado;
@@ -109,11 +129,9 @@ public class BeanTripController {
 		departure = new AddressPoint("", "", "", "", "", new Waypoint(0D, 0D));
 		setArrival(new AddressPoint("", "", "", "", "", new Waypoint(0D, 0D)));
 		System.out.println("BeanAlumnos - PostConstruct");
-		// Buscamos el alumno en la sesión. Esto es un patrón factoría
-		// claramente.
+		
 		trip = (BeanTrip) FacesContext.getCurrentInstance()
 				.getExternalContext().getSessionMap().get(new String("trip"));
-		// si no existe lo creamos e inicializamos
 		if (trip == null) {
 			System.out.println("BeanTrip - No existia");
 			trip = new BeanTrip();
@@ -122,10 +140,15 @@ public class BeanTripController {
 		}
 	}
 
-	public void save() {
+	public String save() {
 
 		TripService tservice;
-		System.out.println("PASO POR AQUI");
+		FacesContext context = FacesContext.getCurrentInstance();
+		ResourceBundle bundle = context.getApplication().getResourceBundle(
+				context, "msgs");
+		String respuesta = "exito";
+
+		completeWaypoints();
 
 		try {
 
@@ -135,12 +158,22 @@ public class BeanTripController {
 
 			if (maxPax < availablePax) {
 
-				return;
+				FacesContext.getCurrentInstance().addMessage(null,
+						new FacesMessage(FacesMessage.SEVERITY_ERROR, "",
+
+						bundle.getString("createTrip_wrongSeats")));
+				return "fallo";
+
 			}
 
 			if (DateUtil.isAfter(dateInscripcion, dateSalida)
 					|| DateUtil.isAfter(dateSalida, dateLlegada)) {
-				return;
+
+				FacesContext.getCurrentInstance().addMessage(
+						null,
+						new FacesMessage(FacesMessage.SEVERITY_ERROR, "",
+								bundle.getString("createTrip_wrongDates")));
+				return "fallo";
 			}
 
 			trip.setArrivalDate(dateLlegada);
@@ -153,18 +186,45 @@ public class BeanTripController {
 			trip.setMaxPax(maxPax);
 			trip.setStatus(TripStatus.OPEN);
 			trip.setPromoterId(314L);
-			
+
 			tservice = Factories.services.createTripService();
 
-			tservice.SaveTrip(trip);
+			tservice.saveTrip(trip);
 
 		} catch (NumberFormatException e) {
+			FacesContext.getCurrentInstance().addMessage(
+					null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "", bundle
+							.getString("createTrip_wrongNumberInputs")));
 			e.printStackTrace();
+			return "fallo";
 
 		} catch (Exception e) {
 			e.printStackTrace();
+			return "fallo";
 		}
 
+		return respuesta;
+
+	}
+
+	private void completeWaypoints() {
+
+		if (coordenadasOrigen != null && coordenadasOrigen != "") {
+			String[] coorOr = coordenadasOrigen.split("C");
+			Double latOr = Double.parseDouble(coorOr[0]);
+			Double lonOr = Double.parseDouble(coorOr[1]);
+			Waypoint cO = new Waypoint(latOr, lonOr);
+			departure.setWaypoint(cO);
+
+		}
+		if (coordenadasDestino != null && coordenadasDestino != "") {
+			String[] coorDes = coordenadasOrigen.split("C");
+			Double latDes = Double.parseDouble(coorDes[0]);
+			Double lonDes = Double.parseDouble(coorDes[1]);
+			Waypoint cD = new Waypoint(latDes, lonDes);
+			destination.setWaypoint(cD);
+		}
 	}
 
 	@PreDestroy

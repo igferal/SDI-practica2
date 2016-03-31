@@ -51,7 +51,14 @@
 					<p:message for="codigoPostalOrigen" styleClass="error" />
 
 					<h:outputText value="#{msgs.createTrip_coordenadasOrigen}" />
-					<p:inputText id="coordenadasOrigen" />
+					<p:inputText id="coordenadasOrigen"
+						validatorMessage="#{msgs.createForm_coordenadasMal}" value="#{tripController.coordenadasOrigen}">
+						<f:validateRegex pattern="[0-9]+C[0-9]+"
+							 />
+					</p:inputText>
+					<p:message for="coordenadasOrigen" styleClass="error" />
+
+
 				</p:panelGrid>
 
 				<p:panelGrid columns="1" layout="grid" class="ui-noborder">
@@ -88,9 +95,15 @@
 						requiredMessage="#{msgs.createTrip_requiredCodigoPostalDestino}" />
 					<p:message for="codigoPostalDestino" styleClass="error" />
 
-					<h:outputText value="#{msgs.createTrip_coordenadasDestino}" />
-					<p:inputText id="coordenadasDestino" />
 
+
+					<h:outputText value="#{msgs.createTrip_coordenadasDestino}"/>
+						<p:inputText id="coordenadasDestino"
+							value="#{tripController.coordenadasDestino}"
+							validatorMessage="#{msgs.createForm_coordenadasMal}">
+							<f:validateRegex pattern="[0-9]+C[0-9]+" />
+						</p:inputText>
+						<p:message for="coordenadasDestino" styleClass="error" />
 				</p:panelGrid>
 			</p:panelGrid>
 
