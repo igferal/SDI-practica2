@@ -134,8 +134,5 @@ public class Trip {
 				+ promoterId + "]";
 	}
 
-	public Trip() {
-		departure = new AddressPoint(null, null, null, null, null, null);
-	}
 
 }

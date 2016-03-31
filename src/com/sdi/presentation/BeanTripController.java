@@ -1,6 +1,5 @@
 package com.sdi.presentation;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.annotation.PostConstruct;
@@ -13,6 +12,9 @@ import javax.faces.context.FacesContext;
 import com.sdi.business.TripService;
 import com.sdi.infrastructure.Factories;
 import com.sdi.model.AddressPoint;
+import com.sdi.model.TripStatus;
+import com.sdi.model.Waypoint;
+import com.sdi.persistence.util.DateUtil;
 
 @ManagedBean(name = "tripController")
 @SessionScoped
@@ -21,10 +23,37 @@ public class BeanTripController {
 	@ManagedProperty(value = "#{trip}")
 	private BeanTrip trip;
 	private AddressPoint departure;
-	private AddressPoint arrival;
+	private AddressPoint destination;
 	private Date dateSalida;
 	private Date dateInscripcion;
 	private Date dateLlegada;
+	private String costeEstimado;
+	private String plazasDisponibles;
+	private String plazasMaximas;
+
+	public String getCosteEstimado() {
+		return costeEstimado;
+	}
+
+	public void setCosteEstimado(String costeEstimado) {
+		this.costeEstimado = costeEstimado;
+	}
+
+	public String getPlazasDisponibles() {
+		return plazasDisponibles;
+	}
+
+	public void setPlazasDisponibles(String plazasDisponibles) {
+		this.plazasDisponibles = plazasDisponibles;
+	}
+
+	public String getPlazasMaximas() {
+		return plazasMaximas;
+	}
+
+	public void setPlazasMaximas(String plazasMaximas) {
+		this.plazasMaximas = plazasMaximas;
+	}
 
 	public Date getDateInscripcion() {
 		return dateInscripcion;
@@ -50,61 +79,6 @@ public class BeanTripController {
 		this.trip = trip;
 	}
 
-	@PostConstruct
-	public void init() {
-		
-		departure = new AddressPoint("", "", "", "", "", null);
-		setArrival(new AddressPoint("", "", "", "", "", null));
-		System.out.println("BeanAlumnos - PostConstruct");
-		// Buscamos el alumno en la sesión. Esto es un patrón factoría
-		// claramente.
-		trip = (BeanTrip) FacesContext.getCurrentInstance()
-				.getExternalContext().getSessionMap().get(new String("trip"));
-		// si no existe lo creamos e inicializamos
-		if (trip == null) {
-			System.out.println("BeanTrip - No existia");
-			trip = new BeanTrip();
-			FacesContext.getCurrentInstance().getExternalContext()
-					.getSessionMap().put("trip", trip);
-		}
-	}
-
-	public void save() {
-
-		TripService tservice;
-		
-
-		try {
-		
-			trip.setArrivalDate(dateSalida);
-			trip.setClosingDate(dateInscripcion);
-			trip.setDepartureDate(dateSalida);
-			trip.setDeparture(departure);
-			trip.setDestination(arrival);
-			/*
-			 * 
-			 * IR METIENDO COMPROBACIONES *
-			 */
-			tservice = Factories.services.createTripService();
-
-		
-			
-			tservice.SaveTrip(trip);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		
-		}
-
-	}
-
-	@PreDestroy
-	public void end() {
-		System.out.println("BeanAlumnos - PreDestroy");
-	}
-
-	
-
 	public AddressPoint getDeparture() {
 		return departure;
 	}
@@ -122,13 +96,79 @@ public class BeanTripController {
 	}
 
 	public AddressPoint getArrival() {
-		return arrival;
+		return destination;
 	}
 
 	public void setArrival(AddressPoint arrival) {
-		this.arrival = arrival;
+		this.destination = arrival;
 	}
 
-	
+	@PostConstruct
+	public void init() {
+
+		departure = new AddressPoint("", "", "", "", "", new Waypoint(0D, 0D));
+		setArrival(new AddressPoint("", "", "", "", "", new Waypoint(0D, 0D)));
+		System.out.println("BeanAlumnos - PostConstruct");
+		// Buscamos el alumno en la sesión. Esto es un patrón factoría
+		// claramente.
+		trip = (BeanTrip) FacesContext.getCurrentInstance()
+				.getExternalContext().getSessionMap().get(new String("trip"));
+		// si no existe lo creamos e inicializamos
+		if (trip == null) {
+			System.out.println("BeanTrip - No existia");
+			trip = new BeanTrip();
+			FacesContext.getCurrentInstance().getExternalContext()
+					.getSessionMap().put("trip", trip);
+		}
+	}
+
+	public void save() {
+
+		TripService tservice;
+
+		try {
+
+			Double estimatedCost = Double.parseDouble(costeEstimado);
+			Integer availablePax = Integer.parseInt(plazasDisponibles);
+			Integer maxPax = Integer.parseInt(plazasMaximas);
+
+			if (maxPax < availablePax) {
+
+				return;
+			}
+
+			if (DateUtil.isAfter(dateInscripcion, dateSalida)
+					|| DateUtil.isAfter(dateSalida, dateLlegada)) {
+				return;
+			}
+
+			trip.setArrivalDate(dateLlegada);
+			trip.setAvailablePax(availablePax);
+			trip.setClosingDate(dateLlegada);
+			trip.setDeparture(departure);
+			trip.setDepartureDate(dateSalida);
+			trip.setDestination(destination);
+			trip.setEstimatedCost(estimatedCost);
+			trip.setMaxPax(maxPax);
+			trip.setStatus(TripStatus.OPEN);
+			trip.setPromoterId(314L);
+			
+			tservice = Factories.services.createTripService();
+
+			tservice.SaveTrip(trip);
+
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	@PreDestroy
+	public void end() {
+		System.out.println("BeanAlumnos - PreDestroy");
+	}
 
 }
