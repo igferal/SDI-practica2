@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Locale;
 
 import javax.annotation.PostConstruct;
+import javax.enterprise.context.RequestScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
@@ -14,7 +15,7 @@ import com.sdi.infrastructure.Factories;
 import com.sdi.model.Trip;
 
 @ManagedBean(name = "activeTrips")
-@ViewScoped
+@RequestScoped
 public class BeanActiveTrips implements Serializable {
 	private static final long serialVersionUID = -8662200441018725390L;
 
@@ -25,12 +26,13 @@ public class BeanActiveTrips implements Serializable {
 	public void init() {
 
 		System.out.println("Creando Bean active trips");
-		list();
+		//list();
 	}
 
 	public String list() {
 
 		try {
+			System.out.println("PASO");
 			TripService tservice = Factories.services.createTripService();
 			setTrips(tservice.listActiveTrips(new Date()));
 			return "exito";
