@@ -2,7 +2,7 @@ package com.sdi.business.impl;
 
 
 import com.sdi.business.AlumnosService;
-import com.sdi.business.LoginService;
+import com.sdi.business.UserService;
 import com.sdi.business.ServicesFactory;
 import com.sdi.business.TripService;
 
@@ -14,8 +14,8 @@ public class SimpleServicesFactory implements ServicesFactory {
 	}
 	
 	@Override
-	public LoginService createLoginService() {
-		return new SimpleLoginService();
+	public UserService createUserService() {
+		return new SimpleUserService();
 	}
 
 	@Override

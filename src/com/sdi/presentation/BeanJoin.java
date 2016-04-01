@@ -51,7 +51,7 @@ public class BeanJoin implements Serializable {
 		user.setPassword(password);
 		user.setStatus(UserStatus.ACTIVE);
 
-		if (Factories.services.createLoginService().saveUser(user)) {
+		if (Factories.services.createUserService().saveUser(user)) {
 			Log.debug("Se ha registrado con éxito al usuario [%s]", username);
 
 			FacesContext context = FacesContext.getCurrentInstance();

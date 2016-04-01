@@ -12,7 +12,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
-import com.sdi.business.LoginService;
+import com.sdi.business.UserService;
 import com.sdi.infrastructure.Factories;
 import com.sdi.model.User;
 
@@ -28,7 +28,7 @@ public class BeanLogin implements Serializable {
 	}
 
 	public String verify() {
-		LoginService login = Factories.services.createLoginService();
+		UserService login = Factories.services.createUserService();
 		User user = login.verify(name, password);
 		if (user != null) {
 			putUserInSession(user);

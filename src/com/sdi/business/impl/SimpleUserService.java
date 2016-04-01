@@ -1,15 +1,15 @@
 package com.sdi.business.impl;
 
-import com.sdi.business.LoginService;
-import com.sdi.infrastructure.Factories;
+import com.sdi.business.UserService;
+import com.sdi.business.impl.classes.UserFind;
+import com.sdi.business.impl.classes.UserSave;
 import com.sdi.model.User;
-import com.sdi.persistence.UserDao;
 
-public class SimpleLoginService implements LoginService {
+public class SimpleUserService implements UserService {
 
 	@Override
 	public User verify(String login, String password) {
-		User user = Factories.persistence.newUserDao().findByLogin(login);
+		User user = new UserFind().find(login);
 		if (user != null && user.getPassword().equals(password)) {
 			user.setPassword(null);
 			return user;
@@ -20,14 +20,7 @@ public class SimpleLoginService implements LoginService {
 
 	@Override
 	public boolean saveUser(User user) {
-		UserDao dao = Factories.persistence.newUserDao();
-
-		if (dao.findByLogin(user.getLogin()) != null)
-			return false;
-		
-		dao.save(user);
-		
-		return true;
+		return new UserSave().save(user);
 	}
 
 }
