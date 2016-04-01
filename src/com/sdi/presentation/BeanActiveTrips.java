@@ -1,5 +1,6 @@
 package com.sdi.presentation;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -7,7 +8,11 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
+
+import org.primefaces.event.SelectEvent;
 
 import com.sdi.business.TripService;
 import com.sdi.infrastructure.Factories;
@@ -20,6 +25,8 @@ public class BeanActiveTrips implements Serializable {
 
 	private List<Trip> trips = null;
 	private List<Trip> filteredTrips = null;
+
+	private Trip selectedTrip;
 
 	@PostConstruct
 	public void init() {
@@ -68,9 +75,25 @@ public class BeanActiveTrips implements Serializable {
 	public void setFilteredTrips(List<Trip> filteredTrips) {
 		this.filteredTrips = filteredTrips;
 	}
-	
+
 	public String formattedDate(Date date) {
 		return new SimpleDateFormat("dd/MM/yyyy HH:mm").format(date);
 	}
 
+	public void onRowSelect(SelectEvent event) {
+		try {
+			FacesContext.getCurrentInstance().getExternalContext()
+					.redirect("infoTrip.xhtml?tripInfo=" + selectedTrip.getId());
+		} catch (IOException e) {
+		}
+	
+	}
+
+	public Trip getSelectedTrip() {
+		return selectedTrip;
+	}
+
+	public void setSelectedTrip(Trip selectedTrip) {
+		this.selectedTrip = selectedTrip;
+	}
 }
