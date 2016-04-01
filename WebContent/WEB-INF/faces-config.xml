@@ -26,6 +26,12 @@
 		<managed-bean-scope>view</managed-bean-scope>
 	</managed-bean>
 	
+	<managed-bean>
+		<managed-bean-name>myTrips</managed-bean-name>
+		<managed-bean-class>com.sdi.presentation.BeanMyTrips</managed-bean-class>
+		<managed-bean-scope>view</managed-bean-scope>
+	</managed-bean>
+	
 
 	<application>
 		<resource-bundle>
@@ -55,6 +61,12 @@
 			<from-action>#{activeTrips.list}</from-action>
 			<from-outcome>exito</from-outcome>
 			<to-view-id>/activeTrips.xhtml</to-view-id>
+		</navigation-case>
+		
+		<navigation-case>
+			<from-action>#{myTrips.listMyTrips}</from-action>
+			<from-outcome>exito</from-outcome>
+			<to-view-id>/myTrips.xhtml</to-view-id>
 		</navigation-case>
 
 		<navigation-case>

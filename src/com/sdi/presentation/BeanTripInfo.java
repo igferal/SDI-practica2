@@ -2,7 +2,6 @@ package com.sdi.presentation;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
 
 @ManagedBean(name = "tripInfo")

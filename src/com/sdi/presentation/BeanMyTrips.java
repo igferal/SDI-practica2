@@ -19,10 +19,10 @@ import com.sdi.infrastructure.Factories;
 import com.sdi.model.Trip;
 import com.sdi.model.User;
 
-@ManagedBean(name = "activeTrips")
+@ManagedBean(name = "myTrips")
 @ViewScoped
-public class BeanActiveTrips implements Serializable {
-	private static final long serialVersionUID = -8662200441018725390L;
+public class BeanMyTrips implements Serializable {
+	private static final long serialVersionUID = -8662200441018725393L;
 
 	private List<Trip> trips = null;
 	private List<Trip> filteredTrips = null;
@@ -33,33 +33,19 @@ public class BeanActiveTrips implements Serializable {
 	public void init() {
 
 		System.out.println("Creando Bean active trips");
-		list();
+		listMyTrips();
 	}
 
-	public String listMyTrips(){
-		
-		Map<String,Object> session = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+	public String listMyTrips() {
+
+		Map<String, Object> session = FacesContext.getCurrentInstance()
+				.getExternalContext().getSessionMap();
 		User user = (User) session.get("LOGGEDIN_USER");
-		System.out.println(user.toString());
-		
-		try {
-			System.out.println("MYTrips");
-			TripService tservice = Factories.services.createTripService();
-			setTrips(tservice.listActiveTrips(new Date()));
-			return "exito";
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			return "fallo";
-		}
-		
-	}
-	
-	public String list() {
+		System.out.println("creando bean myTrips");
 
 		try {
 			TripService tservice = Factories.services.createTripService();
-			setTrips(tservice.listActiveTrips(new Date()));
+			setTrips(tservice.travelsPromoter(user.getId()));
 			return "exito";
 
 		} catch (Exception e) {
@@ -68,16 +54,6 @@ public class BeanActiveTrips implements Serializable {
 		}
 
 	}
-
-	/*
-	 * public boolean filterByCost(Object value, Object filter, Locale locale) {
-	 * String filterText = (filter == null) ? null : filter.toString().trim();
-	 * if(filterText == null||filterText.equals("")) { return true; }
-	 * 
-	 * if(value == null) { return false; }
-	 * 
-	 * return ((Comparable) value).compareTo(Integer.valueOf(filterText)) > 0; }
-	 */
 
 	public List<Trip> getTrips() {
 		return trips;
@@ -101,11 +77,13 @@ public class BeanActiveTrips implements Serializable {
 
 	public void onRowSelect(SelectEvent event) {
 		try {
-			FacesContext.getCurrentInstance().getExternalContext()
+			FacesContext
+					.getCurrentInstance()
+					.getExternalContext()
 					.redirect("infoTrip.xhtml?tripInfo=" + selectedTrip.getId());
 		} catch (IOException e) {
 		}
-	
+
 	}
 
 	public Trip getSelectedTrip() {

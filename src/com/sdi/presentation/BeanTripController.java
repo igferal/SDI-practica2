@@ -1,6 +1,7 @@
 package com.sdi.presentation;
 
 import java.util.Date;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 import javax.annotation.PostConstruct;
@@ -9,14 +10,13 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
-import javax.faces.bean.SessionScoped;
-import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import com.sdi.business.TripService;
 import com.sdi.infrastructure.Factories;
 import com.sdi.model.AddressPoint;
 import com.sdi.model.TripStatus;
+import com.sdi.model.User;
 import com.sdi.model.Waypoint;
 import com.sdi.persistence.util.DateUtil;
 
@@ -178,6 +178,9 @@ public class BeanTripController {
 				return "fallo";
 			}
 
+			Map<String, Object> session = FacesContext.getCurrentInstance()
+					.getExternalContext().getSessionMap();
+			User user = (User) session.get("LOGGEDIN_USER");
 			trip.setArrivalDate(dateLlegada);
 			trip.setAvailablePax(availablePax);
 			trip.setClosingDate(dateLlegada);
@@ -187,7 +190,7 @@ public class BeanTripController {
 			trip.setEstimatedCost(estimatedCost);
 			trip.setMaxPax(maxPax);
 			trip.setStatus(TripStatus.OPEN);
-			trip.setPromoterId(314L);
+			trip.setPromoterId(user.getId());
 
 			tservice = Factories.services.createTripService();
 

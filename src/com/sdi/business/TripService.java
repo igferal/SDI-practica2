@@ -10,5 +10,6 @@ public interface TripService {
 	void saveTrip(Trip trip);
 	
 	List<Trip> listActiveTrips(Date date);
+	List<Trip>  travelsPromoter(Long id);
 
 }
