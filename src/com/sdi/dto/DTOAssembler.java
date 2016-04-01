@@ -121,15 +121,16 @@ public class DTOAssembler {
 
 		User promotor = Factories.persistence.newUserDao().findById(
 				trip.getPromoterId());
-		TripDto tdao = new TripDto(trip, user.getId());
+		TripDto tdao = new TripDto(trip, user);
 		tdao.setPromotor(Factories.persistence.newUserDao()
 				.findById(trip.getPromoterId()).getName());
 		Map<User, SeatStatus> usersAndStatus = findUsersAndStatusSeatBySeat(
 				trip.getId(), promotor.getId());
-		tdao.setInfoPasajeros(getInfoViaje(trip.getId(), usersAndStatus,
+		tdao.setPasajeros(getPasajeros(trip.getId(), usersAndStatus,
 				promotor.getId()));
 		tdao.setIdPromotor(promotor.getId());
-		tdao.setInfoPromotor(getRatingsPromotor(promotor));
+		if (user != null)
+			tdao.setIsInTrip(tdao.checkInTrip(user.getId()));
 
 		return tdao;
 
@@ -186,59 +187,15 @@ public class DTOAssembler {
 
 	}
 
-	private static InfoViajeDto getRatingsPromotor(User promotor) {
-
-		InfoViajeDto infodto = new InfoViajeDto();
-		List<Rating> ratings = Factories.persistence.newRatingDao().findAll();
-		int contador = 0;
-		double media = 0;
-		for (Rating rating : ratings) {
-			if (rating.getSeatAboutUserId().equals(promotor.getId())) {
-				contador++;
-				media += rating.getValue();
-				infodto.getComentarios().add(rating.getComment());
-			}
-		}
-		media = media / contador;
-		infodto.setRating(media);
-		infodto.setIdUsuario(promotor.getId());
-		infodto.setUsuario(promotor.getName() + " " + promotor.getSurname()
-				+ " (" + promotor.getLogin() + ")");
-
-		return infodto;
-	}
-
-	private static Map<String, InfoViajeDto> getInfoViaje(Long idViaje,
+	private static List<PasajeroInfoDto> getPasajeros(Long idViaje,
 			Map<User, SeatStatus> usuarios, Long idPromotor) {
 
-		Map<String, InfoViajeDto> usuarioComentario = new HashMap<String, InfoViajeDto>();
-		List<Rating> ratings = Factories.persistence.newRatingDao().findAll();
+		List<PasajeroInfoDto> pasajeros = new ArrayList<PasajeroInfoDto>();
 
-		for (User usuario : usuarios.keySet()) {
-			int contador = 0;
-			double media = 0;
-			InfoViajeDto infodto = new InfoViajeDto();
-			for (Rating rating : ratings) {
-
-				if (rating.getSeatAboutUserId().equals(usuario.getId())
-						&& !rating.getSeatAboutUserId().equals(idPromotor)) {
-					contador++;
-					media += rating.getValue();
-					infodto.getComentarios().add(rating.getComment());
-
-				}
-
-			}
-			media = media / contador;
-			infodto.setRating(media);
-			infodto.setIdUsuario(usuario.getId());
-			infodto.setUsuario((usuario.getName() + " " + usuario.getSurname()
-					+ " (" + usuario.getLogin() + ")"));
-			infodto.setSeatStatus(usuarios.get(usuario));
-			usuarioComentario.put(usuario.getName(), infodto);
-
-		}
-		return usuarioComentario;
+		for (User usuario : usuarios.keySet())
+			pasajeros.add(new PasajeroInfoDto(usuario.getId(), usuario.getName(), usuarios.get(usuario)));
+	
+		return pasajeros;
 
 	}
 

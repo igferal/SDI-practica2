@@ -81,12 +81,12 @@ public class BeanActiveTrips implements Serializable {
 	}
 
 	public void onRowSelect(SelectEvent event) {
+		FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("tripInfoParam", selectedTrip.getId());
 		try {
 			FacesContext.getCurrentInstance().getExternalContext()
-					.redirect("infoTrip.xhtml?tripInfo=" + selectedTrip.getId());
+					.redirect("tripInfo.xhtml");
 		} catch (IOException e) {
 		}
-	
 	}
 
 	public Trip getSelectedTrip() {

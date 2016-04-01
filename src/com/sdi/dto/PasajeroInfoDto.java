@@ -1,22 +1,17 @@
 package com.sdi.dto;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.sdi.model.SeatStatus;
 
-public class InfoViajeDto {
+public class PasajeroInfoDto {
 
 	private Long idUsuario;
 	private String usuario;
 	private SeatStatus seatStatus;
 
-	private List<String> comentarios;
-
-	private Double rating;
-	
-	public InfoViajeDto() {
-		this.setComentarios(new  ArrayList<String>());
+	public PasajeroInfoDto(Long idUsuario, String usuario, SeatStatus seatStatus) {
+		this.idUsuario = idUsuario;
+		this.usuario = usuario;
+		this.seatStatus = seatStatus;
 	}
 
 	public String getUsuario() {
@@ -27,24 +22,6 @@ public class InfoViajeDto {
 		this.usuario = usuario;
 	}
 
-	
-
-	public Double getRating() {
-		return rating;
-	}
-
-	public void setRating(Double rating) {
-		this.rating = rating;
-	}
-
-	public List<String> getComentarios() {
-		return comentarios;
-	}
-
-	public void setComentarios(List<String> comentarios) {
-		this.comentarios = comentarios;
-	}
-
 	public SeatStatus getSeatStatus() {
 		return seatStatus;
 	}
@@ -53,13 +30,9 @@ public class InfoViajeDto {
 		this.seatStatus = seatStatus;
 	}
 
-
-
 	public Long getIdUsuario() {
 		return idUsuario;
 	}
-
-
 
 	public void setIdUsuario(Long idUsuario) {
 		this.idUsuario = idUsuario;

@@ -2,9 +2,9 @@ package com.sdi.business.impl;
 
 
 import com.sdi.business.AlumnosService;
-import com.sdi.business.UserService;
 import com.sdi.business.ServicesFactory;
 import com.sdi.business.TripService;
+import com.sdi.business.UserService;
 
 public class SimpleServicesFactory implements ServicesFactory {
 
@@ -20,7 +20,6 @@ public class SimpleServicesFactory implements ServicesFactory {
 
 	@Override
 	public TripService createTripService() {
-		// TODO Auto-generated method stub
 		return new SimpleTripService();
 	}
 

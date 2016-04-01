@@ -7,8 +7,8 @@ import com.sdi.model.Trip;
 
 public interface TripService {
 	
+	Trip findTrip(Long id);
 	void saveTrip(Trip trip);
-	
 	List<Trip> listActiveTrips(Date date);
 
 }
