@@ -7,6 +7,8 @@ import com.sdi.business.TripService;
 import com.sdi.business.impl.classes.ListActiveTrip;
 import com.sdi.business.impl.classes.ListPromoterTrips;
 import com.sdi.business.impl.classes.SaveTripImpl;
+import com.sdi.business.impl.classes.UpdateTrip;
+import com.sdi.business.impl.classes.findById;
 import com.sdi.model.Trip;
 
 public class SimpleTripService implements TripService {
@@ -26,8 +28,20 @@ public class SimpleTripService implements TripService {
 
 	@Override
 	public List<Trip> travelsPromoter(Long id) {
-		// TODO Auto-generated method stub
 		return new ListPromoterTrips(id).listTrips();
 	}
+
+	@Override
+	public void update(Trip trip) {
+		 new UpdateTrip(trip).update();
+	}
+
+	@Override
+	public Trip findById(Long id) {
+		// TODO Auto-generated method stub
+		return new findById(id).find();
+	}
+	
+	
 
 }

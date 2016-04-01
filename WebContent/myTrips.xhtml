@@ -19,10 +19,10 @@
 				paginator="true"
 				paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 				rowsPerPageTemplate="5,10,15" selectionMode="single"
-				selection="#{myTrip.selectedTrip}" rowKey="#{trip.id}"
+				 rowKey="#{trip.id}"
 				sortMode="multiple">
 
-				<p:ajax event="rowSelect" listener="#{my.onRowSelect}" />
+				
 
 				<p:column headerText="Id" sortBy="#{trip.id}" filterBy="#{trip.id}">
 					<h:outputText value="#{trip.id}" />
@@ -67,7 +67,7 @@
 
 				<p:column headerText="#{msgs.cancelar}">
 					<p:commandButton value="#{msgs.cancelar}" id="cancelar"
-						styleClass="ui-priority-primary" update="formulario" />
+						styleClass="ui-priority-primary" update="formulario"  type="submit" action="#{myTrips.cancel(trip)}" />
 
 				</p:column>
 

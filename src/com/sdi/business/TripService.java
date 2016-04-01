@@ -6,10 +6,15 @@ import java.util.List;
 import com.sdi.model.Trip;
 
 public interface TripService {
-	
+
 	void saveTrip(Trip trip);
-	
+
 	List<Trip> listActiveTrips(Date date);
-	List<Trip>  travelsPromoter(Long id);
+
+	List<Trip> travelsPromoter(Long id);
+
+	void update(Trip trip);
+
+	Trip findById(Long id);
 
 }

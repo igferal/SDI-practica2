@@ -17,6 +17,7 @@ import org.primefaces.event.SelectEvent;
 import com.sdi.business.TripService;
 import com.sdi.infrastructure.Factories;
 import com.sdi.model.Trip;
+import com.sdi.model.TripStatus;
 import com.sdi.model.User;
 
 @ManagedBean(name = "myTrips")
@@ -34,6 +35,25 @@ public class BeanMyTrips implements Serializable {
 
 		System.out.println("Creando Bean active trips");
 		listMyTrips();
+	}
+
+	public String cancel(Trip trip) {
+
+		try {
+
+			// Long id =
+			TripService tservice = Factories.services.createTripService();
+			trip.setStatus(TripStatus.CANCELLED);
+			tservice.update(trip);
+			trips.remove(trip);
+
+		} catch (NumberFormatException e) {
+			return "fallo";
+			// TODO: handle exception
+		} catch (Exception e) {
+			return "fallo";
+		}
+		return "exito";
 	}
 
 	public String listMyTrips() {
@@ -75,16 +95,7 @@ public class BeanMyTrips implements Serializable {
 		return new SimpleDateFormat("dd/MM/yyyy HH:mm").format(date);
 	}
 
-	public void onRowSelect(SelectEvent event) {
-		try {
-			FacesContext
-					.getCurrentInstance()
-					.getExternalContext()
-					.redirect("infoTrip.xhtml?tripInfo=" + selectedTrip.getId());
-		} catch (IOException e) {
-		}
 
-	}
 
 	public Trip getSelectedTrip() {
 		return selectedTrip;

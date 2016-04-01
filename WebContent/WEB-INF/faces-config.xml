@@ -116,6 +116,17 @@
 			<to-view-id>/editForm.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>/myTrips.xhtml</from-view-id>
+		<navigation-case>
+			<from-action>#{mytrips.cancel(trip)}</from-action>
+			<from-outcome>exito</from-outcome>
+			<to-view-id>/myTrips.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	
 	<navigation-rule>
 		<from-view-id>/altaForm.xhtml</from-view-id>
 		<navigation-case>
