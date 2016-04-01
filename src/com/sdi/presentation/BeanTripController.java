@@ -204,6 +204,7 @@ public class BeanTripController {
 			return "fallo";
 
 		} catch (Exception e) {
+			e.printStackTrace();
 			return "fallo";
 		}
 

@@ -17,9 +17,9 @@ public class TripDto {
 	public TripDto(Trip trip, User user) {
 		this.setTrip(trip);
 		if (user == null)
-			this.idUser = -1;
+			this.setIdUser(-1);
 		else
-			this.idUser = user.getId();
+			this.setIdUser(user.getId());
 	}
 
 	public boolean checkInTrip(long idUser) {
@@ -71,6 +71,14 @@ public class TripDto {
 	
 	public void setIsInTrip(boolean isInTrip) {
 		this.isInTrip = isInTrip;
+	}
+
+	public long getIdUser() {
+		return idUser;
+	}
+
+	public void setIdUser(long idUser) {
+		this.idUser = idUser;
 	}
 
 }
