@@ -15,14 +15,13 @@
 		<h1>#{msgs.misViajes}</h1>
 
 		<h:form id="formulario">
-			<p:dataTable var="trip" value="#{myTrips.trips}" rows="10"
-				paginator="true"
+			<p:dataTable styleClass=".ui-datatable"
+				selection="#{myTrips.selectedTrips}" var="trip"
+				value="#{myTrips.trips}" rows="10" paginator="true"
 				paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-				rowsPerPageTemplate="5,10,15" selectionMode="single"
-				 rowKey="#{trip.id}"
+				rowsPerPageTemplate="5,10,15" rowKey="#{trip.id}"
 				sortMode="multiple">
 
-				
 
 				<p:column headerText="Id" sortBy="#{trip.id}" filterBy="#{trip.id}">
 					<h:outputText value="#{trip.id}" />
@@ -66,22 +65,20 @@
 				</p:column>
 
 				<p:column headerText="#{msgs.cancelar}">
-					<p:commandButton value="#{msgs.cancelar}" id="cancelar"
-						styleClass="ui-priority-primary" update="formulario"  type="submit" action="#{myTrips.cancel(trip)}" />
-
+					<p:selectBooleanCheckbox value="#{myTrips.selectedIds[trip.id]}" />
 				</p:column>
 
-				<p:column headerText="#{msgs.modificar}">
+				<p:column >
 					<p:commandButton value="#{msgs.modificar}" id="modificar"
 						styleClass="ui-priority-primary" url="index.xhtml" />
 
 				</p:column>
-
-
-
 			</p:dataTable>
-		</h:form>
 
+
+		</h:form>
+		<p:commandButton  value="#{msgs.cancelar}" id="enviar"
+			styleClass="ui-priority-primary" action="#{myTrips.cancel}" />
 
 	</ui:define>
 

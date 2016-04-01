@@ -1,23 +1,18 @@
 package com.sdi.presentation;
 
-import java.io.IOException;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-
-import org.primefaces.event.SelectEvent;
-
 import com.sdi.business.TripService;
 import com.sdi.infrastructure.Factories;
 import com.sdi.model.Trip;
-import com.sdi.model.TripStatus;
 import com.sdi.model.User;
 
 @ManagedBean(name = "myTrips")
@@ -26,31 +21,32 @@ public class BeanMyTrips implements Serializable {
 	private static final long serialVersionUID = -8662200441018725393L;
 
 	private List<Trip> trips = null;
-	private List<Trip> filteredTrips = null;
+	private List<Object> selectedTrips = null;
+	private Map<Long, Boolean> selectedIds = new HashMap<Long, Boolean>();
 
 	private Trip selectedTrip;
 
 	@PostConstruct
 	public void init() {
 
-		System.out.println("Creando Bean active trips");
+		System.out.println("Creando Bean my trips");
+		// setSelectedTrips(new ArrayList<Trip>());
 		listMyTrips();
 	}
 
-	public String cancel(Trip trip) {
+	public String cancel() {
 
 		try {
 
 			// Long id =
-			TripService tservice = Factories.services.createTripService();
-			trip.setStatus(TripStatus.CANCELLED);
-			tservice.update(trip);
-			trips.remove(trip);
+			System.out.println("cancelling size=" + selectedIds.size());
 
 		} catch (NumberFormatException e) {
+			e.printStackTrace();
 			return "fallo";
-			// TODO: handle exception
 		} catch (Exception e) {
+			e.printStackTrace();
+
 			return "fallo";
 		}
 		return "exito";
@@ -83,19 +79,9 @@ public class BeanMyTrips implements Serializable {
 		this.trips = trips;
 	}
 
-	public List<Trip> getFilteredTrips() {
-		return filteredTrips;
-	}
-
-	public void setFilteredTrips(List<Trip> filteredTrips) {
-		this.filteredTrips = filteredTrips;
-	}
-
 	public String formattedDate(Date date) {
 		return new SimpleDateFormat("dd/MM/yyyy HH:mm").format(date);
 	}
-
-
 
 	public Trip getSelectedTrip() {
 		return selectedTrip;
@@ -103,5 +89,21 @@ public class BeanMyTrips implements Serializable {
 
 	public void setSelectedTrip(Trip selectedTrip) {
 		this.selectedTrip = selectedTrip;
+	}
+
+	public List<Object> getSelectedTrips() {
+		return selectedTrips;
+	}
+
+	public void setSelectedTrips(List<Object> selectedTrips) {
+		this.selectedTrips = selectedTrips;
+	}
+
+	public Map<Long, Boolean> getSelectedIds() {
+		return selectedIds;
+	}
+
+	public void setSelectedIds(Map<Long, Boolean> selectedIds) {
+		this.selectedIds = selectedIds;
 	}
 }
