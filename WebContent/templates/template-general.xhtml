@@ -17,7 +17,7 @@
 				<p:menuitem id="shareMyTrip" value="#{msgs.appName}" url="/" />
 				<p:menuitem id="viajesActivos" value="#{msgs.viajesActivos}" action="#{activeTrips.list}"/>
 				<p:menuitem id="misViajesOfertados"
-					value="#{msgs.misViajesOfertados}" url=""
+					value="#{msgs.misViajesOfertados}" action="#{myTrips.listMyTrips}"
 					rendered="#{not empty LOGGEDIN_USER}" />
 				<p:menuitem id="misViajesImplicados"
 					value="#{msgs.misViajesImplicados}" url=""

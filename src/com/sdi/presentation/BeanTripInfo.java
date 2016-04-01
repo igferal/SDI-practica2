@@ -7,7 +7,10 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+<<<<<<< HEAD
 import javax.faces.bean.ViewScoped;
+=======
+>>>>>>> a6e632a3c9ad6f6691c0bf0b25c62fc0d89a2962
 import javax.faces.context.FacesContext;
 
 import com.sdi.dto.DTOAssembler;

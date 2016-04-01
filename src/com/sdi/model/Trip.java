@@ -134,5 +134,7 @@ public class Trip {
 				+ promoterId + "]";
 	}
 
+	
+
 
 }
