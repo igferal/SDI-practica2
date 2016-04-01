@@ -8,7 +8,9 @@ import javax.annotation.PreDestroy;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import com.sdi.business.TripService;
@@ -19,7 +21,7 @@ import com.sdi.model.Waypoint;
 import com.sdi.persistence.util.DateUtil;
 
 @ManagedBean(name = "tripController")
-@SessionScoped
+@RequestScoped
 public class BeanTripController {
 
 	@ManagedProperty(value = "#{trip}")
@@ -129,7 +131,7 @@ public class BeanTripController {
 		departure = new AddressPoint("", "", "", "", "", new Waypoint(0D, 0D));
 		setArrival(new AddressPoint("", "", "", "", "", new Waypoint(0D, 0D)));
 		System.out.println("BeanAlumnos - PostConstruct");
-		
+
 		trip = (BeanTrip) FacesContext.getCurrentInstance()
 				.getExternalContext().getSessionMap().get(new String("trip"));
 		if (trip == null) {
@@ -196,11 +198,9 @@ public class BeanTripController {
 					null,
 					new FacesMessage(FacesMessage.SEVERITY_ERROR, "", bundle
 							.getString("createTrip_wrongNumberInputs")));
-			e.printStackTrace();
 			return "fallo";
 
 		} catch (Exception e) {
-			e.printStackTrace();
 			return "fallo";
 		}
 
@@ -210,7 +210,8 @@ public class BeanTripController {
 
 	private void completeWaypoints() {
 
-		if (coordenadasOrigen != null && coordenadasOrigen != "") {
+		if (!coordenadasOrigen.equals("")) {
+			System.out.println("PASO");
 			String[] coorOr = coordenadasOrigen.split("C");
 			Double latOr = Double.parseDouble(coorOr[0]);
 			Double lonOr = Double.parseDouble(coorOr[1]);
@@ -218,7 +219,8 @@ public class BeanTripController {
 			departure.setWaypoint(cO);
 
 		}
-		if (coordenadasDestino != null && coordenadasDestino != "") {
+		if (!coordenadasDestino.equals("")) {
+			System.out.println("PASO2");
 			String[] coorDes = coordenadasOrigen.split("C");
 			Double latDes = Double.parseDouble(coorDes[0]);
 			Double lonDes = Double.parseDouble(coorDes[1]);
