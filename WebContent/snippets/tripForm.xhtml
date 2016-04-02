@@ -20,14 +20,18 @@
 
 
 			<h:outputText value="#{msgs.createTrip_ciudadOrigen}" />
-			<p:inputText id="ciudadOrigen"
+			<p:autoComplete id="ciudadOrigen"
 				value="#{tripController.departure.city}" required="true"
-				requiredMessage="#{msgs.createTrip_requiredCiudadOrigen}" />
+				requiredMessage="#{msgs.createTrip_requiredCiudadOrigen}"
+				completeMethod="#{tripController.completeList}" var="c"
+				itemLabel="#{c}" itemValue="#{c}" />
 			<p:message for="ciudadOrigen" styleClass="error" />
 
 			<h:outputText value="#{msgs.createTrip_provinciaOrigen}" />
-			<p:inputText id="provinciaOrigen"
+			<p:autoComplete id="provinciaOrigen"
 				value="#{tripController.departure.state}" required="true"
+				completeMethod="#{tripController.completeList}" var="c"
+				itemLabel="#{c}" itemValue="#{c}"
 				requiredMessage="#{msgs.createTrip_requiredProvinciaOrigen}" />
 			<p:message for="provinciaOrigen" styleClass="error" />
 
@@ -63,15 +67,19 @@
 			<p:message for="calleDestino" styleClass="error" />
 
 			<h:outputText value="#{msgs.createTrip_ciudadDestino}" />
-			<p:inputText id="ciudadDestino"
+			<p:autoComplete id="ciudadDestino"
 				value="#{tripController.arrival.city}" required="true"
+				completeMethod="#{tripController.completeList}" var="c"
+				itemLabel="#{c}" itemValue="#{c}"
 				requiredMessage="#{msgs.createTrip_requiredCiudadDestino}" />
 			<p:message for="ciudadDestino" styleClass="error" />
 
 
 			<h:outputText value="#{msgs.createTrip_provinciaDestino}" />
-			<p:inputText id="provinciaDestino"
+			<p:autoComplete id="provinciaDestino"
 				value="#{tripController.arrival.state}" required="true"
+				completeMethod="#{tripController.completeList}" var="c"
+				itemLabel="#{c}" itemValue="#{c}"
 				requiredMessage="#{msgs.createTrip_requiredProvinciaDestino}" />
 			<p:message for="provinciaDestino" styleClass="error" />
 

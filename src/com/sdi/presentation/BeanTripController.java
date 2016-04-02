@@ -1,6 +1,8 @@
 package com.sdi.presentation;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 
@@ -37,6 +39,24 @@ public class BeanTripController {
 	private String plazasMaximas;
 	private String coordenadasOrigen;
 	private String coordenadasDestino;
+	private String provincias[];
+	private List<String> autoCompletado;
+
+	public List<String> getAutoCompletado() {
+		return autoCompletado;
+	}
+
+	public void setAutoCompletado(List<String> autoCompletado) {
+		this.autoCompletado = autoCompletado;
+	}
+
+	public String[] getProvincias() {
+		return provincias;
+	}
+
+	public void setProvincias(String ciudades[]) {
+		this.provincias = ciudades;
+	}
 
 	public String getCoordenadasOrigen() {
 		return coordenadasOrigen;
@@ -126,6 +146,20 @@ public class BeanTripController {
 		this.destination = arrival;
 	}
 
+	public List<String> completeList(String query) {
+
+		List<String> filteredThemes = new ArrayList<String>();
+
+		for (int i = 0; i < autoCompletado.size(); i++) {
+			String state = autoCompletado.get(i);
+			if (state.toLowerCase().startsWith(query.toLowerCase())) {
+				filteredThemes.add(state);
+			}
+		}
+
+		return filteredThemes;
+	}
+
 	@PostConstruct
 	public void init() {
 
@@ -141,6 +175,7 @@ public class BeanTripController {
 			FacesContext.getCurrentInstance().getExternalContext()
 					.getSessionMap().put("trip", trip);
 		}
+		fetchProvincias();
 	}
 
 	public String save() {
@@ -241,6 +276,7 @@ public class BeanTripController {
 	private String fechTripInfo(ResourceBundle bundle) {
 
 		try {
+
 			completeWaypoints();
 			Double estimatedCost = Double.parseDouble(costeEstimado);
 			Integer availablePax = Integer.parseInt(plazasDisponibles);
@@ -293,6 +329,28 @@ public class BeanTripController {
 		}
 
 		return "exito";
+	}
+
+	public void fetchProvincias() {
+
+		provincias = new String[] { "Albacete", "Alicante", "Almería", "Alava",
+				"Asturias", "Avila", "Badajoz", "Baleares", "Barcelona",
+				"Vizcaya", "Burgos", "Caceres", "Cadiz", "Cantabria",
+				"Castellon", "Ciudad Real", "Córdoba", "A Coruña", "Cuenca",
+				"Gipuzcua", "Girona", "Granada", "Guadalajara", "Huelva",
+				"Huesca", "Jaen", "Leon", "Lleida", "Lugo", "Madrid", "Malaga",
+				"Murcia", "Navarra", "Ourense", "Palencia", "Las almas",
+				"Pontevedra", "La Rioja", "Salamanca",
+				"Santa Cruz de Tenerife", "Segovia", "Sevilla", "Soria",
+				"Tarragona", "Teruel", "Toledo", "Valencia", "Valladolid",
+				"Zamora", "Zaragoza", "Ceuta", "Melilla" };
+
+		autoCompletado = new ArrayList<String>();
+
+		for (int i = 0; i < provincias.length; i++) {
+			autoCompletado.add(provincias[i]);
+		}
+
 	}
 
 	@PreDestroy
