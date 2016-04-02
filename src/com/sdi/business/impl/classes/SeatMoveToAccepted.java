@@ -12,15 +12,14 @@ public class SeatMoveToAccepted {
 		SeatDao seatDao = Factories.persistence.newSeatDao();
 		Seat seat = seatDao.findByUserAndTrip(idUser, idTrip);
 		
-		System.out.println(seat);
-		
 		if (seat == null) {
 			seat = new Seat();
 			seat.setUserId(idUser);
 			seat.setTripId(idTrip);
 			seat.setStatus(SeatStatus.ACCEPTED);
-			seatDao.update(seat);
+			seatDao.save(seat);
 			decrementAvailablePax(idTrip);
+			Factories.services.createApplicationService().delete(idUser, idTrip);
 		}
 		else if(seat.getStatus().equals(SeatStatus.EXCLUDED)) {
 			seat.setStatus(SeatStatus.ACCEPTED);

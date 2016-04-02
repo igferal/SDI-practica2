@@ -31,6 +31,12 @@
 		<managed-bean-class>com.sdi.presentation.BeanMyTrips</managed-bean-class>
 		<managed-bean-scope>view</managed-bean-scope>
 	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>involvedTrips</managed-bean-name>
+		<managed-bean-class>com.sdi.presentation.BeanInvolvedTrips</managed-bean-class>
+		<managed-bean-scope>view</managed-bean-scope>
+	</managed-bean>
 
 
 	<application>
@@ -55,6 +61,12 @@
 			<from-action>#{controller.listado}</from-action>
 			<from-outcome>exito</from-outcome>
 			<to-view-id>/listado.xhtml</to-view-id>
+		</navigation-case>
+		
+		<navigation-case>
+			<from-action>#{involvedTrips.list}</from-action>
+			<from-outcome>exito</from-outcome>
+			<to-view-id>/involvedTrips.xhtml</to-view-id>
 		</navigation-case>
 
 		<navigation-case>

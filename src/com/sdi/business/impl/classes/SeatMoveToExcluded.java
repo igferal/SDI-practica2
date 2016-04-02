@@ -17,8 +17,8 @@ public class SeatMoveToExcluded {
 			seat.setUserId(idUser);
 			seat.setTripId(idTrip);
 			seat.setStatus(SeatStatus.EXCLUDED);
-			seatDao.update(seat);
-			incrementAvailablePax(idTrip);
+			seatDao.save(seat);
+			Factories.services.createApplicationService().delete(idUser, idTrip);
 		}
 		else if(seat.getStatus().equals(SeatStatus.ACCEPTED)) {
 			seat.setStatus(SeatStatus.EXCLUDED);

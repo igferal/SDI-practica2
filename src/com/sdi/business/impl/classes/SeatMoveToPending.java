@@ -1,7 +1,9 @@
 package com.sdi.business.impl.classes;
 
 import com.sdi.infrastructure.Factories;
+import com.sdi.model.Application;
 import com.sdi.model.Seat;
+import com.sdi.model.SeatStatus;
 import com.sdi.model.Trip;
 import com.sdi.persistence.SeatDao;
 
@@ -13,7 +15,10 @@ public class SeatMoveToPending {
 		
 		if (seat != null) {
 			seatDao.delete(seat.makeKey());
-			incrementAvailablePax(idTrip);
+			Application app = new Application(idUser, idTrip);
+			Factories.services.createApplicationService().save(app);
+			if (seat.getStatus() != null && seat.getStatus().equals(SeatStatus.ACCEPTED))
+				incrementAvailablePax(idTrip);
 		}
 	}
 	
