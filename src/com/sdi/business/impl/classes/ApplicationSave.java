@@ -8,7 +8,7 @@ import com.sdi.model.Trip;
 
 public class ApplicationSave {
 
-	public static boolean save(Application application) {
+	public boolean save(Application application) {
 		Trip trip = Factories.services.createTripService().findTrip(application.getTripId());
 		
 		if (trip.getClosingDate().before(new Date())
