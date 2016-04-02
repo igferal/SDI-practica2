@@ -18,7 +18,13 @@
 
 		<p:commandButton value="#{msgs.createTrip_enviar}" id="enviar"
 			styleClass="ui-priority-primary" action="#{tripController.save}"
-			 form="formulario" update="@all" />
+			form="formulario" update="@all" />
+
+		<p:selectBooleanCheckbox>
+			<p:ajax update="@all"
+				listener="#{tripController.fillWithPredeterminatedTrip}" />
+		#{msgs.fillTrip}</p:selectBooleanCheckbox>
+
 
 	</ui:define>
 

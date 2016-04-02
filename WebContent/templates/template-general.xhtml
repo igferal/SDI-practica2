@@ -9,7 +9,9 @@
 <f:view locale="#{settings.locale}">
 	<h:head>
 		<title>#{msgs.tituloHead}</title>
-		<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet"></link>
+		<link
+			href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css"
+			rel="stylesheet"></link>
 		<style>
 .topAligned {
 	vertical-align: top;
@@ -26,18 +28,20 @@
 		<h:form id="form-cabecera">
 			<p:menubar id="mimenu">
 				<p:menuitem id="shareMyTrip" value="#{msgs.appName}" url="/" />
-				<p:menuitem id="viajesActivos" value="#{msgs.viajesActivos}" action="#{activeTrips.list}"/>
+				<p:menuitem id="viajesActivos" value="#{msgs.viajesActivos}"
+					action="#{activeTrips.list}" />
 				<p:menuitem id="misViajesOfertados"
 					value="#{msgs.misViajesOfertados}" action="#{myTrips.listMyTrips}"
 					rendered="#{not empty LOGGEDIN_USER}" />
 				<p:menuitem id="misViajesImplicados"
-					value="#{msgs.misViajesImplicados}"  action="#{involvedTrips.load}"
-					rendered="#{not empty LOGGEDIN_USER}" />
+					value="#{msgs.misViajesImplicados}" action="#{involvedTrips.load}"
+					rendered="#{not empty LOGGEDIN_USER}" ajax="false" />
 				<p:menuitem id="crearViaje" value="#{msgs.crearViaje}"
 					url="createTrip.xhtml" rendered="#{not empty LOGGEDIN_USER}" />
 
 				<f:facet name="options">
-					<p:button id="login" value="#{msgs.iniciarSesion}" outcome="login" rendered="#{empty LOGGEDIN_USER}"/>
+					<p:button id="login" value="#{msgs.iniciarSesion}" outcome="login"
+						rendered="#{empty LOGGEDIN_USER}" />
 				</f:facet>
 
 				<p:submenu style="float:right" label="#{msgs.textoIdioma}"

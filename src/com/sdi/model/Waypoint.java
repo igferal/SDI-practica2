@@ -25,7 +25,7 @@ public class Waypoint {
 
 	@Override
 	public String toString() {
-		return "Waypoint [lat=" + lat + ", lon=" + lon + "]";
+		return  + lat + "C" +lon;
 	}
 
 	

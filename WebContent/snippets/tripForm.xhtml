@@ -51,7 +51,7 @@
 			<p:inputText id="coordenadasOrigen"
 				validatorMessage="#{msgs.createForm_coordenadasMal}"
 				value="#{tripController.coordenadasOrigen}">
-				<f:validateRegex pattern="[0-9]+C[0-9]+|" />
+				<f:validateRegex pattern="[[0-9]+.[0-9*]]+C[[0-9]+.[0-9*]]+|" />
 			</p:inputText>
 			<p:message for="coordenadasOrigen" styleClass="error" />
 
@@ -102,7 +102,7 @@
 			<p:inputText id="coordenadasDestino"
 				value="#{tripController.coordenadasDestino}"
 				validatorMessage="#{msgs.createForm_coordenadasMal}">
-				<f:validateRegex pattern="[0-9]+C[0-9]+|" />
+				<f:validateRegex pattern="[[0-9]+.[0-9*]]+C[[0-9]+.[0-9*]]+|" />
 			</p:inputText>
 			<p:message for="coordenadasDestino" styleClass="error" />
 		</p:panelGrid>

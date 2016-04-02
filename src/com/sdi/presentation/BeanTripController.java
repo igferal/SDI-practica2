@@ -14,6 +14,8 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 
+import org.primefaces.event.SelectEvent;
+
 import com.sdi.business.TripService;
 import com.sdi.infrastructure.Factories;
 import com.sdi.model.AddressPoint;
@@ -350,6 +352,22 @@ public class BeanTripController {
 		for (int i = 0; i < provincias.length; i++) {
 			autoCompletado.add(provincias[i]);
 		}
+
+	}
+
+	public void fillWithPredeterminatedTrip() {
+
+		trip.fillTrip();
+		setArrival(trip.getDestination());
+		setCosteEstimado("" + trip.getEstimatedCost());
+		setDateInscripcion(trip.getClosingDate());
+		setDateSalida(trip.getDepartureDate());
+		setDateLlegada(trip.getArrivalDate());
+		setDeparture(trip.getDeparture());
+		setPlazasDisponibles("" + trip.getAvailablePax());
+		setPlazasMaximas("" + trip.getMaxPax());
+		setCoordenadasDestino(trip.getDestination().getWaypoint().toString());
+		setCoordenadasOrigen(trip.getDeparture().getWaypoint().toString());
 
 	}
 

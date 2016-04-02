@@ -45,6 +45,7 @@ public class BeanInvolvedTrips implements Serializable {
 		 list();
 	}
 
+	
 	public String list() {
 
 		if (trips != null) {
