@@ -20,6 +20,7 @@ import com.sdi.infrastructure.Factories;
 import com.sdi.model.Trip;
 import com.sdi.model.TripStatus;
 import com.sdi.model.User;
+import com.sdi.persistence.util.DateUtil;
 
 @ManagedBean(name = "myTrips")
 @ViewScoped
@@ -30,6 +31,14 @@ public class BeanMyTrips implements Serializable {
 	private Map<Long, Boolean> selectedIds = new HashMap<Long, Boolean>();
 	private List<Trip> tripsToDelete = null;
 	private Trip selectedTrip;
+	
+	
+	public boolean dateBefore(Date date){
+		
+		Date now = new Date();
+		return DateUtil.isAfter(date, now);
+		
+	}
 
 	@PostConstruct
 	public void init() {

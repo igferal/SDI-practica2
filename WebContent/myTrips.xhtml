@@ -33,8 +33,7 @@
 
 				<p:column headerText="#{msgs.createTrip_fechaSalida}"
 					sortBy="#{trip.departureDate}" filterBy="#{trip.departureDate}">
-					<h:outputText
-						value="#{activeTrips.formattedDate(trip.departureDate)}" />
+					<h:outputText value="#{myTrips.formattedDate(trip.departureDate)}" />
 				</p:column>
 
 				<p:column headerText="#{msgs.createTrip_ciudadDestino}"
@@ -45,14 +44,12 @@
 
 				<p:column headerText="#{msgs.createTrip_fechaLlegada}"
 					sortBy="#{trip.arrivalDate}" filterBy="#{trip.departure.city}">
-					<h:outputText
-						value="#{activeTrips.formattedDate(trip.arrivalDate)}" />
+					<h:outputText value="#{myTrips.formattedDate(trip.arrivalDate)}" />
 				</p:column>
 
 				<p:column headerText="#{msgs.createTrip_fechaInscripcion}"
 					sortBy="#{trip.closingDate}" filterBy="#{trip.closingDate}">
-					<h:outputText
-						value="#{activeTrips.formattedDate(trip.closingDate)}" />
+					<h:outputText value="#{myTrips.formattedDate(trip.closingDate)}" />
 				</p:column>
 
 				<p:column headerText="#{msgs.createTrip_costeEstimado}"
@@ -63,12 +60,13 @@
 					</h:outputText>
 				</p:column>
 
-				<p:column headerText="#{msgs.cancelar}">
-					<p:selectBooleanCheckbox value="#{myTrips.selectedIds[trip.id]}" />
+				<p:column 
+					headerText="#{msgs.cancelar}">
+					<p:selectBooleanCheckbox rendered="#{myTrips.dateBefore(trip.departureDate)}" value="#{myTrips.selectedIds[trip.id]}" />
 				</p:column>
 
-				<p:column>
-					<p:commandButton value="#{msgs.modificar}" id="modificar"
+				<p:column headerText="#{msgs.modificar}">
+					<p:commandButton rendered="#{myTrips.dateBefore(trip.departureDate)}" value="#{msgs.modificar}" id="modificar"
 						styleClass="ui-priority-primary"
 						action="#{tripController.fillEditView(trip)}" />
 
