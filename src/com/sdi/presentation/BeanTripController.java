@@ -15,6 +15,7 @@ import javax.faces.context.FacesContext;
 import com.sdi.business.TripService;
 import com.sdi.infrastructure.Factories;
 import com.sdi.model.AddressPoint;
+import com.sdi.model.Trip;
 import com.sdi.model.TripStatus;
 import com.sdi.model.User;
 import com.sdi.model.Waypoint;
@@ -130,7 +131,7 @@ public class BeanTripController {
 
 		departure = new AddressPoint("", "", "", "", "", new Waypoint(0D, 0D));
 		setArrival(new AddressPoint("", "", "", "", "", new Waypoint(0D, 0D)));
-		System.out.println("BeanAlumnos - PostConstruct");
+		System.out.println("BeanTripController - PostConstruct");
 
 		trip = (BeanTrip) FacesContext.getCurrentInstance()
 				.getExternalContext().getSessionMap().get(new String("trip"));
@@ -148,12 +149,99 @@ public class BeanTripController {
 		FacesContext context = FacesContext.getCurrentInstance();
 		ResourceBundle bundle = context.getApplication().getResourceBundle(
 				context, "msgs");
-		String respuesta = "exito";
-
-		completeWaypoints();
 
 		try {
 
+			String respuesta = fechTripInfo(bundle);
+			if (respuesta.equals("fallo"))
+				return "fallo";
+
+			tservice = Factories.services.createTripService();
+
+			tservice.saveTrip(trip);
+		}
+
+		catch (Exception e) {
+			e.printStackTrace();
+			return "fallo";
+		}
+
+		return "exito";
+
+	}
+
+	private void completeWaypoints() {
+
+		if (!coordenadasOrigen.equals("")) {
+			System.out.println("PASO");
+			String[] coorOr = coordenadasOrigen.split("C");
+			Double latOr = Double.parseDouble(coorOr[0]);
+			Double lonOr = Double.parseDouble(coorOr[1]);
+			Waypoint cO = new Waypoint(latOr, lonOr);
+			departure.setWaypoint(cO);
+
+		}
+		if (!coordenadasDestino.equals("")) {
+			System.out.println("PASO2");
+			String[] coorDes = coordenadasOrigen.split("C");
+			Double latDes = Double.parseDouble(coorDes[0]);
+			Double lonDes = Double.parseDouble(coorDes[1]);
+			Waypoint cD = new Waypoint(latDes, lonDes);
+			destination.setWaypoint(cD);
+		}
+	}
+
+	public String editTrip() {
+		TripService tservice;
+		FacesContext context = FacesContext.getCurrentInstance();
+		ResourceBundle bundle = context.getApplication().getResourceBundle(
+				context, "msgs");
+		try {
+
+			tservice = Factories.services.createTripService();
+			String respuesta = fechTripInfo(bundle);
+			if (respuesta.equals("fallo"))
+				return "fallo";
+			tservice.update(trip);
+			System.out.println("editandooo");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "fallo";
+		}
+		return "exito";
+	}
+
+	public String fillEditView(Trip tripToEdit) {
+
+		try {
+			// identificamos el viaje
+			trip.setId(tripToEdit.getId());
+
+			System.out.println(tripToEdit.toString());
+			// colocamos la informacion del formulario
+			setArrival(tripToEdit.getDestination());
+			setCosteEstimado("" + tripToEdit.getEstimatedCost());
+			setDateInscripcion(tripToEdit.getClosingDate());
+			setDateSalida(tripToEdit.getDepartureDate());
+			setDateLlegada(tripToEdit.getArrivalDate());
+			setDeparture(tripToEdit.getDeparture());
+			setPlazasDisponibles("" + tripToEdit.getAvailablePax());
+			setPlazasMaximas("" + tripToEdit.getMaxPax());
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+			return "fallo";
+		}
+
+		return "exito";
+	}
+
+	private String fechTripInfo(ResourceBundle bundle) {
+
+		try {
+			completeWaypoints();
 			Double estimatedCost = Double.parseDouble(costeEstimado);
 			Integer availablePax = Integer.parseInt(plazasDisponibles);
 			Integer maxPax = Integer.parseInt(plazasMaximas);
@@ -183,7 +271,7 @@ public class BeanTripController {
 			User user = (User) session.get("LOGGEDIN_USER");
 			trip.setArrivalDate(dateLlegada);
 			trip.setAvailablePax(availablePax);
-			trip.setClosingDate(dateLlegada);
+			trip.setClosingDate(dateInscripcion);
 			trip.setDeparture(departure);
 			trip.setDepartureDate(dateSalida);
 			trip.setDestination(destination);
@@ -191,12 +279,9 @@ public class BeanTripController {
 			trip.setMaxPax(maxPax);
 			trip.setStatus(TripStatus.OPEN);
 			trip.setPromoterId(user.getId());
+		}
 
-			tservice = Factories.services.createTripService();
-
-			tservice.saveTrip(trip);
-
-		} catch (NumberFormatException e) {
+		catch (NumberFormatException e) {
 			FacesContext.getCurrentInstance().addMessage(
 					null,
 					new FacesMessage(FacesMessage.SEVERITY_ERROR, "", bundle
@@ -205,37 +290,14 @@ public class BeanTripController {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			return "fallo";
 		}
 
-		return respuesta;
-
-	}
-
-	private void completeWaypoints() {
-
-		if (!coordenadasOrigen.equals("")) {
-			System.out.println("PASO");
-			String[] coorOr = coordenadasOrigen.split("C");
-			Double latOr = Double.parseDouble(coorOr[0]);
-			Double lonOr = Double.parseDouble(coorOr[1]);
-			Waypoint cO = new Waypoint(latOr, lonOr);
-			departure.setWaypoint(cO);
-
-		}
-		if (!coordenadasDestino.equals("")) {
-			System.out.println("PASO2");
-			String[] coorDes = coordenadasOrigen.split("C");
-			Double latDes = Double.parseDouble(coorDes[0]);
-			Double lonDes = Double.parseDouble(coorDes[1]);
-			Waypoint cD = new Waypoint(latDes, lonDes);
-			destination.setWaypoint(cD);
-		}
+		return "exito";
 	}
 
 	@PreDestroy
 	public void end() {
-		System.out.println("BeanAlumnos - PreDestroy");
+		System.out.println("BeanTripController - PreDestroy");
 	}
 
 }

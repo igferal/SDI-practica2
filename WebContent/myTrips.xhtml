@@ -69,15 +69,16 @@
 
 				<p:column>
 					<p:commandButton value="#{msgs.modificar}" id="modificar"
-						styleClass="ui-priority-primary" url="index.xhtml" />
+						styleClass="ui-priority-primary"
+						action="#{tripController.fillEditView(trip)}" />
 
 				</p:column>
 			</p:dataTable>
 
 
 		</h:form>
-		<p:commandButton type="submit" update="@all" form="formulario" value="#{msgs.cancelar}"
-			id="enviar" styleClass="ui-priority-primary"
+		<p:commandButton type="submit" update="@all" form="formulario"
+			value="#{msgs.cancelar}" id="enviar" styleClass="ui-priority-primary"
 			action="#{myTrips.cancel}" />
 
 	</ui:define>
