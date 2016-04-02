@@ -1,48 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf14594660485181" configfile="/sdi2-7/WebContent/WEB-INF/faces-config.xml">
-  <nodes xsi:type="pageflow:PFPage" name="*" x="122" y="1714" id="pf14594661232872" referenceLink="//@navigationRule.0/@fromViewId|" outlinks="pf14594661232873 pf14594661232874 pf14594661232875 pf14594661232876 pf14594661232877 pf14594661232878 pf14594661232879 pf145946612328710 pf145946612328711 pf145946612328712 pf145946612328713 pf14595225251320" path="*"/>
-  <nodes xsi:type="pageflow:PFPage" name="error.xhtml" x="338" y="178" id="pf145946612328714" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf14594661232873" path="/error.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="altaForm.xhtml" x="338" y="1714" id="pf145946612328715" referenceLink="//@navigationRule.3/@fromViewId|" outlinks="pf145946612328716" inlinks="pf14594661232874" path="/altaForm.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="listado.xhtml" x="554" y="1916" id="pf145946612328717" referenceLink="//@navigationRule.4/@navigationCase.0/@toViewId|" outlinks="pf145946612328718 pf145946612328719" inlinks="pf14594661232875 pf145946612328718 pf145946612328716 pf145946612328720" path="/listado.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="activeTrips.xhtml" x="338" y="562" id="pf145946612328721" referenceLink="//@navigationRule.0/@navigationCase.3/@toViewId|" inlinks="pf14594661232876" path="/activeTrips.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="index.xhtml" x="338" y="946" id="pf145946612328722" referenceLink="//@navigationRule.0/@navigationCase.12/@toViewId|" inlinks="pf14594661232877 pf145946612328711" path="/index.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="login.xhtml" x="338" y="1330" id="pf145946612328723" referenceLink="//@navigationRule.0/@navigationCase.8/@toViewId|" inlinks="pf14594661232878 pf145946612328710" path="/login.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="join.xhtml" x="338" y="2503" id="pf145946612328724" referenceLink="//@navigationRule.0/@navigationCase.7/@toViewId|" inlinks="pf14594661232879" path="/join.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="editForm.xhtml" x="338" y="2119" id="pf145946612328725" referenceLink="//@navigationRule.4/@fromViewId|" outlinks="pf145946612328720" inlinks="pf145946612328719" path="/editForm.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="registrarse.xhtml" x="338" y="2887" id="pf145946612328726" referenceLink="//@navigationRule.0/@navigationCase.11/@toViewId|" inlinks="pf145946612328712" path="/registrarse.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="createTrip.xhtml" x="338" y="3271" id="pf145946612328727" referenceLink="//@navigationRule.0/@navigationCase.9/@toViewId|" inlinks="pf145946612328713" path="/createTrip.xhtml"/>
-<<<<<<< HEAD
-  <nodes xsi:type="pageflow:PFPage" name="myTrips.xhtml" x="338" y="3655" id="pf14595225251321" referenceLink="//@navigationRule.2/@navigationCase.0/@toViewId|" outlinks="pf14595551327021" inlinks="pf14595225251320 pf14595551327021" path="/myTrips.xhtml"/>
-=======
-  <nodes xsi:type="pageflow:PFPage" name="myTrips.xhtml" x="338" y="3655" id="pf14595225251321" referenceLink="//@navigationRule.2/@navigationCase.0/@toViewId|" outlinks="pf14595502864730" inlinks="pf14595225251320 pf14595502864730" path="/myTrips.xhtml"/>
->>>>>>> a3327ad362334ce0692acffe0d2d666924c4637a
-  <links id="pf14594661232873" target="pf145946612328714" source="pf14594661232872" outcome="error"/>
-  <links id="pf14594661232874" target="pf145946612328715" source="pf14594661232872" outcome="alta"/>
-  <links id="pf14594661232875" target="pf145946612328717" source="pf14594661232872" outcome="exito" fromaction="#{controller.listado}"/>
-  <links id="pf14594661232876" target="pf145946612328721" source="pf14594661232872" outcome="exito" fromaction="#{activeTrips.list}"/>
-  <links id="pf14594661232877" target="pf145946612328722" source="pf14594661232872" outcome="exito" fromaction="#{login.verify}"/>
-  <links id="pf14594661232878" target="pf145946612328723" source="pf14594661232872" outcome="fallo" fromaction="#{login.verify}"/>
-  <links id="pf14594661232879" target="pf145946612328724" source="pf14594661232872" outcome="join"/>
-  <links id="pf145946612328710" target="pf145946612328723" source="pf14594661232872" outcome="exito" fromaction="#{join.createUser}"/>
-  <links id="pf145946612328719" target="pf145946612328725" source="pf145946612328717" outcome="editar"/>
-  <links id="pf145946612328716" target="pf145946612328717" source="pf145946612328715" outcome="exito" fromaction="#{controller.salva}"/>
-  <links id="pf145946612328720" target="pf145946612328717" source="pf145946612328725" outcome="exito" fromaction="#{controller.salva}"/>
-  <links id="pf145946612328711" target="pf145946612328722" source="pf14594661232872" outcome="exito" fromaction="#{tripController.save}"/>
-  <links id="pf145946612328712" target="pf145946612328726" source="pf14594661232872" outcome="registrarse"/>
-  <links id="pf145946612328713" target="pf145946612328727" source="pf14594661232872" outcome="fallo" fromaction="#{tripController.save}"/>
-  <links id="pf14595225251320" target="pf14595225251321" source="pf14594661232872" outcome="exito" fromaction="#{myTrips.listMyTrips}"/>
-  <links id="pf145946612328718" target="pf145946612328717" source="pf145946612328717" outcome="exito" fromaction="#{controller.baja(valumno)}">
+<pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf14596158626210" configfile="/sdi2-7/WebContent/WEB-INF/faces-config.xml">
+  <nodes xsi:type="pageflow:PFPage" name="*" x="122" y="1714" id="pf14596158897361" referenceLink="//@navigationRule.0/@fromViewId|" outlinks="pf14596158897362 pf14596158897363 pf14596158897364 pf14596158897365 pf14596158897366 pf14596158897367 pf14596158897368 pf14596158897369 pf145961588973610 pf145961588973611 pf145961588973612 pf145961588973613 pf145961591515934" path="*"/>
+  <nodes xsi:type="pageflow:PFPage" name="error.xhtml" x="338" y="178" id="pf145961588973614" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf14596158897362" path="/error.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="altaForm.xhtml" x="338" y="1714" id="pf145961588973615" referenceLink="//@navigationRule.3/@fromViewId|" outlinks="pf145961588973616" inlinks="pf14596158897363" path="/altaForm.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="listado.xhtml" x="554" y="1916" id="pf145961588973617" referenceLink="//@navigationRule.0/@navigationCase.3/@toViewId|" outlinks="pf145961588973618 pf145961588973619" inlinks="pf14596158897364 pf145961588973618 pf145961588973616 pf145961588973620" path="/listado.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="activeTrips.xhtml" x="338" y="562" id="pf145961588973621" referenceLink="//@navigationRule.0/@navigationCase.3/@toViewId|" inlinks="pf14596158897365" path="/activeTrips.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="myTrips.xhtml" x="338" y="3655" id="pf145961588973622" referenceLink="//@navigationRule.5/@navigationCase.0/@toViewId|" outlinks="pf145961588973623 pf145961588973624" inlinks="pf14596158897366 pf145961588973623 pf145961588973625" path="/myTrips.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="index.xhtml" x="338" y="946" id="pf145961588973626" referenceLink="//@navigationRule.0/@navigationCase.10/@toViewId|" inlinks="pf14596158897367 pf145961588973612" path="/index.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="login.xhtml" x="338" y="1330" id="pf145961588973627" referenceLink="//@navigationRule.0/@navigationCase.8/@toViewId|" inlinks="pf14596158897368 pf145961588973610" path="/login.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="join.xhtml" x="338" y="2503" id="pf145961588973628" referenceLink="//@navigationRule.0/@navigationCase.7/@toViewId|" inlinks="pf14596158897369" path="/join.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="createTrip.xhtml" x="338" y="2887" id="pf145961588973629" referenceLink="//@navigationRule.0/@navigationCase.9/@toViewId|" inlinks="pf145961588973611" path="/createTrip.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="registrarse.xhtml" x="338" y="3271" id="pf145961588973630" referenceLink="//@navigationRule.0/@navigationCase.11/@toViewId|" inlinks="pf145961588973613" path="/registrarse.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="editForm.xhtml" x="338" y="2119" id="pf145961588973631" referenceLink="//@navigationRule.6/@fromViewId|" outlinks="pf145961588973620" inlinks="pf145961588973619" path="/editForm.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="editTrip.xhtml" x="122" y="3655" id="pf145961588973632" referenceLink="//@navigationRule.5/@fromViewId|" outlinks="pf145961588973625" inlinks="pf145961588973624" path="/editTrip.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="involvedTrips.xhtml" id="pf145961591515935" referenceLink="//@navigationRule.0/@navigationCase.3/@toViewId|" inlinks="pf145961591515934" path="/involvedTrips.xhtml"/>
+  <links id="pf14596158897362" target="pf145961588973614" source="pf14596158897361" outcome="error"/>
+  <links id="pf14596158897363" target="pf145961588973615" source="pf14596158897361" outcome="alta"/>
+  <links id="pf14596158897364" target="pf145961588973617" source="pf14596158897361" outcome="exito" fromaction="#{controller.listado}"/>
+  <links id="pf14596158897365" target="pf145961588973621" source="pf14596158897361" outcome="exito" fromaction="#{activeTrips.list}"/>
+  <links id="pf14596158897366" target="pf145961588973622" source="pf14596158897361" outcome="exito" fromaction="#{myTrips.listMyTrips}"/>
+  <links id="pf14596158897367" target="pf145961588973626" source="pf14596158897361" outcome="exito" fromaction="#{login.verify}"/>
+  <links id="pf14596158897368" target="pf145961588973627" source="pf14596158897361" outcome="fallo" fromaction="#{login.verify}"/>
+  <links id="pf14596158897369" target="pf145961588973628" source="pf14596158897361" outcome="join"/>
+  <links id="pf145961588973610" target="pf145961588973627" source="pf14596158897361" outcome="exito" fromaction="#{join.createUser}"/>
+  <links id="pf145961588973611" target="pf145961588973629" source="pf14596158897361" outcome="fallo" fromaction="#{tripController.save}"/>
+  <links id="pf145961588973612" target="pf145961588973626" source="pf14596158897361" outcome="exito" fromaction="#{tripController.save}"/>
+  <links id="pf145961588973613" target="pf145961588973630" source="pf14596158897361" outcome="registrarse"/>
+  <links id="pf145961588973619" target="pf145961588973631" source="pf145961588973617" outcome="editar"/>
+  <links id="pf145961588973616" target="pf145961588973617" source="pf145961588973615" outcome="exito" fromaction="#{controller.salva}"/>
+  <links id="pf145961588973624" target="pf145961588973632" source="pf145961588973622" outcome="exito" fromaction="#{tripController.fillEditView(trip)}"/>
+  <links id="pf145961588973625" target="pf145961588973622" source="pf145961588973632" outcome="exito" fromaction="#{tripController.editTrip}"/>
+  <links id="pf145961588973620" target="pf145961588973617" source="pf145961588973631" outcome="exito" fromaction="#{controller.salva}"/>
+  <links id="pf145961588973618" target="pf145961588973617" source="pf145961588973617" outcome="exito" fromaction="#{controller.baja(valumno)}">
     <bendPoints d1Height="-36" d2Height="-36"/>
     <bendPoints d1Width="-64" d1Height="-36" d2Width="-64" d2Height="-36"/>
     <bendPoints d1Width="-64" d2Width="-64"/>
   </links>
-<<<<<<< HEAD
-  <links id="pf14595551327021" target="pf14595225251321" source="pf14595225251321" outcome="exito" fromaction="#{mytrips.cancel}">
-=======
-  <links id="pf14595502864730" target="pf14595225251321" source="pf14595225251321" outcome="exito" fromaction="#{mytrips.cancel}">
->>>>>>> a3327ad362334ce0692acffe0d2d666924c4637a
+  <links id="pf145961588973623" target="pf145961588973622" source="pf145961588973622" outcome="exito" fromaction="#{mytrips.cancel}">
     <bendPoints d1Height="-36" d2Height="-36"/>
     <bendPoints d1Width="-64" d1Height="-36" d2Width="-64" d2Height="-36"/>
     <bendPoints d1Width="-64" d2Width="-64"/>
   </links>
+  <links id="pf145961591515934" target="pf145961591515935" source="pf14596158897361" outcome="exito" fromaction="#{involvedTrips.list}"/>
 </pageflow:Pageflow>

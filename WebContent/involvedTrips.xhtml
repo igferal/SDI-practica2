@@ -1,0 +1,90 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template-general.xhtml">
+
+	<ui:define name="titulo">
+      #{msgs.tituloHead}
+    </ui:define>
+
+	<ui:define name="cuerpo">
+
+
+		<h1>#{msgs.involvedTrips}</h1>
+
+		<h:form id="formulario">
+			<p:dataTable styleClass=".ui-datatable"
+				value="#{involvedTrips.trips.entrySet().toArray()}" var="var"
+				rows="10" paginator="true"
+				paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				rowsPerPageTemplate="5,10,15" rowKey="#{var.key.id}"
+				sortMode="multiple">
+
+
+				<p:column headerText="Id" sortBy="#{var.key.id}"
+					filterBy="#{var.key.id}">
+					<h:outputText value="#{var.key.id}" />
+				</p:column>
+
+				<p:column headerText="#{msgs.createTrip_ciudadOrigen}"
+					filterBy="#{var.key.departure.city}"
+					sortBy="#{var.key.departure.city}">
+					<h:outputText value="#{var.key.departure.city}" />
+				</p:column>
+
+				<p:column headerText="#{msgs.createTrip_fechaSalida}"
+					sortBy="#{var.key.departureDate}"
+					filterBy="#{var.key.departureDate}">
+					<h:outputText
+						value="#{involvedTrips.formattedDate(var.key.departureDate)}" />
+				</p:column>
+
+				<p:column headerText="#{msgs.createTrip_ciudadDestino}"
+					sortBy="#{var.key.destination.city}"
+					filterBy="#{var.key.destination.city}">
+					<h:outputText value="#{var.key.destination.city}" />
+				</p:column>
+
+				<p:column headerText="#{msgs.createTrip_fechaLlegada}"
+					sortBy="#{var.key.arrivalDate}"
+					filterBy="#{var.key.departure.city}">
+					<h:outputText
+						value="#{involvedTrips.formattedDate(var.key.arrivalDate)}" />
+				</p:column>
+
+				<p:column headerText="#{msgs.createTrip_fechaInscripcion}"
+					sortBy="#{var.key.closingDate}" filterBy="#{var.key.closingDate}">
+					<h:outputText
+						value="#{involvedTrips.formattedDate(var.key.closingDate)}" />
+				</p:column>
+
+				<p:column headerText="#{msgs.createTrip_costeEstimado}"
+					sortBy="#{var.key.estimatedCost}"
+					filterBy="#{var.key.estimatedCost}">
+
+					<h:outputText value="#{var.key.estimatedCost}">
+						<f:convertNumber currencySymbol="€" type="currency" />
+					</h:outputText>
+				</p:column>
+
+
+			</p:dataTable>
+
+
+		</h:form>
+		<p:commandButton type="submit" update="@all" form="formulario"
+			value="#{msgs.cancelar}" id="enviar" styleClass="ui-priority-primary"
+			 />
+
+	</ui:define>
+
+
+	<ui:define name="pie">
+
+
+	</ui:define>
+
+</ui:composition>
+
