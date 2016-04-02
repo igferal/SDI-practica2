@@ -11,7 +11,11 @@
   <nodes xsi:type="pageflow:PFPage" name="editForm.xhtml" x="338" y="2119" id="pf145946612328725" referenceLink="//@navigationRule.4/@fromViewId|" outlinks="pf145946612328720" inlinks="pf145946612328719" path="/editForm.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="registrarse.xhtml" x="338" y="2887" id="pf145946612328726" referenceLink="//@navigationRule.0/@navigationCase.11/@toViewId|" inlinks="pf145946612328712" path="/registrarse.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="createTrip.xhtml" x="338" y="3271" id="pf145946612328727" referenceLink="//@navigationRule.0/@navigationCase.9/@toViewId|" inlinks="pf145946612328713" path="/createTrip.xhtml"/>
+<<<<<<< HEAD
   <nodes xsi:type="pageflow:PFPage" name="myTrips.xhtml" x="338" y="3655" id="pf14595225251321" referenceLink="//@navigationRule.2/@navigationCase.0/@toViewId|" outlinks="pf14595551327021" inlinks="pf14595225251320 pf14595551327021" path="/myTrips.xhtml"/>
+=======
+  <nodes xsi:type="pageflow:PFPage" name="myTrips.xhtml" x="338" y="3655" id="pf14595225251321" referenceLink="//@navigationRule.2/@navigationCase.0/@toViewId|" outlinks="pf14595502864730" inlinks="pf14595225251320 pf14595502864730" path="/myTrips.xhtml"/>
+>>>>>>> a3327ad362334ce0692acffe0d2d666924c4637a
   <links id="pf14594661232873" target="pf145946612328714" source="pf14594661232872" outcome="error"/>
   <links id="pf14594661232874" target="pf145946612328715" source="pf14594661232872" outcome="alta"/>
   <links id="pf14594661232875" target="pf145946612328717" source="pf14594661232872" outcome="exito" fromaction="#{controller.listado}"/>
@@ -32,7 +36,11 @@
     <bendPoints d1Width="-64" d1Height="-36" d2Width="-64" d2Height="-36"/>
     <bendPoints d1Width="-64" d2Width="-64"/>
   </links>
+<<<<<<< HEAD
   <links id="pf14595551327021" target="pf14595225251321" source="pf14595225251321" outcome="exito" fromaction="#{mytrips.cancel}">
+=======
+  <links id="pf14595502864730" target="pf14595225251321" source="pf14595225251321" outcome="exito" fromaction="#{mytrips.cancel}">
+>>>>>>> a3327ad362334ce0692acffe0d2d666924c4637a
     <bendPoints d1Height="-36" d2Height="-36"/>
     <bendPoints d1Width="-64" d1Height="-36" d2Width="-64" d2Height="-36"/>
     <bendPoints d1Width="-64" d2Width="-64"/>

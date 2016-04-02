@@ -15,8 +15,7 @@
 		<h1>#{msgs.misViajes}</h1>
 
 		<h:form id="formulario">
-			<p:dataTable styleClass=".ui-datatable"
-				selection="#{myTrips.selectedTrips}" var="trip"
+			<p:dataTable styleClass=".ui-datatable" var="trip"
 				value="#{myTrips.trips}" rows="10" paginator="true"
 				paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 				rowsPerPageTemplate="5,10,15" rowKey="#{trip.id}"
@@ -68,17 +67,19 @@
 					<p:selectBooleanCheckbox value="#{myTrips.selectedIds[trip.id]}" />
 				</p:column>
 
-				<p:column >
+				<p:column>
 					<p:commandButton value="#{msgs.modificar}" id="modificar"
-						styleClass="ui-priority-primary" url="index.xhtml" />
+						styleClass="ui-priority-primary"
+						action="#{tripController.fillEditView(trip)}" />
 
 				</p:column>
 			</p:dataTable>
 
 
 		</h:form>
-		<p:commandButton  value="#{msgs.cancelar}" id="enviar"
-			styleClass="ui-priority-primary" action="#{myTrips.cancel}" />
+		<p:commandButton type="submit" update="@all" form="formulario"
+			value="#{msgs.cancelar}" id="enviar" styleClass="ui-priority-primary"
+			action="#{myTrips.cancel}" />
 
 	</ui:define>
 

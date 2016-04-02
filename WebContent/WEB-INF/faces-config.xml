@@ -13,25 +13,25 @@
 		<managed-bean-class>com.sdi.presentation.BeanSettings</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
-	
+
 	<managed-bean>
 		<managed-bean-name>tripController</managed-bean-name>
 		<managed-bean-class>com.sdi.presentation.BeanTripController</managed-bean-class>
 		<managed-bean-scope>request</managed-bean-scope>
 	</managed-bean>
-	
+
 	<managed-bean>
 		<managed-bean-name>activeTrips</managed-bean-name>
 		<managed-bean-class>com.sdi.presentation.BeanActiveTrips</managed-bean-class>
 		<managed-bean-scope>view</managed-bean-scope>
 	</managed-bean>
-	
+
 	<managed-bean>
 		<managed-bean-name>myTrips</managed-bean-name>
 		<managed-bean-class>com.sdi.presentation.BeanMyTrips</managed-bean-class>
 		<managed-bean-scope>view</managed-bean-scope>
 	</managed-bean>
-	
+
 
 	<application>
 		<resource-bundle>
@@ -50,19 +50,19 @@
 			<from-outcome>alta</from-outcome>
 			<to-view-id>/altaForm.xhtml</to-view-id>
 		</navigation-case>
-		
+
 		<navigation-case>
 			<from-action>#{controller.listado}</from-action>
 			<from-outcome>exito</from-outcome>
 			<to-view-id>/listado.xhtml</to-view-id>
 		</navigation-case>
-		
+
 		<navigation-case>
 			<from-action>#{activeTrips.list}</from-action>
 			<from-outcome>exito</from-outcome>
 			<to-view-id>/activeTrips.xhtml</to-view-id>
 		</navigation-case>
-		
+
 		<navigation-case>
 			<from-action>#{myTrips.listMyTrips}</from-action>
 			<from-outcome>exito</from-outcome>
@@ -116,7 +116,7 @@
 			<to-view-id>/editForm.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
-	
+
 	<navigation-rule>
 		<from-view-id>/myTrips.xhtml</from-view-id>
 		<navigation-case>
@@ -125,8 +125,8 @@
 			<to-view-id>/myTrips.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
-	
-	
+
+
 	<navigation-rule>
 		<from-view-id>/altaForm.xhtml</from-view-id>
 		<navigation-case>
@@ -135,6 +135,26 @@
 			<to-view-id>/listado.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>/myTrips.xhtml</from-view-id>
+		<navigation-case>
+			<from-action>#{tripController.fillEditView(trip)}</from-action>
+			<from-outcome>exito</from-outcome>
+			<to-view-id>/editTrip.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>/editTrip.xhtml</from-view-id>
+		<navigation-case>
+			<from-action>#{tripController.editTrip}</from-action>
+			<from-outcome>exito</from-outcome>
+			<to-view-id>/myTrips.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+
 	<navigation-rule>
 		<from-view-id>/editForm.xhtml</from-view-id>
 		<navigation-case>

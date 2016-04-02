@@ -19,9 +19,9 @@ public class TripDto {
 	public TripDto(Trip trip, User user) {
 		this.setTrip(trip);
 		if (user == null)
-			this.idUser = -1;
+			this.setIdUser(-1);
 		else
-			this.idUser = user.getId();
+			this.setIdUser(user.getId());
 	}
 
 	public boolean checkInTrip(long idUser) {
@@ -67,6 +67,7 @@ public class TripDto {
 		this.isInTrip = isInTrip;
 	}
 
+<<<<<<< HEAD
 	public String getPromotorName() {
 		return promotorName;
 	}
@@ -89,6 +90,14 @@ public class TripDto {
 
 	public void setPromotorLogin(String promotorLogin) {
 		this.promotorLogin = promotorLogin;
+=======
+	public long getIdUser() {
+		return idUser;
+	}
+
+	public void setIdUser(long idUser) {
+		this.idUser = idUser;
+>>>>>>> a3327ad362334ce0692acffe0d2d666924c4637a
 	}
 
 }
