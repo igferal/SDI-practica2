@@ -10,7 +10,9 @@ public class TripDto {
 	private Trip trip;
 	private List<PasajeroInfoDto> pasajeros;
 	private long idPromotor;
-	private String promotor;
+	private String promotorLogin;
+	private String promotorName;
+	private String promotorSurname;
 	private boolean isInTrip;
 	private long idUser;
 
@@ -49,14 +51,6 @@ public class TripDto {
 		this.trip = trip;
 	}
 
-	public String getPromotor() {
-		return promotor;
-	}
-	
-	public void setPromotor(String promotor) {
-		this.promotor = promotor;
-	}
-
 	public Long getIdPromotor() {
 		return idPromotor;
 	}
@@ -71,6 +65,30 @@ public class TripDto {
 	
 	public void setIsInTrip(boolean isInTrip) {
 		this.isInTrip = isInTrip;
+	}
+
+	public String getPromotorName() {
+		return promotorName;
+	}
+
+	public void setPromotorName(String promotorName) {
+		this.promotorName = promotorName;
+	}
+
+	public String getPromotorSurname() {
+		return promotorSurname;
+	}
+
+	public void setPromotorSurname(String promotorSurname) {
+		this.promotorSurname = promotorSurname;
+	}
+
+	public String getPromotorLogin() {
+		return promotorLogin;
+	}
+
+	public void setPromotorLogin(String promotorLogin) {
+		this.promotorLogin = promotorLogin;
 	}
 
 }

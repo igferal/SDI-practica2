@@ -5,21 +5,19 @@ import com.sdi.model.SeatStatus;
 public class PasajeroInfoDto {
 
 	private Long idUsuario;
-	private String usuario;
+	private String login;
+	private String nombre;
+	private String apellidos;
 	private SeatStatus seatStatus;
 
-	public PasajeroInfoDto(Long idUsuario, String usuario, SeatStatus seatStatus) {
+	public PasajeroInfoDto(Long idUsuario, String login, String nombre,
+			String apellidos, SeatStatus seatStatus) {
+		super();
 		this.idUsuario = idUsuario;
-		this.usuario = usuario;
+		this.login = login;
+		this.nombre = nombre;
+		this.apellidos = apellidos;
 		this.seatStatus = seatStatus;
-	}
-
-	public String getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(String usuario) {
-		this.usuario = usuario;
 	}
 
 	public SeatStatus getSeatStatus() {
@@ -36,6 +34,30 @@ public class PasajeroInfoDto {
 
 	public void setIdUsuario(Long idUsuario) {
 		this.idUsuario = idUsuario;
+	}
+
+	public String getLogin() {
+		return login;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public String getApellidos() {
+		return apellidos;
+	}
+
+	public void setApellidos(String apellidos) {
+		this.apellidos = apellidos;
 	}
 
 }

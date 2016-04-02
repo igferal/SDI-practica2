@@ -6,19 +6,10 @@
 	template="/templates/template-general.xhtml">
 
 	<ui:define name="cuerpo">
-		<head>
-<style>
-.topAligned {
-	vertical-align: top;
-}
 
-.ui-widget-content .ui-datalist-content {
-	border: none;
-	background: transparent;
-	background-image: none;
-}
-</style>
-		</head>
+		<p:messages showDetail="true" autoUpdate="true" globalOnly="true"
+			closable="true" />
+
 		<p:panelGrid columnClasses="topAligned, topAligned" columns="2"
 			styleClass="ui-noborder" style="width: 100%">
 			<p:column style="width: 50%">
@@ -30,11 +21,14 @@
 				</h4>
 
 				<br />
-				<p:commandButton value="#{msgs.solicitarPlaza}"
+
+				<p:commandButton id="solicitarPlaza" value="#{msgs.solicitarPlaza}"
+					action="#{tripInfo.solicitarPlaza()}"
 					rendered="#{not empty LOGGEDIN_USER and tripInfo.tripClosed == false and tripInfo.tripDto.isInTrip == false}" />
 
 				<h:outputText value=""
 					rendered="#{not empty LOGGEDIN_USER and tripInfo.tripClosed == false and tripInfo.tripDto.isInTrip == false}" />
+
 
 				<h3>#{tripInfo.tripDto.trip.departure.city} -
 					#{tripInfo.tripDto.trip.destination.city}</h3>
@@ -59,29 +53,31 @@
 
 				<br />
 
-				<p:panel>
+				<p:panel style="display: inline-block">
 					<h:panelGrid>
 						<p:row>
 							<h4>#{msgs.comentariosPromotorViaje}</h4>
 						</p:row>
-						<br />
 						<p:row>#{tripInfo.tripDto.trip.comments}</p:row>
 					</h:panelGrid>
 				</p:panel>
 
 			</p:column>
 
-			<p:column style="width: 50%">
+			<p:column rendered="#{not empty LOGGEDIN_USER}" style="width: 50%">
 				<h1>#{msgs.participantesConfirmados}</h1>
 				<p:panel>
 					<span class="label label-default">#{msgs.promotor}</span>
-					<b>&#160;#{tripInfo.tripDto.promotor}</b>
+					<b>&#160;#{tripInfo.tripDto.promotorLogin}
+						(#{tripInfo.tripDto.promotorName}
+						#{tripInfo.tripDto.promotorSurname})</b>
 				</p:panel>
 				<p:dataList value="#{tripInfo.getAcceptedPassengers()}" var="pas"
-					type="definition">
+					type="definition"
+					emptyMessage="">
 					<p:panel style="margin-top: 10px">
 						<span class="label label-success">#{msgs.admitido}</span> 
-						&#160;#{pas.usuario}
+						&#160;#{pas.login} (#{pas.nombre} #{pas.apellidos})
 				</p:panel>
 				</p:dataList>
 			</p:column>

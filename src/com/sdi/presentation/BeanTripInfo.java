@@ -4,8 +4,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
@@ -14,6 +16,7 @@ import com.sdi.dto.DTOAssembler;
 import com.sdi.dto.PasajeroInfoDto;
 import com.sdi.dto.TripDto;
 import com.sdi.infrastructure.Factories;
+import com.sdi.model.Application;
 import com.sdi.model.SeatStatus;
 import com.sdi.model.Trip;
 import com.sdi.model.User;
@@ -37,6 +40,30 @@ public class BeanTripInfo {
 						.getSessionMap().get("LOGGEDIN_USER")));
 	}
 
+	public String solicitarPlaza() {
+		Application app = new Application(((User) FacesContext
+				.getCurrentInstance().getExternalContext().getSessionMap()
+				.get("LOGGEDIN_USER")).getId(), tripDto.getTrip().getId());
+
+		FacesContext context = FacesContext.getCurrentInstance();
+		ResourceBundle bundle = context.getApplication().getResourceBundle(
+				context, "msgs");
+		if (Factories.services.createApplicationService().save(app))
+			context.addMessage(
+					null,
+					new FacesMessage(FacesMessage.SEVERITY_INFO, "", bundle
+							.getString("solicitarPlaza_result_exito")));
+		else
+			context.addMessage(
+					null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "", bundle
+							.getString("solicitarPlaza_result_fallo")));
+
+		context.getExternalContext().getFlash().setKeepMessages(true);
+
+		return "tripInfo.xhtml?faces-redirect=true";
+	}
+
 	public TripDto getTripDto() {
 		return tripDto;
 	}
@@ -44,24 +71,24 @@ public class BeanTripInfo {
 	public void setTripDto(TripDto tripDto) {
 		this.tripDto = tripDto;
 	}
-	
+
 	public String formattedDate(Date date) {
 		return new SimpleDateFormat("dd/MM/yyyy HH:mm").format(date);
 	}
-	
+
 	public List<PasajeroInfoDto> getAcceptedPassengers() {
 		List<PasajeroInfoDto> pasajeros = new ArrayList<PasajeroInfoDto>();
-		
-		for (PasajeroInfoDto pasajero:tripDto.getPasajeros())
-			if (pasajero.getSeatStatus() != null && pasajero.getSeatStatus().equals(SeatStatus.ACCEPTED))
+
+		for (PasajeroInfoDto pasajero : tripDto.getPasajeros())
+			if (pasajero.getSeatStatus() != null
+					&& pasajero.getSeatStatus().equals(SeatStatus.ACCEPTED))
 				pasajeros.add(pasajero);
-		
+
 		return pasajeros;
 	}
-	
+
 	public boolean isTripClosed() {
 		isTripClosed = tripDto.getTrip().getClosingDate().before(new Date());
-		System.out.println(isTripClosed);
 		return isTripClosed;
 	}
 

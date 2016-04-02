@@ -17,15 +17,14 @@ import com.sdi.model.SeatStatus;
 import com.sdi.model.Trip;
 import com.sdi.model.User;
 
-
 public class DTOAssembler {
 
 	public static SolicitudesDto generateSolicitudesDTO(Long idTrip) {
 
-		SolicitudesDto scdto = new SolicitudesDto( Factories.persistence.
-				newTripDao().findById(idTrip));
+		SolicitudesDto scdto = new SolicitudesDto(Factories.persistence
+				.newTripDao().findById(idTrip));
 
-		Trip trip =  Factories.persistence.newTripDao().findById(idTrip);
+		Trip trip = Factories.persistence.newTripDao().findById(idTrip);
 
 		List<User> admitidos = getAdmitidos(idTrip, trip.getPromoterId());
 		List<User> excluidos = getExcluidos(idTrip, trip.getPromoterId());
@@ -68,8 +67,8 @@ public class DTOAssembler {
 	private static List<User> getPendientes(Long tripId, Long long1) {
 
 		List<User> pendientes = new ArrayList<User>();
-		List<Application> applications = Factories.persistence.newApplicationDao()
-				.appNotInSeat(tripId);
+		List<Application> applications = Factories.persistence
+				.newApplicationDao().appNotInSeat(tripId);
 
 		for (Application application : applications) {
 
@@ -89,8 +88,9 @@ public class DTOAssembler {
 		List<Seat> seats = Factories.persistence.newSeatDao().findAll();
 		for (Seat seat : seats) {
 			if (seat.getTripId().equals(idTrip)
-					&& !seat.getTripId().equals(
-							Factories.persistence.newTripDao().findById(idTrip))
+					&& !seat.getTripId()
+							.equals(Factories.persistence.newTripDao()
+									.findById(idTrip))
 					&& seat.getStatus().equals(SeatStatus.ACCEPTED)
 					&& !seat.getUserId().equals(long1)) {
 				admitidos.add(Factories.persistence.newUserDao().findById(
@@ -106,8 +106,9 @@ public class DTOAssembler {
 		List<Seat> seats = Factories.persistence.newSeatDao().findAll();
 		for (Seat seat : seats) {
 			if (seat.getTripId().equals(idTrip)
-					&& !seat.getTripId().equals(
-							Factories.persistence.newTripDao().findById(idTrip))
+					&& !seat.getTripId()
+							.equals(Factories.persistence.newTripDao()
+									.findById(idTrip))
 					&& seat.getStatus().equals(SeatStatus.EXCLUDED)
 					&& !seat.getUserId().equals(long1)) {
 				admitidos.add(Factories.persistence.newUserDao().findById(
@@ -122,8 +123,10 @@ public class DTOAssembler {
 		User promotor = Factories.persistence.newUserDao().findById(
 				trip.getPromoterId());
 		TripDto tdao = new TripDto(trip, user);
-		tdao.setPromotor(Factories.persistence.newUserDao()
-				.findById(trip.getPromoterId()).getName());
+		tdao.setIdPromotor(promotor.getId());
+		tdao.setPromotorLogin(promotor.getLogin());
+		tdao.setPromotorName(promotor.getName());
+		tdao.setPromotorSurname(promotor.getSurname());
 		Map<User, SeatStatus> usersAndStatus = findUsersAndStatusSeatBySeat(
 				trip.getId(), promotor.getId());
 		tdao.setPasajeros(getPasajeros(trip.getId(), usersAndStatus,
@@ -137,8 +140,8 @@ public class DTOAssembler {
 	}
 
 	public static ComentariosUsuarioDto generateComentariosUsuarioDto(User user) {
-		List<Rating> ratings = Factories.persistence.newRatingDao().findByUserId(
-				user.getId());
+		List<Rating> ratings = Factories.persistence.newRatingDao()
+				.findByUserId(user.getId());
 
 		ComentariosUsuarioDto dto = new ComentariosUsuarioDto();
 		dto.setUser(user);
@@ -174,10 +177,12 @@ public class DTOAssembler {
 		UserDao userDao = Factories.persistence.newUserDao();
 		RatingDao ratingDao = Factories.persistence.newRatingDao();
 
-		List<Seat> seats = Factories.persistence.newSeatDao().findByTripId(idTrip);
-		
+		List<Seat> seats = Factories.persistence.newSeatDao().findByTripId(
+				idTrip);
+
 		for (Seat seat : seats) {
-			if (!seat.getUserId().equals(idUser) && seat.getStatus().equals(SeatStatus.ACCEPTED)
+			if (!seat.getUserId().equals(idUser)
+					&& seat.getStatus().equals(SeatStatus.ACCEPTED)
 					&& ratingDao.findByAboutFrom(seat.getUserId(), idTrip,
 							idUser, idTrip) == null)
 				dto.getParticipantes().add(userDao.findById(seat.getUserId()));
@@ -193,8 +198,10 @@ public class DTOAssembler {
 		List<PasajeroInfoDto> pasajeros = new ArrayList<PasajeroInfoDto>();
 
 		for (User usuario : usuarios.keySet())
-			pasajeros.add(new PasajeroInfoDto(usuario.getId(), usuario.getName(), usuarios.get(usuario)));
-	
+			pasajeros.add(new PasajeroInfoDto(usuario.getId(), usuario
+					.getLogin(), usuario.getName(), usuario.getSurname(),
+					usuarios.get(usuario)));
+
 		return pasajeros;
 
 	}
@@ -215,8 +222,8 @@ public class DTOAssembler {
 			}
 		}
 
-		List<Application> applications = Factories.persistence.newApplicationDao()
-				.findAll();
+		List<Application> applications = Factories.persistence
+				.newApplicationDao().findAll();
 
 		for (Application application : applications) {
 
