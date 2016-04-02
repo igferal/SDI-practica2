@@ -67,7 +67,6 @@ public class TripDto {
 		this.isInTrip = isInTrip;
 	}
 
-<<<<<<< HEAD
 	public String getPromotorName() {
 		return promotorName;
 	}
@@ -90,14 +89,14 @@ public class TripDto {
 
 	public void setPromotorLogin(String promotorLogin) {
 		this.promotorLogin = promotorLogin;
-=======
+	}
+	
 	public long getIdUser() {
 		return idUser;
 	}
 
 	public void setIdUser(long idUser) {
 		this.idUser = idUser;
->>>>>>> a3327ad362334ce0692acffe0d2d666924c4637a
 	}
 
 }
