@@ -53,7 +53,6 @@ public class BeanTripSeats {
 	
 	public String moveToAccepted(PasajeroInfoDto pas) {
 		Factories.services.createSeatService().moveToAccepted(pas.getIdUsuario(), tripDto.getTrip().getId());
-		System.out.println("entra");
 		
 		return "tripSeats.xhtml?faces-redirect=true";
 	}

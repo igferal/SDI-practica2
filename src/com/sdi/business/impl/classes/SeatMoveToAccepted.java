@@ -12,8 +12,6 @@ public class SeatMoveToAccepted {
 		SeatDao seatDao = Factories.persistence.newSeatDao();
 		Seat seat = seatDao.findByUserAndTrip(idUser, idTrip);
 		
-		System.out.println(seat);
-		
 		if (seat == null) {
 			seat = new Seat();
 			seat.setUserId(idUser);
