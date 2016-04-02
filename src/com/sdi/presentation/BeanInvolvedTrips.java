@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.ResourceBundle;
 import java.util.Map.Entry;
 
 import javax.annotation.PostConstruct;
@@ -37,15 +38,13 @@ public class BeanInvolvedTrips implements Serializable {
 		return "exito";
 	}
 
-	
 	@PostConstruct
 	public void init() {
 
 		System.out.println("Creando Bean involved trips");
-		 list();
+		list();
 	}
 
-	
 	public String list() {
 
 		if (trips != null) {
@@ -70,6 +69,27 @@ public class BeanInvolvedTrips implements Serializable {
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "fallo";
+		}
+
+	}
+
+	public String getRole(Trip trip) {
+		
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+        ResourceBundle bundle = 
+         facesContext.getApplication().getResourceBundle(facesContext, "msgs");
+
+		if (trips.get(trip) == null) {
+
+			if (trip.getAvailablePax() == 0) {
+				return bundle.getString("statusSinPlaza");
+			} else {
+				return bundle.getString("statusPendiente");
+			}
+		} else if (trips.get(trip).equals(SeatStatus.ACCEPTED)) {
+			return bundle.getString("statusAdmitido");
+		} else {
+			return bundle.getString("statusCancelado");
 		}
 
 	}
