@@ -215,8 +215,7 @@ public class DTOAssembler {
 		for (Seat seat : seats) {
 
 			if (seat.getTripId().equals(id)
-					&& !seat.getUserId().equals(promoterID)
-					&& seat.getStatus().equals((SeatStatus.ACCEPTED))) {
+					&& !seat.getUserId().equals(promoterID)) {
 				map.put(Factories.persistence.newUserDao().findById(
 						seat.getUserId()), seat.getStatus());
 			}
