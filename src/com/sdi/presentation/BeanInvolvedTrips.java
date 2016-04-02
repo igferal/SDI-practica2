@@ -33,21 +33,36 @@ public class BeanInvolvedTrips implements Serializable {
 
 	}
 
+	public String load() {
+		return "exito";
+	}
+
+	
 	@PostConstruct
 	public void init() {
 
-		System.out.println("Creando Bean my trips");
-		list();
+		System.out.println("Creando Bean involved trips");
+		 list();
 	}
 
 	public String list() {
+
+		if (trips != null) {
+			return "exito";
+		}
 		try {
 			Map<String, Object> session = FacesContext.getCurrentInstance()
 					.getExternalContext().getSessionMap();
 			User user = (User) session.get("LOGGEDIN_USER");
 
+			long l1, l2;
+
+			l1 = System.currentTimeMillis();
 			setTrips(DTOAssembler.getViajesImplicadosDto(user.getId())
 					.getTrips());
+			l2 = System.currentTimeMillis();
+
+			System.out.println("tiempo tarda = " + (l2 - l1));
 
 			return "exito";
 

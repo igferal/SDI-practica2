@@ -31,7 +31,7 @@
 					value="#{msgs.misViajesOfertados}" action="#{myTrips.listMyTrips}"
 					rendered="#{not empty LOGGEDIN_USER}" />
 				<p:menuitem id="misViajesImplicados"
-					value="#{msgs.misViajesImplicados}"  action="#{involvedTrips.list}"
+					value="#{msgs.misViajesImplicados}"  action="#{involvedTrips.load}"
 					rendered="#{not empty LOGGEDIN_USER}" />
 				<p:menuitem id="crearViaje" value="#{msgs.crearViaje}"
 					url="createTrip.xhtml" rendered="#{not empty LOGGEDIN_USER}" />

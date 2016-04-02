@@ -69,14 +69,19 @@
 					</h:outputText>
 				</p:column>
 
+				<p:column headerText="#{msgs.cancelarPlaza}">
+					<p:commandButton type="submit" update="@all" form="formulario"
+						value="#{msgs.cancelarPlaza}"  id="enviar"
+						styleClass="ui-priority-primary" />
+
+
+				</p:column>
 
 			</p:dataTable>
 
 
 		</h:form>
-		<p:commandButton type="submit" update="@all" form="formulario"
-			value="#{msgs.cancelar}" id="enviar" styleClass="ui-priority-primary"
-			 />
+
 
 	</ui:define>
 

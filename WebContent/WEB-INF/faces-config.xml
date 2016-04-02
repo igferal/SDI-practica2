@@ -64,7 +64,7 @@
 		</navigation-case>
 		
 		<navigation-case>
-			<from-action>#{involvedTrips.list}</from-action>
+			<from-action>#{involvedTrips.load}</from-action>
 			<from-outcome>exito</from-outcome>
 			<to-view-id>/involvedTrips.xhtml</to-view-id>
 		</navigation-case>
