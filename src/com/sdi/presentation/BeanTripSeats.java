@@ -16,6 +16,7 @@ import com.sdi.dto.TripDto;
 import com.sdi.infrastructure.Factories;
 import com.sdi.model.SeatStatus;
 import com.sdi.model.Trip;
+import com.sdi.model.TripStatus;
 import com.sdi.model.User;
 
 @ManagedBean(name = "tripSeats")
@@ -23,6 +24,10 @@ import com.sdi.model.User;
 public class BeanTripSeats {
 
 	private TripDto tripDto;
+	boolean cancelledTrip;
+	boolean openTrip;
+	boolean closedTrip;
+	boolean doneTrip;
 
 	private List<PasajeroInfoDto> acceptedPassengers = new ArrayList<>();
 	private List<PasajeroInfoDto> pendingPassengers = new ArrayList<>();
@@ -33,18 +38,12 @@ public class BeanTripSeats {
 
 		System.out.println("Creando Bean trip seats");
 
-		Trip trip = Factories.services.createTripService().findTrip(
-				new Long(60));
-		setTripDto(DTOAssembler.generateTripDto(trip,
-				(User) FacesContext.getCurrentInstance().getExternalContext()
-						.getSessionMap().get("LOGGEDIN_USER")));
-
-		// Trip trip = Factories.services.createTripService().findTrip(
-		// (Long) FacesContext.getCurrentInstance().getExternalContext()
-		// .getSessionMap().get("tripInfoParam"));
-		// setTripDto(DTOAssembler.generateTripDto(trip,
-		// (User) FacesContext.getCurrentInstance().getExternalContext()
-		// .getSessionMap().get("LOGGEDIN_USER")));
+		 Trip trip = Factories.services.createTripService().findTrip(
+		 (Long) FacesContext.getCurrentInstance().getExternalContext()
+		 .getSessionMap().get("tripSeatsParam"));
+		 setTripDto(DTOAssembler.generateTripDto(trip,
+		 (User) FacesContext.getCurrentInstance().getExternalContext()
+		 .getSessionMap().get("LOGGEDIN_USER")));
 
 		putAcceptedPassengers();
 		putPendingPassengers();
@@ -126,4 +125,23 @@ public class BeanTripSeats {
 		return new SimpleDateFormat("dd/MM/yyyy HH:mm").format(date);
 	}
 	
+	public boolean isCancelledTrip() {
+		cancelledTrip = tripDto.getTrip().getStatus().equals(TripStatus.CANCELLED);
+		return cancelledTrip;
+	}
+	
+	public boolean isClosedTrip() {
+		closedTrip = tripDto.getTrip().getStatus().equals(TripStatus.CLOSED);
+		return closedTrip;
+	}
+	
+	public boolean isOpenTrip() {
+		openTrip =  tripDto.getTrip().getStatus().equals(TripStatus.OPEN);
+		return openTrip;
+	}
+	
+	public boolean isDoneTrip() {
+		doneTrip = tripDto.getTrip().getStatus().equals(TripStatus.DONE);
+		return doneTrip;
+	}
 }

@@ -62,6 +62,13 @@
 						<f:convertNumber currencySymbol="€" type="currency" />
 					</h:outputText>
 				</p:column>
+				
+				<p:column headerText="#{msgs.solicitudes}">
+					<p:commandButton
+						value="#{msgs.solicitudes}" id="solicitudes" action="solicitudes"
+						styleClass="ui-priority-primary"
+						actionListener="#{facesContext.externalContext.sessionMap.put('tripSeatsParam', trip.id)}" />
+				</p:column>
 
 				<p:column headerText="#{msgs.cancelar}">
 					<p:selectBooleanCheckbox
@@ -75,7 +82,6 @@
 						value="#{msgs.modificar}" id="modificar"
 						styleClass="ui-priority-primary"
 						action="#{tripController.fillEditView(trip)}" />
-
 				</p:column>
 			</p:dataTable>
 

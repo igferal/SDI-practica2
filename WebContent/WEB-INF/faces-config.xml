@@ -136,6 +136,10 @@
 			<from-outcome>exito</from-outcome>
 			<to-view-id>/myTrips.xhtml</to-view-id>
 		</navigation-case>
+		<navigation-case>
+			<from-outcome>solicitudes</from-outcome>
+			<to-view-id>/tripSeats.xhtml</to-view-id>
+		</navigation-case>
 	</navigation-rule>
 
 
