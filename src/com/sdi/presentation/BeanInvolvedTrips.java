@@ -111,6 +111,7 @@ public class BeanInvolvedTrips implements Serializable {
 
 			SeatService sService = Factories.services.createSeatService();
 			sService.moveToExcluded(user.getId(), trip.getId());
+			trips.remove(trip);
 
 		} catch (Exception e) {
 
