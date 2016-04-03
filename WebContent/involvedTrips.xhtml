@@ -16,40 +16,33 @@
 
 		<h:form id="formulario">
 			<p:dataTable styleClass=".ui-datatable"
-				value="#{involvedTrips.trips}" var="var"
-				rows="10" paginator="true"
+				value="#{involvedTrips.trips}" var="var" rows="10" paginator="true"
 				paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-				rowsPerPageTemplate="5,10,15" rowKey="#{var.id}"
-				sortMode="multiple">
+				rowsPerPageTemplate="5,10,15" rowKey="#{var.id}" sortMode="multiple">
 
 
-				<p:column headerText="Id" sortBy="#{var.id}"
-					filterBy="#{var.id}">
+				<p:column headerText="Id" sortBy="#{var.id}" filterBy="#{var.id}">
 					<h:outputText value="#{var.id}" />
 				</p:column>
 
 				<p:column headerText="#{msgs.createTrip_ciudadOrigen}"
-					filterBy="#{var.departure.city}"
-					sortBy="#{var.departure.city}">
+					filterBy="#{var.departure.city}" sortBy="#{var.departure.city}">
 					<h:outputText value="#{var.departure.city}" />
 				</p:column>
 
 				<p:column headerText="#{msgs.createTrip_fechaSalida}"
-					sortBy="#{var.departureDate}"
-					filterBy="#{var.departureDate}">
+					sortBy="#{var.departureDate}" filterBy="#{var.departureDate}">
 					<h:outputText
 						value="#{involvedTrips.formattedDate(var.departureDate)}" />
 				</p:column>
 
 				<p:column headerText="#{msgs.createTrip_ciudadDestino}"
-					sortBy="#{var.destination.city}"
-					filterBy="#{var.destination.city}">
+					sortBy="#{var.destination.city}" filterBy="#{var.destination.city}">
 					<h:outputText value="#{var.destination.city}" />
 				</p:column>
 
 				<p:column headerText="#{msgs.createTrip_fechaLlegada}"
-					sortBy="#{var.arrivalDate}"
-					filterBy="#{var.departure.city}">
+					sortBy="#{var.arrivalDate}" filterBy="#{var.departure.city}">
 					<h:outputText
 						value="#{involvedTrips.formattedDate(var.arrivalDate)}" />
 				</p:column>
@@ -61,8 +54,7 @@
 				</p:column>
 
 				<p:column headerText="#{msgs.createTrip_costeEstimado}"
-					sortBy="#{var.estimatedCost}"
-					filterBy="#{var.estimatedCost}">
+					sortBy="#{var.estimatedCost}" filterBy="#{var.estimatedCost}">
 
 					<h:outputText value="#{var.estimatedCost}">
 						<f:convertNumber currencySymbol="€" type="currency" />
@@ -70,10 +62,10 @@
 				</p:column>
 
 				<p:column headerText="#{msgs.cancelarPlaza}">
-					<p:commandButton action="#{involvedTrips.cancelSeat(var)}"
-						type="submit" update="@all" form="formulario"
-						value="#{msgs.cancelarPlaza}" id="enviar"
-						styleClass="ui-priority-primary" />
+					<p:commandButton rendered="#{involvedTrips.dateBefore(var.closingDate)}"
+						action="#{involvedTrips.cancelSeat(var)}" type="submit"
+						update="@all" form="formulario" value="#{msgs.cancelarPlaza}"
+						id="enviar" styleClass="ui-priority-primary" />
 
 
 				</p:column>
