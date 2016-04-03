@@ -7,8 +7,10 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.ResourceBundle;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
@@ -31,6 +33,14 @@ public class BeanMyTrips implements Serializable {
 	private Map<Long, Boolean> selectedIds = new HashMap<Long, Boolean>();
 	private List<Trip> tripsToDelete = null;
 	private Trip selectedTrip;
+
+	public String load() {
+		if (trips != null)
+			return "exito";
+		else
+			return "fallo";
+
+	}
 
 	public boolean dateBefore(Date date) {
 
@@ -61,7 +71,8 @@ public class BeanMyTrips implements Serializable {
 
 			for (Trip trip : trips) {
 
-				cancelThisTrip = selectedIds.get(trip.getId());
+				if (selectedIds.get(trip.getId()) != null)
+					cancelThisTrip = selectedIds.get(trip.getId());
 
 				if (cancelThisTrip) {
 
@@ -76,6 +87,13 @@ public class BeanMyTrips implements Serializable {
 
 			}
 			removeTripsFromView();
+			FacesContext context = FacesContext.getCurrentInstance();
+			ResourceBundle bundle = context.getApplication().getResourceBundle(
+					context, "msgs");
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_INFO, "",
+
+					bundle.getString("viajesCancelados")));
 
 		} catch (NumberFormatException e) {
 			e.printStackTrace();

@@ -30,14 +30,17 @@ public class BeanInvolvedTrips implements Serializable {
 		if (date != null) {
 			Date now = new Date();
 			return DateUtil.isAfter(date, now);
-			
+
 		}
 		return false;
 
 	}
 
 	public String load() {
-		return "exito";
+		if (trips != null)
+			return "exito";
+		else
+			return "fallo";
 	}
 
 	@PostConstruct

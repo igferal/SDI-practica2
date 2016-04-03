@@ -14,6 +14,9 @@
 
 		<h1>#{msgs.misViajes}</h1>
 
+		<p:messages showDetail="true" autoUpdate="true" globalOnly="true"
+			closable="true" />
+
 		<h:form id="formulario">
 			<p:dataTable styleClass=".ui-datatable" var="trip"
 				value="#{myTrips.trips}" rows="10" paginator="true"
@@ -60,13 +63,16 @@
 					</h:outputText>
 				</p:column>
 
-				<p:column 
-					headerText="#{msgs.cancelar}">
-					<p:selectBooleanCheckbox rendered="#{myTrips.dateBefore(trip.departureDate)}" value="#{myTrips.selectedIds[trip.id]}" />
+				<p:column headerText="#{msgs.cancelar}">
+					<p:selectBooleanCheckbox
+						rendered="#{myTrips.dateBefore(trip.departureDate)}"
+						value="#{myTrips.selectedIds[trip.id]}" />
 				</p:column>
 
 				<p:column headerText="#{msgs.modificar}">
-					<p:commandButton rendered="#{myTrips.dateBefore(trip.departureDate)}" value="#{msgs.modificar}" id="modificar"
+					<p:commandButton
+						rendered="#{myTrips.dateBefore(trip.departureDate)}"
+						value="#{msgs.modificar}" id="modificar"
 						styleClass="ui-priority-primary"
 						action="#{tripController.fillEditView(trip)}" />
 

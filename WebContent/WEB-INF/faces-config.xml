@@ -70,13 +70,13 @@
 		</navigation-case>
 
 		<navigation-case>
-			<from-action>#{activeTrips.list}</from-action>
+			<from-action>#{activeTrips.load}</from-action>
 			<from-outcome>exito</from-outcome>
 			<to-view-id>/activeTrips.xhtml</to-view-id>
 		</navigation-case>
 
 		<navigation-case>
-			<from-action>#{myTrips.listMyTrips}</from-action>
+			<from-action>#{myTrips.load}</from-action>
 			<from-outcome>exito</from-outcome>
 			<to-view-id>/myTrips.xhtml</to-view-id>
 		</navigation-case>

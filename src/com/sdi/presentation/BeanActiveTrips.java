@@ -36,12 +36,21 @@ public class BeanActiveTrips implements Serializable {
 		list();
 	}
 
-	public String listMyTrips(){
-		
-		Map<String,Object> session = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+	public String load() {
+
+		if (trips != null)
+			return "exito";
+		else
+			return "fallo";
+	}
+
+	public String listMyTrips() {
+
+		Map<String, Object> session = FacesContext.getCurrentInstance()
+				.getExternalContext().getSessionMap();
 		User user = (User) session.get("LOGGEDIN_USER");
 		System.out.println(user.toString());
-		
+
 		try {
 			System.out.println("MYTrips");
 			TripService tservice = Factories.services.createTripService();
@@ -52,9 +61,9 @@ public class BeanActiveTrips implements Serializable {
 			e.printStackTrace();
 			return "fallo";
 		}
-		
+
 	}
-	
+
 	public String list() {
 
 		try {
@@ -100,7 +109,8 @@ public class BeanActiveTrips implements Serializable {
 	}
 
 	public void onRowSelect(SelectEvent event) {
-		FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("tripInfoParam", selectedTrip.getId());
+		FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
+				.put("tripInfoParam", selectedTrip.getId());
 		try {
 			FacesContext.getCurrentInstance().getExternalContext()
 					.redirect("tripInfo.xhtml");
