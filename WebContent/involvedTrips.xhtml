@@ -78,9 +78,14 @@
 
 				</p:column>
 
-				<p:column headerText="#{msgs.statusViaje}">
+				<p:column headerText="#{msgs.statusPeticion}">
 
 					<h:outputText value="#{involvedTrips.getRole(var.key)}" />
+				</p:column>
+
+				<p:column headerText="#{msgs.statusViaje}">
+
+					<h:outputText value="#{var.key.status}" />
 				</p:column>
 
 
