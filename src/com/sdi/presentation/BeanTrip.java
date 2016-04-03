@@ -1,6 +1,7 @@
 package com.sdi.presentation;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Map;
 import java.util.ResourceBundle;
 
@@ -34,15 +35,15 @@ public class BeanTrip extends Trip implements Serializable {
 		ResourceBundle bundle = facesContext.getApplication()
 				.getResourceBundle(facesContext, "msgs");
 
-		setArrivalDate(DateUtil.fromString("2016-06-12"));
+		setArrivalDate(DateUtil.addDays(new Date(), 10));
 		setAvailablePax(4);
-		setClosingDate(DateUtil.fromString("2016-06-10"));
+		setClosingDate(DateUtil.addDays(new Date(), 8));
 		setComments(bundle.getString("ctcomment"));
 		setDeparture(new AddressPoint(bundle.getString("ctCalO"),
 				bundle.getString("ctCiuO"), bundle.getString("ctProO"),
 				bundle.getString("ctPaiO"), bundle.getString("ctCPO"),
 				new Waypoint(23.4D, 43.45D)));
-		setDepartureDate(DateUtil.fromString("2016-06-11"));
+		setDepartureDate(DateUtil.addDays(new Date(), 9));
 		setDestination(new AddressPoint(bundle.getString("ctCalD"),
 				bundle.getString("ctCiuD"), bundle.getString("ctProD"),
 				bundle.getString("ctPaiD"), bundle.getString("ctCPD"),

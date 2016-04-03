@@ -6,10 +6,13 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
+
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+
 import com.sdi.business.SeatService;
 import com.sdi.dto.DTOAssembler;
 import com.sdi.dto.ViajeImplicadoDto;
@@ -25,15 +28,20 @@ public class BeanInvolvedTrips implements Serializable {
 
 	private List<ViajeImplicadoDto> trips;
 
-	public boolean dateBefore(Date date) {
+	public boolean dateBefore(ViajeImplicadoDto trip) {
 
-		if (date != null) {
+		if (trip != null) {
+
+			if (trip.getSeatStatus() != null) {
+				if (trip.getSeatStatus().equals(SeatStatus.EXCLUDED)) {
+					return false;
+				}
+			}
+
 			Date now = new Date();
-			return DateUtil.isAfter(date, now);
-
+			return DateUtil.isAfter(trip.getClosingDate(), now);
 		}
 		return false;
-
 	}
 
 	public String load() {
@@ -116,6 +124,7 @@ public class BeanInvolvedTrips implements Serializable {
 			SeatService sService = Factories.services.createSeatService();
 			sService.moveToExcluded(user.getId(), trip.getId());
 			trips.remove(trip);
+			generateFeebackMessages();
 
 		} catch (Exception e) {
 
@@ -124,6 +133,16 @@ public class BeanInvolvedTrips implements Serializable {
 		}
 
 		return "exito";
+	}
+
+	private void generateFeebackMessages() {
+		FacesContext context = FacesContext.getCurrentInstance();
+		ResourceBundle bundle = context.getApplication().getResourceBundle(
+				context, "msgs");
+		FacesContext.getCurrentInstance().addMessage(null,
+				new FacesMessage(FacesMessage.SEVERITY_INFO, "",
+
+				bundle.getString("plazaCancelada")));
 	}
 
 	public List<ViajeImplicadoDto> getTrips() {

@@ -193,6 +193,10 @@ public class BeanTripController {
 			tservice = Factories.services.createTripService();
 
 			tservice.saveTrip(trip);
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_INFO, "",
+
+					bundle.getString("viajeCreado")));
 		}
 
 		catch (Exception e) {
@@ -237,7 +241,11 @@ public class BeanTripController {
 			if (respuesta.equals("fallo"))
 				return "fallo";
 			tservice.update(trip);
-			System.out.println("editandooo");
+
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_INFO, "",
+
+					bundle.getString("viajeEditado")));
 
 		} catch (Exception e) {
 			e.printStackTrace();
