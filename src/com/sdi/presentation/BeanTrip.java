@@ -2,6 +2,7 @@ package com.sdi.presentation;
 
 import java.io.Serializable;
 import java.util.Map;
+import java.util.ResourceBundle;
 
 import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedBean;
@@ -29,15 +30,23 @@ public class BeanTrip extends Trip implements Serializable {
 
 	public void fillTrip() {
 
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		ResourceBundle bundle = facesContext.getApplication()
+				.getResourceBundle(facesContext, "msgs");
+
 		setArrivalDate(DateUtil.fromString("2016-06-12"));
 		setAvailablePax(4);
 		setClosingDate(DateUtil.fromString("2016-06-10"));
-		setComments("Tratar de ser lo mas limpios posibles");
-		setDeparture(new AddressPoint("General Elorza", "Oviedo", "Asturias",
-				"España", "33006", new Waypoint(23.4D, 43.45D)));
+		setComments(bundle.getString("ctcomment"));
+		setDeparture(new AddressPoint(bundle.getString("ctCalO"),
+				bundle.getString("ctCiuO"), bundle.getString("ctProO"),
+				bundle.getString("ctPaiO"), bundle.getString("ctCPO"),
+				new Waypoint(23.4D, 43.45D)));
 		setDepartureDate(DateUtil.fromString("2016-06-11"));
-		setDestination(new AddressPoint("Paseo de la Castellana ", "Madrid",
-				"Madrid", "España", "67890", new Waypoint(56D, 65D)));
+		setDestination(new AddressPoint(bundle.getString("ctCalD"),
+				bundle.getString("ctCiuD"), bundle.getString("ctProD"),
+				bundle.getString("ctPaiD"), bundle.getString("ctCPD"),
+				new Waypoint(23.4D, 43.45D)));
 		setEstimatedCost(70D);
 		setMaxPax(4);
 		Map<String, Object> session = FacesContext.getCurrentInstance()
