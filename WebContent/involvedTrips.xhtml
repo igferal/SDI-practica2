@@ -70,7 +70,8 @@
 				</p:column>
 
 				<p:column headerText="#{msgs.cancelarPlaza}">
-					<p:commandButton type="submit" update="@all" form="formulario"
+					<p:commandButton action="#{involvedTrips.cancelSeat(var.key)}"
+						type="submit" update="@all" form="formulario"
 						value="#{msgs.cancelarPlaza}" id="enviar"
 						styleClass="ui-priority-primary" />
 
@@ -79,7 +80,7 @@
 
 				<p:column headerText="#{msgs.statusViaje}">
 
-					<h:outputText value="#{involvedTrips.getRole(var.key)}"/>
+					<h:outputText value="#{involvedTrips.getRole(var.key)}" />
 				</p:column>
 
 

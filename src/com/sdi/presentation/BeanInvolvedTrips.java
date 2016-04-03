@@ -13,8 +13,9 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-
+import com.sdi.business.SeatService;
 import com.sdi.dto.DTOAssembler;
+import com.sdi.infrastructure.Factories;
 import com.sdi.model.SeatStatus;
 import com.sdi.model.Trip;
 import com.sdi.model.User;
@@ -74,12 +75,19 @@ public class BeanInvolvedTrips implements Serializable {
 	}
 
 	public String getRole(Trip trip) {
-		
-		FacesContext facesContext = FacesContext.getCurrentInstance();
-        ResourceBundle bundle = 
-         facesContext.getApplication().getResourceBundle(facesContext, "msgs");
 
-		if (trips.get(trip) == null) {
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		ResourceBundle bundle = facesContext.getApplication()
+				.getResourceBundle(facesContext, "msgs");
+
+		if (DateUtil.isAfter(new Date(), trip.getClosingDate())
+				&& trips.get(trip) == null) {
+
+			return bundle.getString("statusSinPlaza");
+
+		}
+
+		else if (trips.get(trip) == null) {
 
 			if (trip.getAvailablePax() == 0) {
 				return bundle.getString("statusSinPlaza");
@@ -92,6 +100,26 @@ public class BeanInvolvedTrips implements Serializable {
 			return bundle.getString("statusCancelado");
 		}
 
+	}
+
+	public String cancelSeat(Trip trip) {
+
+		try {
+
+			Map<String, Object> session = FacesContext.getCurrentInstance()
+					.getExternalContext().getSessionMap();
+			User user = (User) session.get("LOGGEDIN_USER");
+
+			SeatService sService = Factories.services.createSeatService();
+			sService.moveToExcluded(user.getId(), trip.getId());
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+			return "fallo";
+		}
+
+		return "exito";
 	}
 
 	public List<Entry<Trip, SeatStatus>> entryList() {
