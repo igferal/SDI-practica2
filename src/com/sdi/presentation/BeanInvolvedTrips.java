@@ -2,22 +2,19 @@ package com.sdi.presentation;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
-import java.util.Map.Entry;
-
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import com.sdi.business.SeatService;
 import com.sdi.dto.DTOAssembler;
+import com.sdi.dto.ViajeImplicadoDto;
 import com.sdi.infrastructure.Factories;
 import com.sdi.model.SeatStatus;
-import com.sdi.model.Trip;
 import com.sdi.model.User;
 import com.sdi.persistence.util.DateUtil;
 
@@ -26,7 +23,7 @@ import com.sdi.persistence.util.DateUtil;
 public class BeanInvolvedTrips implements Serializable {
 	private static final long serialVersionUID = -8662200441018725393L;
 
-	private Map<Trip, SeatStatus> trips;
+	private List<ViajeImplicadoDto> trips;
 
 	public boolean dateBefore(Date date) {
 
@@ -62,8 +59,7 @@ public class BeanInvolvedTrips implements Serializable {
 			long l1, l2;
 
 			l1 = System.currentTimeMillis();
-			setTrips(DTOAssembler.getViajesImplicadosDto(user.getId())
-					.getTrips());
+			setTrips(DTOAssembler.getViajesImplicadosDto(user.getId()));
 			l2 = System.currentTimeMillis();
 
 			System.out.println("tiempo tarda = " + (l2 - l1));
@@ -77,27 +73,27 @@ public class BeanInvolvedTrips implements Serializable {
 
 	}
 
-	public String getRole(Trip trip) {
+	public String getRole(ViajeImplicadoDto trip) {
 
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		ResourceBundle bundle = facesContext.getApplication()
 				.getResourceBundle(facesContext, "msgs");
 
 		if (DateUtil.isAfter(new Date(), trip.getClosingDate())
-				&& trips.get(trip) == null) {
+				&& trip.getSeatStatus() == null) {
 
 			return bundle.getString("statusSinPlaza");
 
 		}
 
-		else if (trips.get(trip) == null) {
+		else if (trip.getSeatStatus() == null) {
 
 			if (trip.getAvailablePax() == 0) {
 				return bundle.getString("statusSinPlaza");
 			} else {
 				return bundle.getString("statusPendiente");
 			}
-		} else if (trips.get(trip).equals(SeatStatus.ACCEPTED)) {
+		} else if (trip.getSeatStatus().equals(SeatStatus.ACCEPTED)) {
 			return bundle.getString("statusAdmitido");
 		} else {
 			return bundle.getString("statusCancelado");
@@ -105,7 +101,7 @@ public class BeanInvolvedTrips implements Serializable {
 
 	}
 
-	public String cancelSeat(Trip trip) {
+	public String cancelSeat(ViajeImplicadoDto trip) {
 
 		try {
 
@@ -125,21 +121,16 @@ public class BeanInvolvedTrips implements Serializable {
 		return "exito";
 	}
 
-	public List<Entry<Trip, SeatStatus>> entryList() {
-		return new ArrayList<>(trips.entrySet());
+	public List<ViajeImplicadoDto> getTrips() {
+		return trips;
+	}
 
+	public void setTrips(List<ViajeImplicadoDto> trips) {
+		this.trips = trips;
 	}
 
 	public String formattedDate(Date date) {
 		return new SimpleDateFormat("dd/MM/yyyy HH:mm").format(date);
-	}
-
-	public Map<Trip, SeatStatus> getTrips() {
-		return trips;
-	}
-
-	public void setTrips(Map<Trip, SeatStatus> trips) {
-		this.trips = trips;
 	}
 
 }

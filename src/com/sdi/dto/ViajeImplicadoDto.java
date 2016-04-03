@@ -1,22 +1,35 @@
 package com.sdi.dto;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import com.sdi.model.SeatStatus;
 import com.sdi.model.Trip;
 
-public class ViajeImplicadoDto {
+public class ViajeImplicadoDto extends Trip {
 
-	private Map<Trip, SeatStatus> trips = new HashMap<Trip, SeatStatus>();
+	private SeatStatus seatStatus;
 
-	public Map<Trip, SeatStatus> getTrips() {
-		return trips;
+	public ViajeImplicadoDto(Trip trip, SeatStatus seatStatus) {
+		setArrivalDate(trip.getArrivalDate());
+		setAvailablePax(trip.getAvailablePax());
+		setClosingDate(trip.getClosingDate());
+		setComments(trip.getComments());
+		setDeparture(trip.getDeparture());
+		setDepartureDate(trip.getDepartureDate());
+		setDestination(trip.getDestination());
+		setEstimatedCost(trip.getEstimatedCost());
+		setId(trip.getId());
+		setMaxPax(trip.getMaxPax());
+		setPromoterId(trip.getPromoterId());
+		setStatus(trip.getStatus());
+		setSeatStatus(seatStatus);
+
 	}
 
-	public ViajeImplicadoDto() {
+	public SeatStatus getSeatStatus() {
+		return seatStatus;
+	}
 
-		this.trips = new HashMap<Trip, SeatStatus>();
+	public void setSeatStatus(SeatStatus seatStatus) {
+		this.seatStatus = seatStatus;
 	}
 
 }
