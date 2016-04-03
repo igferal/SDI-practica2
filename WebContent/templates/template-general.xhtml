@@ -26,6 +26,11 @@
 	</h:head>
 	<h:body>
 		<h:form id="form-cabecera">
+		<p:selectOneMenu value="#{settings.localeSelected}" style="width:150px;">
+                <p:ajax listener="#{settings.onCountryChange}" update="@all"/>
+                <f:selectItem itemLabel="#{msgs.textoIdioma}" itemValue="" noSelectionOption="true" />
+                <f:selectItems value="#{settings.languages.keySet()}" />
+            </p:selectOneMenu>
 			<p:menubar id="mimenu">
 				<p:menuitem id="shareMyTrip" value="#{msgs.appName}" url="/" />
 				<p:menuitem id="viajesActivos" value="#{msgs.viajesActivos}"
@@ -43,14 +48,6 @@
 					<p:button id="login" value="#{msgs.iniciarSesion}" outcome="login"
 						rendered="#{empty LOGGEDIN_USER}" />
 				</f:facet>
-
-				<p:submenu style="float:right" label="#{msgs.textoIdioma}"
-					icon="ui-icon-document">
-					<p:menuitem id="linkespa" value="#{msgs.enlaceIdiomaES}"
-						actionListener="#{settings.setSpanish}" update="@all" />
-					<p:menuitem id="linkingles" value="#{msgs.enlaceIdiomaEN}"
-						actionListener="#{settings.setEnglish}" update="@all" />
-				</p:submenu>
 
 				<p:submenu label="#{LOGGEDIN_USER.login}" style="float:right"
 					rendered="#{not empty LOGGEDIN_USER}">
