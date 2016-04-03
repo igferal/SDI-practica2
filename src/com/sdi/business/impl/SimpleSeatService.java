@@ -4,6 +4,8 @@ import com.sdi.business.SeatService;
 import com.sdi.business.impl.classes.SeatMoveToAccepted;
 import com.sdi.business.impl.classes.SeatMoveToExcluded;
 import com.sdi.business.impl.classes.SeatMoveToPending;
+import com.sdi.business.impl.classes.findSeat;
+import com.sdi.model.Seat;
 
 public class SimpleSeatService implements SeatService {
 
@@ -20,6 +22,13 @@ public class SimpleSeatService implements SeatService {
 	@Override
 	public void moveToExcluded(Long idUser, Long idTrip) {
 		new SeatMoveToExcluded().exclude(idUser, idTrip);
+	}
+
+	@Override
+	public Seat find(Long[] id) {
+		
+		return new findSeat(id).find();
+		
 	}
 
 }

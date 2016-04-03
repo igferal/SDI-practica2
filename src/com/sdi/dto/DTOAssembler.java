@@ -38,9 +38,10 @@ public class DTOAssembler {
 
 	}
 
-	public static ViajeImplicadoDto getViajesImplicadosDto(Long userId) {
+	public static List<ViajeImplicadoDto> getViajesImplicadosDto(Long userId) {
 
-		ViajeImplicadoDto vidto = new ViajeImplicadoDto();
+		List<ViajeImplicadoDto> dto = new ArrayList<ViajeImplicadoDto>();
+		
 		Seat seat;
 
 		for (Application aplication : Factories.persistence.newApplicationDao()
@@ -50,17 +51,16 @@ public class DTOAssembler {
 					aplication.getTripId());
 
 			if (seat == null)
-				vidto.getTrips().put(
-						Factories.persistence.newTripDao().findById(
-								aplication.getTripId()), null);
+				dto.add(new ViajeImplicadoDto(Factories.persistence
+						.newTripDao().findById(aplication.getTripId()), null));
 			else
-				vidto.getTrips().put(
-						Factories.persistence.newTripDao().findById(
-								aplication.getTripId()), seat.getStatus());
+				dto.add(new ViajeImplicadoDto(Factories.persistence
+						.newTripDao().findById(aplication.getTripId()), seat
+						.getStatus()));
 
 		}
 
-		return vidto;
+		return dto;
 
 	}
 

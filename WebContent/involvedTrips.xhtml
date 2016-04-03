@@ -16,66 +16,79 @@
 
 		<h:form id="formulario">
 			<p:dataTable styleClass=".ui-datatable"
-				value="#{involvedTrips.trips.entrySet().toArray()}" var="var"
+				value="#{involvedTrips.trips}" var="var"
 				rows="10" paginator="true"
 				paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-				rowsPerPageTemplate="5,10,15" rowKey="#{var.key.id}"
+				rowsPerPageTemplate="5,10,15" rowKey="#{var.id}"
 				sortMode="multiple">
 
 
-				<p:column headerText="Id" sortBy="#{var.key.id}"
-					filterBy="#{var.key.id}">
-					<h:outputText value="#{var.key.id}" />
+				<p:column headerText="Id" sortBy="#{var.id}"
+					filterBy="#{var.id}">
+					<h:outputText value="#{var.id}" />
 				</p:column>
 
 				<p:column headerText="#{msgs.createTrip_ciudadOrigen}"
-					filterBy="#{var.key.departure.city}"
-					sortBy="#{var.key.departure.city}">
-					<h:outputText value="#{var.key.departure.city}" />
+					filterBy="#{var.departure.city}"
+					sortBy="#{var.departure.city}">
+					<h:outputText value="#{var.departure.city}" />
 				</p:column>
 
 				<p:column headerText="#{msgs.createTrip_fechaSalida}"
-					sortBy="#{var.key.departureDate}"
-					filterBy="#{var.key.departureDate}">
+					sortBy="#{var.departureDate}"
+					filterBy="#{var.departureDate}">
 					<h:outputText
-						value="#{involvedTrips.formattedDate(var.key.departureDate)}" />
+						value="#{involvedTrips.formattedDate(var.departureDate)}" />
 				</p:column>
 
 				<p:column headerText="#{msgs.createTrip_ciudadDestino}"
-					sortBy="#{var.key.destination.city}"
-					filterBy="#{var.key.destination.city}">
-					<h:outputText value="#{var.key.destination.city}" />
+					sortBy="#{var.destination.city}"
+					filterBy="#{var.destination.city}">
+					<h:outputText value="#{var.destination.city}" />
 				</p:column>
 
 				<p:column headerText="#{msgs.createTrip_fechaLlegada}"
-					sortBy="#{var.key.arrivalDate}"
-					filterBy="#{var.key.departure.city}">
+					sortBy="#{var.arrivalDate}"
+					filterBy="#{var.departure.city}">
 					<h:outputText
-						value="#{involvedTrips.formattedDate(var.key.arrivalDate)}" />
+						value="#{involvedTrips.formattedDate(var.arrivalDate)}" />
 				</p:column>
 
 				<p:column headerText="#{msgs.createTrip_fechaInscripcion}"
-					sortBy="#{var.key.closingDate}" filterBy="#{var.key.closingDate}">
+					sortBy="#{var.closingDate}" filterBy="#{var.closingDate}">
 					<h:outputText
-						value="#{involvedTrips.formattedDate(var.key.closingDate)}" />
+						value="#{involvedTrips.formattedDate(var.closingDate)}" />
 				</p:column>
 
 				<p:column headerText="#{msgs.createTrip_costeEstimado}"
-					sortBy="#{var.key.estimatedCost}"
-					filterBy="#{var.key.estimatedCost}">
+					sortBy="#{var.estimatedCost}"
+					filterBy="#{var.estimatedCost}">
 
-					<h:outputText value="#{var.key.estimatedCost}">
+					<h:outputText value="#{var.estimatedCost}">
 						<f:convertNumber currencySymbol="€" type="currency" />
 					</h:outputText>
 				</p:column>
 
 				<p:column headerText="#{msgs.cancelarPlaza}">
-					<p:commandButton type="submit" update="@all" form="formulario"
-						value="#{msgs.cancelarPlaza}"  id="enviar"
+					<p:commandButton action="#{involvedTrips.cancelSeat(var)}"
+						type="submit" update="@all" form="formulario"
+						value="#{msgs.cancelarPlaza}" id="enviar"
 						styleClass="ui-priority-primary" />
 
 
 				</p:column>
+
+				<p:column headerText="#{msgs.statusPeticion}">
+
+					<h:outputText value="#{involvedTrips.getRole(var)}" />
+				</p:column>
+
+				<p:column headerText="#{msgs.statusViaje}">
+
+					<h:outputText value="#{var.status}" />
+				</p:column>
+
+
 
 			</p:dataTable>
 

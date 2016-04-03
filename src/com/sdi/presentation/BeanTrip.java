@@ -1,7 +1,6 @@
 package com.sdi.presentation;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.Map;
 
 import javax.enterprise.context.SessionScoped;

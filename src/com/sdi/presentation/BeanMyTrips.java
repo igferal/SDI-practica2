@@ -31,13 +31,15 @@ public class BeanMyTrips implements Serializable {
 	private Map<Long, Boolean> selectedIds = new HashMap<Long, Boolean>();
 	private List<Trip> tripsToDelete = null;
 	private Trip selectedTrip;
-	
-	
-	public boolean dateBefore(Date date){
-		
-		Date now = new Date();
-		return DateUtil.isAfter(date, now);
-		
+
+	public boolean dateBefore(Date date) {
+
+		if (date != null) {
+			Date now = new Date();
+			return DateUtil.isAfter(date, now);
+		}
+		return true;
+
 	}
 
 	@PostConstruct
