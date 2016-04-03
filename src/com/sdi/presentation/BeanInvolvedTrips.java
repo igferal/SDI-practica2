@@ -27,9 +27,10 @@ public class BeanInvolvedTrips implements Serializable {
 
 	public boolean dateBefore(Date date) {
 
-		if (date == null) {
+		if (date != null) {
 			Date now = new Date();
 			return DateUtil.isAfter(date, now);
+			
 		}
 		return false;
 
