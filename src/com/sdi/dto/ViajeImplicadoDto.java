@@ -1,10 +1,16 @@
 package com.sdi.dto;
 
+import java.io.Serializable;
+
 import com.sdi.model.SeatStatus;
 import com.sdi.model.Trip;
 
-public class ViajeImplicadoDto extends Trip {
+public class ViajeImplicadoDto extends Trip implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private SeatStatus seatStatus;
 
 	public ViajeImplicadoDto(Trip trip, SeatStatus seatStatus) {
