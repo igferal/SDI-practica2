@@ -30,6 +30,8 @@ public interface TripDao extends GenericDao<Trip, Long> {
 	List<Trip> destinoDescendingPromoter(Long idProm);
 
 	List<Trip> destinoAscendingPromoter(Long idProm);
+
+	List<Trip> findTravelsOpenAndClosed();
 	
 
 }

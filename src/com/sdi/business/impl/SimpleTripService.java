@@ -8,6 +8,7 @@ import com.sdi.business.impl.classes.ListActiveTrip;
 import com.sdi.business.impl.classes.ListPromoterTrips;
 import com.sdi.business.impl.classes.SaveTripImpl;
 import com.sdi.business.impl.classes.TripFind;
+import com.sdi.business.impl.classes.TripsUpdateStatusTask;
 import com.sdi.business.impl.classes.UpdateTrip;
 import com.sdi.model.Trip;
 
@@ -37,6 +38,11 @@ public class SimpleTripService implements TripService {
 	@Override
 	public Trip findTrip(Long id) {
 		return new TripFind().findById(id);
+	}
+
+	@Override
+	public void updateTripsStatusTask() {
+		new TripsUpdateStatusTask();
 	}
 	
 }

@@ -37,7 +37,24 @@
 		<managed-bean-class>com.sdi.presentation.BeanInvolvedTrips</managed-bean-class>
 		<managed-bean-scope>view</managed-bean-scope>
 	</managed-bean>
-
+	
+	<managed-bean>
+		<managed-bean-name>tripSeats</managed-bean-name>
+		<managed-bean-class>com.sdi.presentation.BeanTripSeats</managed-bean-class>
+		<managed-bean-scope>view</managed-bean-scope>
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>tripInfo</managed-bean-name>
+		<managed-bean-class>com.sdi.presentation.BeanTripInfo</managed-bean-class>
+		<managed-bean-scope>view</managed-bean-scope>
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>applicationBean</managed-bean-name>
+		<managed-bean-class>com.sdi.presentation.BeanApplication</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
+	</managed-bean>
 
 	<application>
 		<resource-bundle>

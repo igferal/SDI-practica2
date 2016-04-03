@@ -134,7 +134,7 @@ public class TripDaoJdbcImpl implements TripDao {
 
 	@Override
 	public List<Trip> findTravelsAfter(Date date) {
-		return jdbcTemplate.queryForList("TRIP_FIND_BEFORE_DATE",
+		return jdbcTemplate.queryForList("TRIP_FIND_AFTER_DATE",
 				new TripMapper(), date);
 	}
 
@@ -189,6 +189,12 @@ public class TripDaoJdbcImpl implements TripDao {
 		// TODO Auto-generated method stub
 		return jdbcTemplate.queryForList("TRIP_DEST_ASC_PROM",
 				new TripMapper(), idProm);
+	}
+
+	@Override
+	public List<Trip> findTravelsOpenAndClosed() {
+		return jdbcTemplate.queryForList("TRIP_FIND_OPEN_AND_CLOSED",
+				new TripMapper());
 	}
 
 }
