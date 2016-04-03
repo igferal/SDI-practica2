@@ -33,5 +33,6 @@ public interface TripDao extends GenericDao<Trip, Long> {
 
 	List<Trip> findTravelsOpenAndClosed();
 	
+	List<Trip> findTripsByUserIdNotPromoter(Long id);
 
 }

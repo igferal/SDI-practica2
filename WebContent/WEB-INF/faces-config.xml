@@ -83,7 +83,7 @@
 		<navigation-case>
 			<from-action>#{involvedTrips.load}</from-action>
 			<from-outcome>exito</from-outcome>
-			<to-view-id>/involvedTrips.xhtml</to-view-id>
+			<to-view-id>/restricted/involvedTrips.xhtml</to-view-id>
 		</navigation-case>
 
 		<navigation-case>
@@ -95,7 +95,7 @@
 		<navigation-case>
 			<from-action>#{myTrips.load}</from-action>
 			<from-outcome>exito</from-outcome>
-			<to-view-id>/myTrips.xhtml</to-view-id>
+			<to-view-id>/restricted/myTrips.xhtml</to-view-id>
 		</navigation-case>
 
 		<navigation-case>
@@ -120,16 +120,16 @@
 		<navigation-case>
 			<from-action>#{tripController.save}</from-action>
 			<from-outcome>fallo</from-outcome>
-			<to-view-id>/createTrip.xhtml</to-view-id>
+			<to-view-id>/restricted/createTrip.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
 			<from-action>#{tripController.save}</from-action>
 			<from-outcome>exito</from-outcome>
-			<to-view-id>/myTrips.xhtml</to-view-id>
+			<to-view-id>/restricted/myTrips.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
 			<from-outcome>registrarse</from-outcome>
-			<to-view-id>/registrarse.xhtml</to-view-id>
+			<to-view-id>/join.xhtml</to-view-id>
 		</navigation-case>
 
 	</navigation-rule>
@@ -151,11 +151,11 @@
 		<navigation-case>
 			<from-action>#{mytrips.cancel}</from-action>
 			<from-outcome>exito</from-outcome>
-			<to-view-id>/myTrips.xhtml</to-view-id>
+			<to-view-id>/restricted/myTrips.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
 			<from-outcome>solicitudes</from-outcome>
-			<to-view-id>/tripSeats.xhtml</to-view-id>
+			<to-view-id>/restricted/tripSeats.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 
@@ -174,7 +174,7 @@
 		<navigation-case>
 			<from-action>#{tripController.fillEditView(trip)}</from-action>
 			<from-outcome>exito</from-outcome>
-			<to-view-id>/editTrip.xhtml</to-view-id>
+			<to-view-id>/restricted/editTrip.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 
@@ -183,7 +183,7 @@
 		<navigation-case>
 			<from-action>#{tripController.editTrip}</from-action>
 			<from-outcome>exito</from-outcome>
-			<to-view-id>/myTrips.xhtml</to-view-id>
+			<to-view-id>/restricted/myTrips.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 
@@ -193,7 +193,7 @@
 		<navigation-case>
 			<from-action>#{involvedTrips.cancelSeat(var.key)}</from-action>
 			<from-outcome>exito</from-outcome>
-			<to-view-id>/involvedTrips.xhtml</to-view-id>
+			<to-view-id>/restricted/involvedTrips.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 

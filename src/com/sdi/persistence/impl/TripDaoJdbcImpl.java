@@ -7,7 +7,6 @@ import java.util.Date;
 import java.util.List;
 
 import com.sdi.persistence.TripDao;
-
 import com.sdi.model.AddressPoint;
 import com.sdi.model.Trip;
 import com.sdi.model.TripStatus;
@@ -195,6 +194,12 @@ public class TripDaoJdbcImpl implements TripDao {
 	public List<Trip> findTravelsOpenAndClosed() {
 		return jdbcTemplate.queryForList("TRIP_FIND_OPEN_AND_CLOSED",
 				new TripMapper());
+	}
+
+	@Override
+	public List<Trip> findTripsByUserIdNotPromoter(Long id) {
+		return jdbcTemplate.queryForList("TRIP_FIND_BY_USER_ID_NOT_PROMOTER",
+				new TripMapper(), id);
 	}
 
 }

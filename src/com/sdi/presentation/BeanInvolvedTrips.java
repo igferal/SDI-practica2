@@ -78,13 +78,7 @@ public class BeanInvolvedTrips implements Serializable {
 					.getExternalContext().getSessionMap();
 			User user = (User) session.get("LOGGEDIN_USER");
 
-			long l1, l2;
-
-			l1 = System.currentTimeMillis();
 			setTrips(DTOAssembler.getViajesImplicadosDto(user.getId()));
-			l2 = System.currentTimeMillis();
-
-			System.out.println("tiempo tarda = " + (l2 - l1));
 
 			return "exito";
 

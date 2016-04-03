@@ -9,6 +9,7 @@ import java.util.Set;
 
 import com.sdi.dto.ComentariosUsuarioDto.Comentario;
 import com.sdi.persistence.RatingDao;
+import com.sdi.persistence.SeatDao;
 import com.sdi.persistence.TripDao;
 import com.sdi.persistence.UserDao;
 import com.sdi.infrastructure.Factories;
@@ -43,21 +44,21 @@ public class DTOAssembler {
 	public static List<ViajeImplicadoDto> getViajesImplicadosDto(Long userId) {
 
 		List<ViajeImplicadoDto> dto = new ArrayList<ViajeImplicadoDto>();
+		TripDao tripDao = Factories.persistence.newTripDao();
+		SeatDao seatDao = Factories.persistence.newSeatDao();
 		
 		Seat seat;
+		List<Trip> trips = tripDao.findTripsByUserIdNotPromoter(userId);
+		
+		for (Trip trip : trips) {
 
-		for (Application aplication : Factories.persistence.newApplicationDao()
-				.findByUserId(userId)) {
-
-			seat = Factories.persistence.newSeatDao().findByUserAndTrip(userId,
-					aplication.getTripId());
+			seat = seatDao.findByUserAndTrip(userId,
+					trip.getId());
 
 			if (seat == null)
-				dto.add(new ViajeImplicadoDto(Factories.persistence
-						.newTripDao().findById(aplication.getTripId()), null));
+				dto.add(new ViajeImplicadoDto(trip, null));
 			else
-				dto.add(new ViajeImplicadoDto(Factories.persistence
-						.newTripDao().findById(aplication.getTripId()), seat
+				dto.add(new ViajeImplicadoDto(trip, seat
 						.getStatus()));
 
 		}
