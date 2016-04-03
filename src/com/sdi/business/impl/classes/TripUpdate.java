@@ -4,11 +4,11 @@ import alb.util.log.Log;
 import com.sdi.infrastructure.Factories;
 import com.sdi.model.Trip;
 
-public class UpdateTrip {
+public class TripUpdate {
 
 	private Trip trip;
 
-	public UpdateTrip(Trip trip) {
+	public TripUpdate(Trip trip) {
 		this.trip = trip;
 	}
 

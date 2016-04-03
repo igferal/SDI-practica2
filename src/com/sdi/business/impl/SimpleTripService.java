@@ -6,10 +6,10 @@ import java.util.List;
 import com.sdi.business.TripService;
 import com.sdi.business.impl.classes.ListActiveTrip;
 import com.sdi.business.impl.classes.ListPromoterTrips;
-import com.sdi.business.impl.classes.SaveTripImpl;
+import com.sdi.business.impl.classes.TripSave;
 import com.sdi.business.impl.classes.TripFind;
 import com.sdi.business.impl.classes.TripsUpdateStatusTask;
-import com.sdi.business.impl.classes.UpdateTrip;
+import com.sdi.business.impl.classes.TripUpdate;
 import com.sdi.model.Trip;
 
 public class SimpleTripService implements TripService {
@@ -18,7 +18,7 @@ public class SimpleTripService implements TripService {
 	public void saveTrip(Trip trip) {
 
 		
-		new SaveTripImpl(trip).save();
+		new TripSave(trip).save();
 	}
 
 	@Override
@@ -32,7 +32,7 @@ public class SimpleTripService implements TripService {
 
 	@Override
 	public void update(Trip trip) {
-		 new UpdateTrip(trip).update();
+		 new TripUpdate(trip).update();
 	}
 
 	@Override

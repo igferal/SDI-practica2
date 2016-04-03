@@ -7,18 +7,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.sdi.dto.ComentariosUsuarioDto.Comentario;
-import com.sdi.persistence.RatingDao;
-import com.sdi.persistence.SeatDao;
-import com.sdi.persistence.TripDao;
-import com.sdi.persistence.UserDao;
 import com.sdi.infrastructure.Factories;
 import com.sdi.model.Application;
-import com.sdi.model.Rating;
 import com.sdi.model.Seat;
 import com.sdi.model.SeatStatus;
 import com.sdi.model.Trip;
 import com.sdi.model.User;
+import com.sdi.persistence.SeatDao;
+import com.sdi.persistence.TripDao;
 
 public class DTOAssembler {
 
@@ -139,59 +135,6 @@ public class DTOAssembler {
 			tdao.setIsInTrip(tdao.checkInTrip(user.getId()));
 
 		return tdao;
-
-	}
-
-	public static ComentariosUsuarioDto generateComentariosUsuarioDto(User user) {
-		List<Rating> ratings = Factories.persistence.newRatingDao()
-				.findByUserId(user.getId());
-
-		ComentariosUsuarioDto dto = new ComentariosUsuarioDto();
-		dto.setUser(user);
-
-		UserDao userDao = Factories.persistence.newUserDao();
-		TripDao tripDao = Factories.persistence.newTripDao();
-
-		User userComenta;
-		Trip trip;
-
-		for (Rating rating : ratings) {
-			userComenta = userDao.findById(rating.getSeatFromUserId());
-			trip = tripDao.findById(rating.getSeatAboutTripId());
-
-			if (!dto.getComentarios().containsKey(userComenta))
-				dto.getComentarios().put(userComenta,
-						new ArrayList<Comentario>());
-
-			dto.getComentarios()
-					.get(userComenta)
-					.add(new Comentario(trip, rating.getComment(), rating
-							.getValue()));
-		}
-
-		return dto;
-	}
-
-	public static ComentarEnViajeDto generateComentarEnViajeDto(Long idTrip,
-			Long idUser) {
-		ComentarEnViajeDto dto = new ComentarEnViajeDto(Factories.persistence
-				.newTripDao().findById(idTrip));
-
-		UserDao userDao = Factories.persistence.newUserDao();
-		RatingDao ratingDao = Factories.persistence.newRatingDao();
-
-		List<Seat> seats = Factories.persistence.newSeatDao().findByTripId(
-				idTrip);
-
-		for (Seat seat : seats) {
-			if (!seat.getUserId().equals(idUser)
-					&& seat.getStatus().equals(SeatStatus.ACCEPTED)
-					&& ratingDao.findByAboutFrom(seat.getUserId(), idTrip,
-							idUser, idTrip) == null)
-				dto.getParticipantes().add(userDao.findById(seat.getUserId()));
-		}
-
-		return dto;
 
 	}
 

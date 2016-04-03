@@ -42,7 +42,7 @@
 					value="#{msgs.misViajesImplicados}" action="#{involvedTrips.load}"
 					rendered="#{not empty LOGGEDIN_USER}" ajax="false" />
 				<p:menuitem id="crearViaje" value="#{msgs.crearViaje}"
-					url="createTrip.xhtml" rendered="#{not empty LOGGEDIN_USER}" />
+					url="/restricted/createTrip.xhtml" rendered="#{not empty LOGGEDIN_USER}" />
 
 				<f:facet name="options">
 					<p:button id="login" value="#{msgs.iniciarSesion}" outcome="login"

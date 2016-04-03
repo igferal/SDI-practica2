@@ -4,7 +4,7 @@ import com.sdi.business.SeatService;
 import com.sdi.business.impl.classes.SeatMoveToAccepted;
 import com.sdi.business.impl.classes.SeatMoveToExcluded;
 import com.sdi.business.impl.classes.SeatMoveToPending;
-import com.sdi.business.impl.classes.findSeat;
+import com.sdi.business.impl.classes.SeatFind;
 import com.sdi.model.Seat;
 
 public class SimpleSeatService implements SeatService {
@@ -27,7 +27,7 @@ public class SimpleSeatService implements SeatService {
 	@Override
 	public Seat find(Long[] id) {
 		
-		return new findSeat(id).find();
+		return new SeatFind(id).find();
 		
 	}
 

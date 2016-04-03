@@ -6,11 +6,11 @@ import com.sdi.infrastructure.Factories;
 import com.sdi.model.Trip;
 import com.sdi.persistence.TripDao;
 
-public class SaveTripImpl {
+public class TripSave {
 
 	private Trip trip;
 
-	public SaveTripImpl(Trip trip) {
+	public TripSave(Trip trip) {
 
 		this.trip = trip;
 	}

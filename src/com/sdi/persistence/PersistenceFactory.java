@@ -1,8 +1,5 @@
 package com.sdi.persistence;
 
-import com.sdi.persistence.AlumnosDao;
-
-
 /**
  * Interfaz de la factoria que suministra implementaciones reales de la fachada
  * de persistencia para cada Entidad del Modelo (en este caso solo hay una:
@@ -12,8 +9,6 @@ import com.sdi.persistence.AlumnosDao;
  * 
  */
 public interface PersistenceFactory {
-
-	AlumnosDao createAlumnoDao();
 
 	Transaction newTransaction();
 
