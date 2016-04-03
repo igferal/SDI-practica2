@@ -28,8 +28,6 @@ public class SeatMoveToAccepted {
 				seat.setStatus(SeatStatus.ACCEPTED);
 				seatDao.save(seat);
 				decrementAvailablePax(idTrip);
-				Factories.services.createApplicationService().delete(idUser,
-						idTrip);
 				Log.info("Seat Accepted para el usuario [%s] en el viaje [%s] (desde Pending)", idUser, idTrip);
 			} else if (seat.getStatus().equals(SeatStatus.EXCLUDED)) {
 				seat.setStatus(SeatStatus.ACCEPTED);

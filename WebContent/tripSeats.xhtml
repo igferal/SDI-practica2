@@ -8,32 +8,32 @@
 	<ui:define name="cuerpo">
 		<h1>#{msgs.solicitudesViaje} ID #{tripSeats.tripDto.trip.id}</h1>
 
-		<h:panelGroup rendered="#{tripSeats.tripDto.trip.availablePax gt 0 and tripSeats.openTrip == true}">
+		<h:panelGroup rendered="#{tripSeats.openTrip() == true and tripSeats.tripDto.trip.availablePax gt 0}">
 			<h3>
 				<span class="label label-warning">#{tripSeats.tripDto.trip.availablePax}/#{tripSeats.tripDto.trip.maxPax}
 					#{msgs.plazasLibres}</span>
 			</h3>
 		</h:panelGroup>
 		
-		<h:panelGroup rendered="#{tripSeats.tripDto.trip.availablePax eq 0 and tripSeats.openTrip == true}">
+		<h:panelGroup rendered="#{tripSeats.openTrip() == true and tripSeats.tripDto.trip.availablePax eq 0}">
 			<h3>
 				<span class="label label-default">#{msgs.sinPlazas}</span>
 			</h3>
 		</h:panelGroup>
 		
-		<h:panelGroup rendered="#{tripSeats.cancelledTrip == true}">
+		<h:panelGroup rendered="#{tripSeats.cancelledTrip() == true}">
 			<h3>
 				<span class="label label-danger">#{msgs.cancelado}</span>
 			</h3>
 		</h:panelGroup>
 		
-		<h:panelGroup rendered="#{tripSeats.closedTrip == true}">
+		<h:panelGroup rendered="#{tripSeats.closedTrip() == true}">
 			<h3>
 				<span class="label label-danger">#{msgs.cerrado}</span>
 			</h3>
 		</h:panelGroup>
 		
-		<h:panelGroup rendered="#{tripSeats.doneTrip == true}">
+		<h:panelGroup rendered="#{tripSeats.doneTrip() == true}">
 			<h3>
 				<span class="label label-default">#{msgs.realizado}</span>
 			</h3>
@@ -58,7 +58,7 @@
 						<span class="label label-success">#{msgs.admitido}</span> 
 							&#160;#{seatA.login} (#{seatA.nombre} #{seatA.apellidos})
 						</p:panel>
-					<p:overlayPanel for="btnPasar" hideEffect="fade" rendered="#{tripSeats.openTrip == true}">
+					<p:overlayPanel for="btnPasar" hideEffect="fade" rendered="#{tripSeats.openTrip() == true}">
 						<h:outputText value="#{msgs.pasarA}:" />
 						<br />
 						<p:commandButton action="#{tripSeats.moveToPending(seatA)}"
@@ -91,7 +91,7 @@
 							&#160;#{seatP.login} (#{seatP.nombre} #{seatP.apellidos})
 						</p:panel>
 
-					<p:overlayPanel for="btnPasar" hideEffect="fade" rendered="#{tripSeats.openTrip == true}">
+					<p:overlayPanel for="btnPasar" hideEffect="fade" rendered="#{tripSeats.openTrip() == true}">
 						<h:outputText value="#{msgs.pasarA}:" />
 						<br />
 						<p:commandButton action="#{tripSeats.moveToAccepted(seatP)}"
@@ -113,7 +113,7 @@
 						<span class="label label-danger">#{msgs.excluido}</span> 
 							&#160;#{seatE.login} (#{seatE.nombre} #{seatE.apellidos})
 						</p:panel>
-					<p:overlayPanel for="btnPasar" hideEffect="fade" rendered="#{tripSeats.openTrip == true}">
+					<p:overlayPanel for="btnPasar" hideEffect="fade" rendered="#{tripSeats.openTrip() == true}">
 						<h:outputText value="#{msgs.pasarA}:" />
 						<br />
 						<p:commandButton action="#{tripSeats.moveToAccepted(seatE)}"

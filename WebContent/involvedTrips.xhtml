@@ -20,7 +20,15 @@
 			<p:dataTable styleClass=".ui-datatable"
 				value="#{involvedTrips.trips}" var="var" rows="10" paginator="true"
 				paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-				rowsPerPageTemplate="5,10,15" rowKey="#{var.id}" sortMode="multiple">
+				rowsPerPageTemplate="5,10,15" rowKey="#{var.id}" sortMode="multiple"
+				selectionMode="single" selection="#{involvedTrips.selectedTrip}">
+				
+				<p:ajax event="rowSelect" listener="#{involvedTrips.onRowSelect}" />
+
+				<p:column headerText="#{msgs.statusViaje}" sortBy="#{var.status.toString()}"
+				filterBy="#{var.status.toString()}">
+					<h:outputText value="#{var.status.toString()}" />
+				</p:column>
 
 
 				<p:column headerText="Id" sortBy="#{var.id}" filterBy="#{var.id}">
@@ -63,26 +71,20 @@
 					</h:outputText>
 				</p:column>
 
+				<p:column headerText="#{msgs.statusPeticion}" sortBy="#{involvedTrips.getRole(var)}"
+				filterBy="#{involvedTrips.getRole(var)}">
+					<h:outputText value="#{involvedTrips.getRole(var)}" />
+				</p:column>
+
 				<p:column headerText="#{msgs.cancelarPlaza}">
 					<p:commandButton
-						rendered="#{involvedTrips.dateBefore(var)}"
+						rendered="#{involvedTrips.dateBefore(var) and involvedTrips.cancelledTrip(var) == false}"
 						action="#{involvedTrips.cancelSeat(var)}" type="submit"
 						update="@all" form="formulario" value="#{msgs.cancelarPlaza}"
 						id="enviar" styleClass="ui-priority-primary" />
 
 
 				</p:column>
-
-				<p:column headerText="#{msgs.statusPeticion}">
-
-					<h:outputText value="#{involvedTrips.getRole(var)}" />
-				</p:column>
-
-				<p:column headerText="#{msgs.statusViaje}">
-
-					<h:outputText value="#{var.status}" />
-				</p:column>
-
 
 
 			</p:dataTable>

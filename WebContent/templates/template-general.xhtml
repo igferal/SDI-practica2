@@ -47,6 +47,8 @@
 				<f:facet name="options">
 					<p:button id="login" value="#{msgs.iniciarSesion}" outcome="login"
 						rendered="#{empty LOGGEDIN_USER}" />
+					<p:button id="join" value="#{msgs.registrarse}" outcome="join"
+						rendered="#{empty LOGGEDIN_USER}" />
 				</f:facet>
 
 				<p:submenu label="#{LOGGEDIN_USER.login}" style="float:right"

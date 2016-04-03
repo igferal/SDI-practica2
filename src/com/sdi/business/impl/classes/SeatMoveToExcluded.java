@@ -25,8 +25,6 @@ public class SeatMoveToExcluded {
 				seat.setTripId(idTrip);
 				seat.setStatus(SeatStatus.EXCLUDED);
 				seatDao.save(seat);
-				Factories.services.createApplicationService().delete(idUser,
-						idTrip);
 				Log.info(
 						"Seat Excluded para el usuario [%s] en el viaje [%s] (desde Pending)",
 						idUser, idTrip);

@@ -5,7 +5,6 @@ import java.util.Date;
 import alb.util.log.Log;
 
 import com.sdi.infrastructure.Factories;
-import com.sdi.model.Application;
 import com.sdi.model.Seat;
 import com.sdi.model.SeatStatus;
 import com.sdi.model.Trip;
@@ -22,8 +21,6 @@ public class SeatMoveToPending {
 
 			if (seat != null) {
 				seatDao.delete(seat.makeKey());
-				Application app = new Application(idUser, idTrip);
-				Factories.services.createApplicationService().save(app);
 				if (seat.getStatus() != null
 						&& seat.getStatus().equals(SeatStatus.ACCEPTED)) {
 					incrementAvailablePax(idTrip);

@@ -17,12 +17,24 @@
 		<p:messages showDetail="true" autoUpdate="true" globalOnly="true"
 			closable="true" />
 
+		<p:commandButton type="submit" update="@all" form="formulario"
+			value="#{msgs.cancelar}" id="enviar" styleClass="ui-priority-primary"
+			style="float: right"
+			action="#{myTrips.cancel}" />
 		<h:form id="formulario">
 			<p:dataTable styleClass=".ui-datatable" var="trip"
 				value="#{myTrips.trips}" rows="10" paginator="true"
 				paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 				rowsPerPageTemplate="5,10,15" rowKey="#{trip.id}"
-				sortMode="multiple">
+				sortMode="multiple"
+				selectionMode="single" selection="#{myTrips.selectedTrip}">
+				
+				<p:ajax event="rowSelect" listener="#{myTrips.onRowSelect}" />
+				
+				<p:column headerText="#{msgs.statusViaje}" sortBy="#{trip.status.toString()}"
+				filterBy="#{trip.status.toString()}">
+					<h:outputText value="#{trip.status.toString()}" />
+				</p:column>
 
 
 				<p:column headerText="Id" sortBy="#{trip.id}" filterBy="#{trip.id}">
@@ -69,13 +81,7 @@
 						styleClass="ui-priority-primary"
 						actionListener="#{facesContext.externalContext.sessionMap.put('tripSeatsParam', trip.id)}" />
 				</p:column>
-
-				<p:column headerText="#{msgs.cancelar}">
-					<p:selectBooleanCheckbox
-						rendered="#{myTrips.dateBefore(trip.departureDate)}"
-						value="#{myTrips.selectedIds[trip.id]}" />
-				</p:column>
-
+				
 				<p:column headerText="#{msgs.modificar}">
 					<p:commandButton
 						rendered="#{myTrips.dateBefore(trip.departureDate)}"
@@ -83,13 +89,17 @@
 						styleClass="ui-priority-primary"
 						action="#{tripController.fillEditView(trip)}" />
 				</p:column>
+
+				<p:column headerText="#{msgs.cancelar}">
+					<p:selectBooleanCheckbox
+						rendered="#{myTrips.dateBefore(trip.departureDate)}"
+						value="#{myTrips.selectedIds[trip.id]}" />
+				</p:column>
+
 			</p:dataTable>
 
 
 		</h:form>
-		<p:commandButton type="submit" update="@all" form="formulario"
-			value="#{msgs.cancelar}" id="enviar" styleClass="ui-priority-primary"
-			action="#{myTrips.cancel}" />
 
 	</ui:define>
 

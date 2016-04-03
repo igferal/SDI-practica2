@@ -1,5 +1,6 @@
 package com.sdi.presentation;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -14,6 +15,8 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+
+import org.primefaces.event.SelectEvent;
 
 import alb.util.log.Log;
 
@@ -167,5 +170,15 @@ public class BeanMyTrips implements Serializable {
 
 	public void setTripsToDelete(List<Trip> tripsToDelete) {
 		this.tripsToDelete = tripsToDelete;
+	}
+	
+	public void onRowSelect(SelectEvent event) {
+		FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
+				.put("tripInfoParam", selectedTrip.getId());
+		try {
+			FacesContext.getCurrentInstance().getExternalContext()
+					.redirect("tripInfo.xhtml");
+		} catch (IOException e) {
+		}
 	}
 }

@@ -2,8 +2,10 @@ package com.sdi.dto;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import com.sdi.dto.ComentariosUsuarioDto.Comentario;
 import com.sdi.persistence.RatingDao;
@@ -211,6 +213,7 @@ public class DTOAssembler {
 
 		List<Seat> seats = Factories.persistence.newSeatDao().findAll();
 		Map<User, SeatStatus> map = new HashMap<User, SeatStatus>();
+		Set<Long> idUsers = new HashSet<Long>();
 
 		for (Seat seat : seats) {
 
@@ -218,6 +221,7 @@ public class DTOAssembler {
 					&& !seat.getUserId().equals(promoterID)) {
 				map.put(Factories.persistence.newUserDao().findById(
 						seat.getUserId()), seat.getStatus());
+				idUsers.add(seat.getUserId());
 			}
 		}
 
@@ -227,7 +231,8 @@ public class DTOAssembler {
 		for (Application application : applications) {
 
 			if (application.getTripId().equals(id)
-					&& !application.getUserId().equals(promoterID)) {
+					&& !application.getUserId().equals(promoterID)
+					&& !idUsers.contains(application.getUserId())) {
 				map.put(Factories.persistence.newUserDao().findById(
 						application.getUserId()), null);
 

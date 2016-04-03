@@ -1,5 +1,6 @@
 package com.sdi.presentation;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -21,13 +22,11 @@ import com.sdi.model.User;
 
 @ManagedBean(name = "tripSeats")
 @ViewScoped
-public class BeanTripSeats {
+public class BeanTripSeats implements Serializable {
 
+	private static final long serialVersionUID = 5188245089243636845L;
+	
 	private TripDto tripDto;
-	boolean cancelledTrip;
-	boolean openTrip;
-	boolean closedTrip;
-	boolean doneTrip;
 
 	private List<PasajeroInfoDto> acceptedPassengers = new ArrayList<>();
 	private List<PasajeroInfoDto> pendingPassengers = new ArrayList<>();
@@ -125,23 +124,19 @@ public class BeanTripSeats {
 		return new SimpleDateFormat("dd/MM/yyyy HH:mm").format(date);
 	}
 	
-	public boolean isCancelledTrip() {
-		cancelledTrip = tripDto.getTrip().getStatus().equals(TripStatus.CANCELLED);
-		return cancelledTrip;
+	public boolean cancelledTrip() {
+		return tripDto.getTrip().getStatus().equals(TripStatus.CANCELLED);	
 	}
 	
-	public boolean isClosedTrip() {
-		closedTrip = tripDto.getTrip().getStatus().equals(TripStatus.CLOSED);
-		return closedTrip;
+	public boolean closedTrip() {
+		return tripDto.getTrip().getStatus().equals(TripStatus.CLOSED);
 	}
 	
-	public boolean isOpenTrip() {
-		openTrip =  tripDto.getTrip().getStatus().equals(TripStatus.OPEN);
-		return openTrip;
+	public boolean openTrip() {
+		return tripDto.getTrip().getStatus().equals(TripStatus.OPEN);
 	}
 	
-	public boolean isDoneTrip() {
-		doneTrip = tripDto.getTrip().getStatus().equals(TripStatus.DONE);
-		return doneTrip;
+	public boolean doneTrip() {
+		return tripDto.getTrip().getStatus().equals(TripStatus.DONE);
 	}
 }

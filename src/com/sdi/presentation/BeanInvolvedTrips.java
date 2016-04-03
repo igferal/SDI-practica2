@@ -1,5 +1,6 @@
 package com.sdi.presentation;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -13,11 +14,15 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
+import org.primefaces.event.SelectEvent;
+
 import com.sdi.business.SeatService;
 import com.sdi.dto.DTOAssembler;
 import com.sdi.dto.ViajeImplicadoDto;
 import com.sdi.infrastructure.Factories;
 import com.sdi.model.SeatStatus;
+import com.sdi.model.Trip;
+import com.sdi.model.TripStatus;
 import com.sdi.model.User;
 import com.sdi.persistence.util.DateUtil;
 
@@ -27,6 +32,7 @@ public class BeanInvolvedTrips implements Serializable {
 	private static final long serialVersionUID = -8662200441018725393L;
 
 	private List<ViajeImplicadoDto> trips;
+	private Trip selectedTrip;
 
 	public boolean dateBefore(ViajeImplicadoDto trip) {
 
@@ -42,6 +48,10 @@ public class BeanInvolvedTrips implements Serializable {
 			return DateUtil.isAfter(trip.getClosingDate(), now);
 		}
 		return false;
+	}
+	
+	public boolean cancelledTrip(Trip trip) {
+		return trip.getStatus().equals(TripStatus.CANCELLED);	
 	}
 
 	public String load() {
@@ -155,6 +165,24 @@ public class BeanInvolvedTrips implements Serializable {
 
 	public String formattedDate(Date date) {
 		return new SimpleDateFormat("dd/MM/yyyy HH:mm").format(date);
+	}
+
+	public Trip getSelectedTrip() {
+		return selectedTrip;
+	}
+
+	public void setSelectedTrip(Trip selectedTrip) {
+		this.selectedTrip = selectedTrip;
+	}
+	
+	public void onRowSelect(SelectEvent event) {
+		FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
+				.put("tripInfoParam", selectedTrip.getId());
+		try {
+			FacesContext.getCurrentInstance().getExternalContext()
+					.redirect("tripInfo.xhtml");
+		} catch (IOException e) {
+		}
 	}
 
 }
