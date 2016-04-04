@@ -26,7 +26,7 @@
 	</h:head>
 	<h:body>
 		<h:form id="form-cabecera">
-		<p:selectOneMenu value="#{settings.localeSelected}" style="width:150px;">
+		<p:selectOneMenu id="menuIdioma" value="#{settings.localeSelected}" style="width:150px;">
                 <p:ajax listener="#{settings.onCountryChange}" update="@all"/>
                 <f:selectItem itemLabel="#{msgs.textoIdioma}" itemValue="" noSelectionOption="true" />
                 <f:selectItems value="#{settings.languages.keySet()}" />

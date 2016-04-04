@@ -55,7 +55,7 @@
 					type="definition" emptyMessage="">
 					<p:panel id="btnPasar"
 						style="cursor:pointer; display: inline-block; margin-top: 10px">
-						<span class="label label-success">#{msgs.admitido}</span> 
+						<span id="admitido" class="label label-success">#{msgs.admitido}</span> 
 							&#160;#{seatA.login} (#{seatA.nombre} #{seatA.apellidos})
 						</p:panel>
 					<p:overlayPanel for="btnPasar" hideEffect="fade" rendered="#{tripSeats.openTrip() == true}">
