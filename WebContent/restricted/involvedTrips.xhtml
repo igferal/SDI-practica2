@@ -78,7 +78,7 @@
 
 				<p:column headerText="#{msgs.cancelarPlaza}">
 					<p:commandButton
-						rendered="#{involvedTrips.dateBefore(var) and involvedTrips.cancelledTrip(var) == false}"
+						rendered="#{involvedTrips.openTrip(var)}"
 						action="#{involvedTrips.cancelSeat(var)}" type="submit"
 						update="@all" form="formulario" value="#{msgs.cancelarPlaza}"
 						id="enviar" styleClass="ui-priority-primary" />

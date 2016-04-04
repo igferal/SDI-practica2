@@ -45,6 +45,10 @@ public class BeanMyTrips implements Serializable {
 
 	}
 
+	public boolean openTrip(Trip trip) {
+		return trip.getStatus().equals(TripStatus.OPEN);	
+	}
+	
 	public boolean dateBefore(Date date) {
 
 		if (date != null) {

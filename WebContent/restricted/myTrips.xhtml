@@ -84,7 +84,7 @@
 				
 				<p:column headerText="#{msgs.modificar}">
 					<p:commandButton
-						rendered="#{myTrips.dateBefore(trip.departureDate)}"
+						rendered="#{myTrips.openTrip(trip)}"
 						value="#{msgs.modificar}" id="modificar"
 						styleClass="ui-priority-primary"
 						action="#{tripController.fillEditView(trip)}" />
@@ -92,7 +92,7 @@
 
 				<p:column headerText="#{msgs.cancelar}">
 					<p:selectBooleanCheckbox
-						rendered="#{myTrips.dateBefore(trip.departureDate)}"
+						rendered="#{myTrips.openTrip(trip)}"
 						value="#{myTrips.selectedIds[trip.id]}" />
 				</p:column>
 

@@ -20,7 +20,8 @@ public class TripsUpdateStatusTask {
 		@Override
 		public void run() {
 			TripDao dao = Factories.persistence.newTripDao();
-			List<Trip> trips = dao.findTravelsOpenAndClosed();
+			List<Trip> trips = dao.findAll();
+//			List<Trip> trips = dao.findTravelsOpenAndClosed();
 			
 			boolean modified = false;
 			for (Trip trip:trips) {

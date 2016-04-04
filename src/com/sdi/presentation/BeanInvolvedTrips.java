@@ -50,8 +50,8 @@ public class BeanInvolvedTrips implements Serializable {
 		return false;
 	}
 	
-	public boolean cancelledTrip(Trip trip) {
-		return trip.getStatus().equals(TripStatus.CANCELLED);	
+	public boolean openTrip(Trip trip) {
+		return trip.getStatus().equals(TripStatus.OPEN);	
 	}
 
 	public String load() {
