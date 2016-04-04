@@ -61,8 +61,6 @@ public class BeanMyTrips implements Serializable {
 
 	@PostConstruct
 	public void init() {
-
-		System.out.println("Creando Bean my trips");
 		listMyTrips();
 	}
 
@@ -93,7 +91,7 @@ public class BeanMyTrips implements Serializable {
 				}
 
 			}
-			removeTripsFromView();
+
 			FacesContext context = FacesContext.getCurrentInstance();
 			ResourceBundle bundle = context.getApplication().getResourceBundle(
 					context, "msgs");
@@ -103,22 +101,11 @@ public class BeanMyTrips implements Serializable {
 					bundle.getString("viajesCancelados")));
 
 		} catch (NumberFormatException e) {
-			e.printStackTrace();
 			return "fallo";
 		} catch (Exception e) {
-			e.printStackTrace();
-
 			return "fallo";
 		}
 		return "exito";
-	}
-
-	private void removeTripsFromView() {
-		for (Trip tripTod : tripsToDelete) {
-
-			trips.remove(tripTod);
-
-		}
 	}
 
 	public String listMyTrips() {
@@ -126,7 +113,6 @@ public class BeanMyTrips implements Serializable {
 		Map<String, Object> session = FacesContext.getCurrentInstance()
 				.getExternalContext().getSessionMap();
 		User user = (User) session.get("LOGGEDIN_USER");
-		System.out.println("creando bean myTrips");
 
 		try {
 			TripService tservice = Factories.services.createTripService();

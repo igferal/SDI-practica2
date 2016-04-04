@@ -5,7 +5,6 @@ import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
@@ -17,7 +16,6 @@ import org.primefaces.event.SelectEvent;
 import com.sdi.business.TripService;
 import com.sdi.infrastructure.Factories;
 import com.sdi.model.Trip;
-import com.sdi.model.User;
 
 @ManagedBean(name = "activeTrips")
 @ViewScoped
@@ -31,8 +29,6 @@ public class BeanActiveTrips implements Serializable {
 
 	@PostConstruct
 	public void init() {
-
-		System.out.println("Creando Bean active trips");
 		list();
 	}
 
@@ -46,19 +42,12 @@ public class BeanActiveTrips implements Serializable {
 
 	public String listMyTrips() {
 
-		Map<String, Object> session = FacesContext.getCurrentInstance()
-				.getExternalContext().getSessionMap();
-		User user = (User) session.get("LOGGEDIN_USER");
-		System.out.println(user.toString());
-
 		try {
-			System.out.println("MYTrips");
 			TripService tservice = Factories.services.createTripService();
 			setTrips(tservice.listActiveTrips(new Date()));
 			return "exito";
 
 		} catch (Exception e) {
-			e.printStackTrace();
 			return "fallo";
 		}
 
@@ -72,7 +61,6 @@ public class BeanActiveTrips implements Serializable {
 			return "exito";
 
 		} catch (Exception e) {
-			e.printStackTrace();
 			return "fallo";
 		}
 
