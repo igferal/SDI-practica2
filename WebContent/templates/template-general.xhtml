@@ -51,7 +51,7 @@
 						rendered="#{empty LOGGEDIN_USER}" />
 				</f:facet>
 
-				<p:submenu label="#{LOGGEDIN_USER.login}" style="float:right"
+				<p:submenu id="submenu" label="#{LOGGEDIN_USER.login}" style="float:right"
 					rendered="#{not empty LOGGEDIN_USER}">
 					<p:menuitem id="logout" value="#{msgs.cerrarSesion}"
 						action="#{login.logout}" />
