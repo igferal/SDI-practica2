@@ -142,7 +142,12 @@
 	</navigation-rule>
 
 	<navigation-rule>
-		<from-view-id>/myTrips.xhtml</from-view-id>
+		<from-view-id>/restricted/myTrips.xhtml</from-view-id>
+		<navigation-case>
+			<from-action>#{tripController.fillEditView(trip)}</from-action>
+			<from-outcome>exito</from-outcome>
+			<to-view-id>/restricted/editTrip.xhtml</to-view-id>
+		</navigation-case>
 		<navigation-case>
 			<from-action>#{mytrips.cancel}</from-action>
 			<from-outcome>exito</from-outcome>
@@ -161,15 +166,6 @@
 			<from-action>#{controller.salva}</from-action>
 			<from-outcome>exito</from-outcome>
 			<to-view-id>/listado.xhtml</to-view-id>
-		</navigation-case>
-	</navigation-rule>
-
-	<navigation-rule>
-		<from-view-id>/restricted/myTrips.xhtml</from-view-id>
-		<navigation-case>
-			<from-action>#{tripController.fillEditView(trip)}</from-action>
-			<from-outcome>exito</from-outcome>
-			<to-view-id>/restricted/editTrip.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 
