@@ -547,10 +547,47 @@ public class SDI2_Tests {
 	// al
 	// // // idioma por defecto. (Probar algunas vistas)
 	//
-	// @Test
-	// public void t18_i18N2() {
-	//
-	// }
+	 @Test
+	 public void t18_i18N2() {
+		SeleniumUtils.textoPresentePagina(driver, "Viajes activos");
+		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id",
+				"form-cabecera:menuIdioma", 1);
+		elementos.get(0).click();
+		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id",
+				"form-cabecera:menuIdioma_1", 1);
+		elementos.get(0).click();
+		wait(2);
+		SeleniumUtils.textoPresentePagina(driver, "Active trips");
+		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id",
+				"form-cabecera:menuIdioma", 1);
+		elementos.get(0).click();
+		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id",
+				"form-cabecera:menuIdioma_1", 2);
+		elementos.get(0).click();
+		wait(2);
+		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id",
+				"form-cabecera:menuIdioma", 1);
+		elementos.get(0).click();
+		SeleniumUtils.textoPresentePagina(driver, "Viajes activos");
+		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id",
+				"form-cabecera:menuIdioma_1", 1);
+		elementos.get(0).click();
+		wait(2);
+		
+		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id",
+				"form-cabecera:login", 10);
+		elementos.get(0).click();
+		wait(2);
+		SeleniumUtils.textoPresentePagina(driver, "Sing in");
+		SeleniumUtils.textoPresentePagina(driver, "Active trips");
+		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id",
+				"form-cabecera:menuIdioma", 1);
+		elementos.get(0).click();
+		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id",
+				"form-cabecera:menuIdioma_1", 1);
+		elementos.get(0).click();
+		SeleniumUtils.textoPresentePagina(driver, "Iniciar sesión");
+	 }
 
 	/*
 	 * // 19. [OpFiltrado] Prueba para el filtrado opcional.
