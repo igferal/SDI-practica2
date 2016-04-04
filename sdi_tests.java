@@ -523,10 +523,25 @@ public class SDI2_Tests {
 	// // 17. [i18N1] Cambio del idioma por defecto a un segundo idioma. (Probar
 	// // algunas vistas)
 	//
-	// @Test
-	// public void t17_i18N1() {
-	//
-	// }
+	@Test
+	 public void t17_i18N1() {
+		SeleniumUtils.textoPresentePagina(driver, "Viajes activos");
+		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id",
+				"form-cabecera:menuIdioma", 1);
+		elementos.get(0).click();
+		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id",
+				"form-cabecera:menuIdioma_1", 1);
+		elementos.get(0).click();
+		// SeleniumUtils.ClickSubopcionMenuHover(driver,
+		// "form-cabecera:menuIdioma",
+		wait(2);
+		SeleniumUtils.textoPresentePagina(driver, "Active trips");
+		elementos = SeleniumUtils.EsperaCargaPagina(driver, "id",
+				"form-cabecera:login", 10);
+		elementos.get(0).click();
+		wait(2);
+		SeleniumUtils.textoPresentePagina(driver, "Sing in");
+	 }
 	//
 	// // 18. [i18N2] Cambio del idioma por defecto a un segundo idioma y vuelta
 	// al
