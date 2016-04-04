@@ -165,7 +165,7 @@
 	</navigation-rule>
 
 	<navigation-rule>
-		<from-view-id>/myTrips.xhtml</from-view-id>
+		<from-view-id>/restricted/myTrips.xhtml</from-view-id>
 		<navigation-case>
 			<from-action>#{tripController.fillEditView(trip)}</from-action>
 			<from-outcome>exito</from-outcome>
@@ -174,7 +174,7 @@
 	</navigation-rule>
 
 	<navigation-rule>
-		<from-view-id>/editTrip.xhtml</from-view-id>
+		<from-view-id>/restricted/editTrip.xhtml</from-view-id>
 		<navigation-case>
 			<from-action>#{tripController.editTrip}</from-action>
 			<from-outcome>exito</from-outcome>
@@ -184,7 +184,7 @@
 
 
 	<navigation-rule>
-		<from-view-id>/involvedTrips.xhtml</from-view-id>
+		<from-view-id>/restricted/involvedTrips.xhtml</from-view-id>
 		<navigation-case>
 			<from-action>#{involvedTrips.cancelSeat(var.key)}</from-action>
 			<from-outcome>exito</from-outcome>
